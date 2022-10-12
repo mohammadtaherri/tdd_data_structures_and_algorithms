@@ -12,3 +12,6 @@ environment:
 dev_dependencies:
   lints: ^2.0.0
   test: ^1.16.0
+  clean_test:
+    git: 
+      url: git@github.com:mohammadtaherri/clean_test.git

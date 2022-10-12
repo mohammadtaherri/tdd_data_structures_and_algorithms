@@ -36,6 +36,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  clean_test:
+    dependency: "direct dev"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "7412be96871e5e5cf18ccdf042f04dcf632065a1"
+      url: "git@github.com:mohammadtaherri/clean_test.git"
+    source: git
+    version: "1.0.0"
   collection:
     dependency: transitive
     description:
