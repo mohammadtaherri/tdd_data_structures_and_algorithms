@@ -20,7 +20,7 @@ class StackTest extends RootTestGroup {
     ]
   );
 
-  void whenStackWithNegativeCapcityIsCreated_SHouldThrowIllegalCapacity(){
+  void whenStackWithNegativeCapcityIsCreated_ShouldThrowIllegalCapacity(){
     void act(){
       Stack(capacity: -1);
     }
@@ -30,7 +30,7 @@ class StackTest extends RootTestGroup {
   @override
   void registerTests(TestContainer container) {
     container['when stack with negative capacity is created, should throw IllegalCapacity'] = 
-      Test(whenStackWithNegativeCapcityIsCreated_SHouldThrowIllegalCapacity);
+      Test(whenStackWithNegativeCapcityIsCreated_ShouldThrowIllegalCapacity);
   }
 }
 
