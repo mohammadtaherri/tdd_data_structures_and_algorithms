@@ -11,9 +11,8 @@ class Stack{
     return Stack._(capacity: capacity);
   }
 
-  Stack._({required this.capacity}) : _items = List.filled(capacity, 0);
+  Stack._({required int capacity}) : _items = List.filled(capacity, 0);
 
-  final int capacity;
   final List<int> _items;
 
   int get size => _size;
@@ -22,11 +21,13 @@ class Stack{
   bool get isEmpty => _size == 0;
 
   void push(int item) {
-    if(size == capacity)
+    if(_isFull)
       throw StackOverFlow();
     
     _items[_size++] = item;
   }
+
+  bool get _isFull => size == _items.length;
 
   int pop() {
     if(isEmpty)
