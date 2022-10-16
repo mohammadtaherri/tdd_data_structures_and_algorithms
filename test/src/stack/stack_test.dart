@@ -27,7 +27,6 @@ class StackTest extends RootTestGroup {
     expect(act, throwsA(isA<IllegalCapacity>()));
   }
 
-
   @override
   void registerTests(TestContainer container) {
     container['when stack with negative capacity is created, should throw IllegalCapacity'] = 
