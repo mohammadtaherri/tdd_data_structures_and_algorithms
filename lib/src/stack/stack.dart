@@ -15,10 +15,9 @@ class Stack{
 
   final List<int> _items;
 
+  bool get isEmpty => _size == 0;
   int get size => _size;
   int _size = 0;
-
-  bool get isEmpty => _size == 0;
 
   void push(int item) {
     if(_isFull)
@@ -44,7 +43,6 @@ class Stack{
   }
 }
 
-
 class _ZeroCapacityStack extends Stack{
   _ZeroCapacityStack(): super._(capacity: 0);
 
@@ -69,7 +67,6 @@ class _ZeroCapacityStack extends Stack{
     throw StackEmpty();
   }
 }
-
 
 class StackOverFlow implements Exception{}
 
