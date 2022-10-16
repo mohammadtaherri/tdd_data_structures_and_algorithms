@@ -4,3 +4,6 @@
 
 # Conventional directory for build output.
 build/
+
+# Files and directories created by VS Code.
+.vscode
