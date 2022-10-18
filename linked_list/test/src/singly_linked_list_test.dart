@@ -23,49 +23,6 @@ class SinglyLinkedListTest extends RootTestGroup {
         ]);
 }
 
-mixin Variables on TestGroup {
-  SinglyLinkedList get linkedList => findVariableByKey('linked_list');
-}
-
-mixin ComposedExpect on TestGroup{
-  SinglyLinkedList get linkedList => findVariableByKey('linked_list');
-
-  expectListIsEmpty(){
-    expect(linkedList.isEmpty, isTrue);
-    expect(linkedList.size, isZero);
-  }
-
-  expectSizeIsOne(){
-    expect(linkedList.size, equals(1));
-    expect(linkedList.isEmpty, isFalse);
-  }
-
-  expectSizeIsTwo(){
-    expect(linkedList.size, equals(2));
-    expect(linkedList.isEmpty, isFalse);
-  }
-
-  expectFirstAndLastAreNull(){
-    expect(linkedList.first, isNull);
-    expect(linkedList.last, isNull);
-  }
-
-  expectFirstAndLastAreEqualTo(DummyEntry x, [DummyEntry? y]){
-    expect(linkedList.first, equals(x));
-    expect(linkedList.last, equals(y??x));
-  }
-
-  expectFirstIsLinkedToLast(){
-    expect(linkedList.first?.next, isNotNull);
-    expect(linkedList.first!.next, equals(linkedList.last));
-  }
-
-  expectLastIsLinkedToNull(){
-    expect(linkedList.last?.next, isNull);
-  }
-}
-
-
 class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
   GivenNewlyCreatedList({required super.groups})
       : super(groupDescription: 'given newly created list');
@@ -299,3 +256,45 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
   }
 }
 
+
+mixin Variables on TestGroup {
+  SinglyLinkedList get linkedList => findVariableByKey('linked_list');
+}
+
+mixin ComposedExpect on TestGroup{
+  SinglyLinkedList get linkedList => findVariableByKey('linked_list');
+
+  expectListIsEmpty(){
+    expect(linkedList.isEmpty, isTrue);
+    expect(linkedList.size, isZero);
+  }
+
+  expectSizeIsOne(){
+    expect(linkedList.size, equals(1));
+    expect(linkedList.isEmpty, isFalse);
+  }
+
+  expectSizeIsTwo(){
+    expect(linkedList.size, equals(2));
+    expect(linkedList.isEmpty, isFalse);
+  }
+
+  expectFirstAndLastAreNull(){
+    expect(linkedList.first, isNull);
+    expect(linkedList.last, isNull);
+  }
+
+  expectFirstAndLastAreEqualTo(DummyEntry x, [DummyEntry? y]){
+    expect(linkedList.first, equals(x));
+    expect(linkedList.last, equals(y??x));
+  }
+
+  expectFirstIsLinkedToLast(){
+    expect(linkedList.first?.next, isNotNull);
+    expect(linkedList.first!.next, equals(linkedList.last));
+  }
+
+  expectLastIsLinkedToNull(){
+    expect(linkedList.last?.next, isNull);
+  }
+}
