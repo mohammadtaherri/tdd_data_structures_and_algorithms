@@ -26,15 +26,18 @@ mixin LinkedListVariables on TestGroup {
       findVariableByKey('linked_list');
 }
 
+class IntEntry extends LinkedListEntry{
+}
+
 class GivenNewlyCreatedLinkedList extends BranchTestGroup {
   GivenNewlyCreatedLinkedList({required super.groups})
       : super(groupDescription: 'given newly created linked list');
 
-  late SinglyLinkedList linkedList;
+  late SinglyLinkedList<IntEntry> linkedList;
 
   @override
   void setUp() {
-    linkedList = SinglyLinkedList();
+    linkedList = SinglyLinkedList<IntEntry>();
   }
 
   void shouldBeEmpty() {
@@ -71,8 +74,28 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   AddFirstMethodTest(): 
       super(groupDescription: '#addFirst method ');
 
+  void whenOneItemIsAdded_ThenSizeShouldBeOne(){
+    IntEntry entry = IntEntry();
+    linkedList.addFirst(entry);
+    expect(linkedList.size, equals(1));
+    expect(linkedList.isEmpty, isFalse);
+  }
+
+  void whenTwoItemsAreAdded_ThenSizeShouldBeTwo(){
+    IntEntry entry = IntEntry();
+    linkedList.addFirst(entry);
+    linkedList.addFirst(entry);
+    expect(linkedList.size, equals(2));
+    expect(linkedList.isEmpty, isFalse);
+  }
+
   @override
   void registerTests(TestContainer container) {
-    
+    container['when one item is added, then size should be one'] = 
+        Test(whenOneItemIsAdded_ThenSizeShouldBeOne);
+
+    container['when two items are added, then size should be two'] = 
+        Test(whenTwoItemsAreAdded_ThenSizeShouldBeTwo);
   }
 }
+
