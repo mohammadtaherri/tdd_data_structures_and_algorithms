@@ -40,8 +40,8 @@ packages:
     dependency: "direct dev"
     description:
       path: "."
-      ref: c515be290279623fb548725ef0b3fc4aa986910c
-      resolved-ref: c515be290279623fb548725ef0b3fc4aa986910c
+      ref: "5b9a35f1c05ddd47a6890e1decd0b50e149b01f1"
+      resolved-ref: "5b9a35f1c05ddd47a6890e1decd0b50e149b01f1"
       url: "git@github.com:mohammadtaherri/clean_test.git"
     source: git
     version: "1.0.0"
