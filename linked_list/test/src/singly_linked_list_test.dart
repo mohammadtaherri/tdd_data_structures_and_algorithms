@@ -244,6 +244,18 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     expect(linkedList.last, isNull);
   }
 
+  void removeLast_ShouldBeEmpty(){
+    linkedList.removeLast();
+    expect(linkedList.isEmpty, isTrue);
+    expect(linkedList.size, isZero);
+  }
+
+  void removeLast_ThenFirstAndLastShouldBeNull(){
+    linkedList.removeLast();
+    expect(linkedList.first, isNull);
+    expect(linkedList.last, isNull);
+  }
+
   @override
   void registerTests(TestContainer container) {
     container.addAll({
@@ -270,6 +282,12 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
 
       'removeFirst, then first and last should be null':
           Test(removeFirst_ThenFirstAndLastShouldBeNull),
+
+      'removeLast, should be empty':
+          Test(removeLast_ShouldBeEmpty),
+
+      'removeLast, then first and last should be null':
+          Test(removeLast_ThenFirstAndLastShouldBeNull),
     });
   }
 }
