@@ -16,13 +16,12 @@ class SinglyLinkedListTest extends RootTestGroup {
               groups: [
                 AddFirstMethodTest(),
                 AddLastMethodTest(),
+                RemoveFirstMethodTest(),
               ],
             ),
           ],
         );
 }
-
-
 
 mixin LinkedListVariables on TestGroup {
   SinglyLinkedList get linkedList =>
@@ -216,7 +215,7 @@ class AddLastMethodTest extends LeafTestGroup with LinkedListVariables{
     expect(linkedList.last?.next, isNull);
   }
 
-   void whenThreeItemsAreAdded_ThenLinksShouldBeCorrect(){
+  void whenThreeItemsAreAdded_ThenLinksShouldBeCorrect() {
     _addEntries([x, y, z]);
 
     expect(x.next, isNotNull);
@@ -260,5 +259,16 @@ class AddLastMethodTest extends LeafTestGroup with LinkedListVariables{
 
     container['when three items are added, then links should be correct'] = 
         Test(whenThreeItemsAreAdded_ThenLinksShouldBeCorrect);
+  }
+}
+
+
+class RemoveFirstMethodTest extends LeafTestGroup with LinkedListVariables{
+  RemoveFirstMethodTest()
+      : super(groupDescription: '#removeFirst method');
+
+  @override
+  void registerTests(TestContainer container) {
+    
   }
 }
