@@ -33,6 +33,22 @@ class SinglyLinkedList<E extends LinkedListEntry<E>> {
     _size++;
   }
 
+  void removeFirst() {
+    if(isEmpty)
+      throw IllegalState();
+
+    if(_first == _last)
+      _first = _last = null;
+    else{
+      var newFirst = first!.next;
+      _first!.next = null;
+      _first = newFirst;
+    }
+      
+
+    _size--;
+  }
+
   
 }
 
@@ -41,3 +57,4 @@ abstract class LinkedListEntry<E extends LinkedListEntry<E>>{
 }
 
 
+class IllegalState implements Exception{}
