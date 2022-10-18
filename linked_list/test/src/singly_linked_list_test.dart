@@ -361,9 +361,17 @@ class GivenAddingXAndYAndZ extends LeafTestGroup with Variables, ComposedExpect{
     linkedList.addLast(z);
   }
 
+  void removeFirst_FirstAndLastShouldBeYAndZ(){
+    linkedList.removeFirst();
+    expectFirstAndLastAreEqualTo(y, z);
+  }
+
   @override
   void registerTests(TestContainer container) {
-    
+    container.addAll({
+      'removeFirst, first and last should be y and z': 
+          Test(removeFirst_FirstAndLastShouldBeYAndZ),
+    });
   }
 }
 
