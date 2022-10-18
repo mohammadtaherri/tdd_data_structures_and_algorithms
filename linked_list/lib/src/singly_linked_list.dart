@@ -17,6 +17,10 @@ class SinglyLinkedList<E extends LinkedListEntry>{
   void addLast(E entry) {
     _size++;
   }
+
+  void removeFirst() {
+    throw IllegalState();
+  }
 }
 
 class LinkedListEntry{}
