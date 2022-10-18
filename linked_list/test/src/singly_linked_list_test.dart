@@ -19,14 +19,19 @@ class GivenNewlyCreatedList extends BranchTestGroup{
   GivenNewlyCreatedList({required super.groups})
       : super(groupDescription: 'given newly created list');
 
+  late SinglyLinkedList linkedList;
+
+  @override
+  void setUp() {
+    linkedList = SinglyLinkedList();
+  }
+
   void shouldBeEmpty(){
-    SinglyLinkedList linkedList = SinglyLinkedList();
     expect(linkedList.isEmpty, isTrue);
     expect(linkedList.size, isZero);
   }
 
   void firstAndLastShouldBeNull(){
-    SinglyLinkedList linkedList = SinglyLinkedList();
     expect(linkedList.first, isNull);
     expect(linkedList.last, isNull);
   }
