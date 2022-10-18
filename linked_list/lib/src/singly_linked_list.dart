@@ -26,6 +26,11 @@ class SinglyLinkedList<E extends LinkedListEntry>{
   void addLast(E entry) {
     if(isEmpty)
       _first = _last = entry;
+    else{
+      _first!.next = entry;
+      _last = entry;
+    }
+      
       
     _size++;
   }
