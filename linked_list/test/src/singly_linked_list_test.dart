@@ -285,6 +285,11 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
     expectLinksAreCorrect([x, y, z]);
   }
 
+  void removeFirst_SizeShouldBeOne(){
+    linkedList.removeFirst();
+    expectSizeIsOne();
+  }
+
   @override
   void registerTests(TestContainer container) {
     container.addAll({
@@ -293,6 +298,9 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
 
       'addLast, when z is added, then links should be correct':
           Test(addLast_WhenZIsAdded_ThenLinksShouldBeCorrect),
+
+      'removeFirst, size should be one': 
+          Test(removeFirst_SizeShouldBeOne),
     });
   }
 }
