@@ -50,10 +50,18 @@ mixin ComposedExpect on TestGroup{
     expect(linkedList.last, isNull);
   }
 
-  expectFirstAndLastAreEqualTo(DummyEntry x){
+  expectFirstAndLastAreEqualTo(DummyEntry x, [DummyEntry? y]){
     expect(linkedList.first, equals(x));
-    expect(linkedList.last, equals(x));
-    expect(linkedList.last, equals(linkedList.first));
+    expect(linkedList.last, equals(y??x));
+  }
+
+  expectFirstIsLinkedToLast(){
+    expect(linkedList.first?.next, isNotNull);
+    expect(linkedList.first!.next, equals(linkedList.last));
+  }
+
+  expectLastIsLinkedToNull(){
+    expect(linkedList.last?.next, isNull);
   }
 }
 
@@ -195,65 +203,57 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
   void addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX(){
     final y = DummyEntry();
     linkedList.addFirst(y);
-    expect(linkedList.first, equals(y));
-    expect(linkedList.last, equals(x));
+    expectFirstAndLastAreEqualTo(y, x);
   }
 
   void addFirst_WhenYIsAdded_ThenFirstShouldLinkToLast(){
     final y = DummyEntry();
     linkedList.addFirst(y);
-    expect(linkedList.first?.next, isNotNull);
-    expect(linkedList.first!.next, equals(linkedList.last));
+    expectFirstIsLinkedToLast();
   }
 
   void addFirst_WhenYIsAdded_ThenLastShouldLinkToNull(){
     final y = DummyEntry();
     linkedList.addFirst(y);
-    expect(linkedList.last?.next, isNull);
+    expectLastIsLinkedToNull();
   }
 
   void addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY(){
     final y = DummyEntry();
     linkedList.addLast(y);
-    expect(linkedList.first, equals(x));
-    expect(linkedList.last, equals(y));
+    expectFirstAndLastAreEqualTo(x, y);
   }
 
   void addLast_WhenYIsAdded_ThenFirstShouldLinkToLast(){
     final y = DummyEntry();
     linkedList.addLast(y);
-    expect(linkedList.first?.next, isNotNull);
-    expect(linkedList.first!.next, equals(linkedList.last));
+    expectFirstIsLinkedToLast();
   }
 
   void addLast_WhenYIsAdded_ThenLastShouldLinkToNull(){
     final y = DummyEntry();
     linkedList.addLast(y);
-    expect(linkedList.last?.next, isNull);
+    expectLastIsLinkedToNull();
   }
 
   void removeFirst_ShouldBeEmpty(){
     linkedList.removeFirst();
-    expect(linkedList.isEmpty, isTrue);
-    expect(linkedList.size, isZero);
+    expectListIsEmpty();
   }
 
   void removeFirst_ThenFirstAndLastShouldBeNull(){
     linkedList.removeFirst();
-    expect(linkedList.first, isNull);
-    expect(linkedList.last, isNull);
+    expectFirstAndLastAreNull();
   }
 
   void removeLast_ShouldBeEmpty(){
     linkedList.removeLast();
-    expect(linkedList.isEmpty, isTrue);
-    expect(linkedList.size, isZero);
+    expectListIsEmpty();
   }
 
   void removeLast_ThenFirstAndLastShouldBeNull(){
     linkedList.removeLast();
-    expect(linkedList.first, isNull);
-    expect(linkedList.last, isNull);
+    expectFirstAndLastAreNull();
   }
 
   void indexOf_X_ShouldReturnZero(){
