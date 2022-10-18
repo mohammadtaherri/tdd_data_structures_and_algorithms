@@ -135,7 +135,7 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
     expect(linkedList.last?.next, isNull);
   }
 
-   void _addEntries(List<LinkedListEntry> entries){
+   void _addEntries(List<IntEntry> entries){
     for(var entry in entries)
       linkedList.addFirst(entry);
   }
@@ -168,10 +168,95 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
 
 class AddLastMethodTest extends LeafTestGroup with LinkedListVariables{
   AddLastMethodTest()
-      : super(groupDescription: '#addFirst method ');
+      : super(groupDescription: '#addLast method ');
+
+  late IntEntry x, y, z;
+
+  @override
+  void setUp() {
+    x = IntEntry();
+    y = IntEntry();
+    z = IntEntry();
+  }
+
+  void whenOneItemIsAdded_ThenSizeShouldBeOne(){
+    _addEntries([x]);
+    expect(linkedList.size, equals(1));
+    expect(linkedList.isEmpty, isFalse);
+  }
+
+  void whenTwoItemsAreAdded_ThenSizeShouldBeTwo(){
+    _addEntries([x, y]);
+    expect(linkedList.size, equals(2));
+    expect(linkedList.isEmpty, isFalse);
+  }
+
+  void whenXIsAdded_ThenFirstAndLastShouldBeX(){
+    _addEntries([x]);
+    expect(linkedList.first, equals(x));
+    expect(linkedList.last, equals(x));
+  }
+
+  void whenXAndYAreAdded_ThenFirstAndLastShouldBeXAndY(){
+    _addEntries([x, y]);
+    expect(linkedList.first, equals(x));
+    expect(linkedList.last, equals(y));
+  }
+
+  void whenTwoItemsAreAdded_ThenFirstShouldLinkToLast(){
+    _addEntries([x, y]);
+    expect(linkedList.first?.next, isNotNull);
+    expect(linkedList.first!.next, equals(linkedList.last));
+  }
+
+  void whenTwoItemsAreAdded_ThenLastShouldLinkToNull(){
+    _addEntries([x, y]);
+    expect(linkedList.last?.next, isNull);
+  }
+
+   void whenThreeItemsAreAdded_ThenLinksShouldBeCorrect(){
+    _addEntries([x, y, z]);
+
+    expect(x.next, isNotNull);
+    expect(x.next, equals(y));
+
+    expect(y.next, isNotNull);
+    expect(y.next, equals(z));
+
+    expect(z.next, isNull);
+
+    expect(linkedList.first?.next, isNotNull);
+    expect(linkedList.first!.next, equals(y));
+
+    expect(linkedList.last?.next, isNull);
+  }
+
+  void _addEntries(List<IntEntry> entries){
+    for(var entry in entries)
+      linkedList.addLast(entry);
+  }
 
   @override
   void registerTests(TestContainer container) {
-    
+    container['when one item is added, then size should be one'] = 
+        Test(whenOneItemIsAdded_ThenSizeShouldBeOne);
+
+    container['when two items are added, then size should be two'] = 
+        Test(whenTwoItemsAreAdded_ThenSizeShouldBeTwo);
+
+    container['when x is added, then first and last should be x'] =
+        Test(whenXIsAdded_ThenFirstAndLastShouldBeX);
+
+    container['when x and y are added, then first and last should be x and y'] = 
+        Test(whenXAndYAreAdded_ThenFirstAndLastShouldBeXAndY);
+
+    container['when two items are added, then first should link to last'] = 
+        Test(whenTwoItemsAreAdded_ThenFirstShouldLinkToLast);
+
+    container['when two items are added, then last should link to null'] = 
+        Test(whenTwoItemsAreAdded_ThenLastShouldLinkToNull);
+
+    container['when three items are added, then links should be correct'] = 
+        Test(whenThreeItemsAreAdded_ThenLinksShouldBeCorrect);
   }
 }
