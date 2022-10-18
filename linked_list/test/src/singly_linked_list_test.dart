@@ -55,7 +55,7 @@ class GivenNewlyCreatedLinkedList extends BranchTestGroup {
     expect(linkedList.size, isZero);
   }
 
-  void firstAndLastShouldBeNull() {
+  void thenFirstAndLastShouldBeNull() {
     expect(linkedList.first, isNull);
     expect(linkedList.last, isNull);
   }
@@ -65,8 +65,8 @@ class GivenNewlyCreatedLinkedList extends BranchTestGroup {
     container['should be empty'] = 
         Test(shouldBeEmpty);
 
-    container['first and last should be null'] = 
-        Test(firstAndLastShouldBeNull);
+    container['then first and last should be null'] = 
+        Test(thenFirstAndLastShouldBeNull);
   }
 
     @override
@@ -91,7 +91,7 @@ class GivenNewlyCreatedLinkedList extends BranchTestGroup {
 
 class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   AddFirstMethodTest(): 
-      super(groupDescription: '#addFirst method ');
+      super(groupDescription: '(#addFirst method)');
 
   void whenOneItemIsAdded_ThenSizeShouldBeOne(){
     _addEntries([x]);
@@ -178,7 +178,7 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
 
 class AddLastMethodTest extends LeafTestGroup with LinkedListVariables{
   AddLastMethodTest()
-      : super(groupDescription: '#addLast method ');
+      : super(groupDescription: '(#addLast method)');
 
   void whenOneItemIsAdded_ThenSizeShouldBeOne(){
     _addEntries([x]);
@@ -265,7 +265,7 @@ class AddLastMethodTest extends LeafTestGroup with LinkedListVariables{
 
 class RemoveFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   RemoveFirstMethodTest()
-      : super(groupDescription: '#removeFirst method');
+      : super(groupDescription: '(#removeFirst method)');
 
   void remove_ShouldThrowsIllegalState(){
     void act(){
