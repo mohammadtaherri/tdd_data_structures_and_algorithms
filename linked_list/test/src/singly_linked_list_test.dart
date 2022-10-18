@@ -13,7 +13,9 @@ class SinglyLinkedListTest extends RootTestGroup {
       : super(
           groups: [
             GivenNewlyCreatedLinkedList(
-              groups: [],
+              groups: [
+                AddFirstMethodTest(),
+              ],
             ),
           ],
         );
@@ -47,5 +49,16 @@ class GivenNewlyCreatedLinkedList extends BranchTestGroup {
 
     container['first and last should be null'] = 
         Test(firstAndLastShouldBeNull);
+  }
+}
+
+
+class AddFirstMethodTest extends LeafTestGroup{
+  AddFirstMethodTest(): 
+      super(groupDescription: '#addFirst method ');
+
+  @override
+  void registerTests(TestContainer container) {
+    
   }
 }
