@@ -49,6 +49,33 @@ class SinglyLinkedList<E extends LinkedListEntry<E>> {
     _size--;
   }
 
+  void removeLast() {
+    if(isEmpty)
+      throw IllegalState();
+
+    if(_first == _last)
+      _first = _last = null;
+    else{
+      E newLsat = _nodeBefore(_last!)!;
+      newLsat.next = null;
+      _last = newLsat;
+    }
+      
+    _size--;
+  }
+
+  E? _nodeBefore(E node) {
+    var current = _first;
+
+    while (current != null) {
+      if (current.next == node) 
+        return current;
+      
+      current = current.next;
+    }
+
+    return null;
+  }
   
 }
 
