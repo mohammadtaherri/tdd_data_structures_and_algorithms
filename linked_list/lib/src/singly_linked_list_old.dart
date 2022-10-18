@@ -1,6 +1,6 @@
 part of linked_list;
 
-class SinglyLinkedListOld<E extends LinkedListEntry<E>> {
+class SinglyLinkedListOld<E extends LinkedListEntryOld<E>> {
 
   get isEmpty => _size == 0;
   get size => _size;
@@ -79,7 +79,7 @@ class SinglyLinkedListOld<E extends LinkedListEntry<E>> {
   
 }
 
-abstract class LinkedListEntry<E extends LinkedListEntry<E>>{
+abstract class LinkedListEntryOld<E extends LinkedListEntryOld<E>>{
   E? next;
 }
 
