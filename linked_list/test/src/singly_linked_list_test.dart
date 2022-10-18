@@ -4,6 +4,9 @@ import 'package:test/test.dart';
 import 'package:clean_test/clean_test.dart';
 import 'package:linked_list/linked_list.dart';
 
+import 'matchers.dart';
+import 'singly_linked_list_old_test.dart';
+
 void main() {
   runTest(SinglyLinkedListTest());
 }
@@ -19,10 +22,40 @@ class SinglyLinkedListTest extends RootTestGroup {
         ]);
 }
 
-class GivenNewlyCreatedList extends BranchTestGroup{
+mixin Variables on TestGroup {
+  SinglyLinkedList get linkedList => findVariableByKey('linked_list');
+}
+
+mixin UtilityMethods on TestGroup{
+  SinglyLinkedList get linkedList => findVariableByKey('linked_list');
+
+  expectListIsEmpty(){
+    expect(linkedList.isEmpty, isTrue);
+    expect(linkedList.size, isZero);
+  }
+
+  expectSizeIsOne(){
+    expect(linkedList.size, equals(1));
+    expect(linkedList.isEmpty, isFalse);
+  }
+
+  expectSizeIsTwo(){
+    expect(linkedList.size, equals(2));
+    expect(linkedList.isEmpty, isFalse);
+  }
+
+  expectFirstAndLastAreNull(){
+    expect(linkedList.first, isNull);
+    expect(linkedList.last, isNull);
+  }
+}
+
+
+class GivenNewlyCreatedList extends BranchTestGroup with UtilityMethods{
   GivenNewlyCreatedList({required super.groups})
       : super(groupDescription: 'given newly created list');
 
+  @override
   late SinglyLinkedList<DummyEntry> linkedList;
 
   @override
@@ -31,39 +64,33 @@ class GivenNewlyCreatedList extends BranchTestGroup{
   }
 
   void shouldBeEmpty(){
-    expect(linkedList.isEmpty, isTrue);
-    expect(linkedList.size, isZero);
+    expectListIsEmpty();
   }
 
   void firstAndLastShouldBeNull(){
-    expect(linkedList.first, isNull);
-    expect(linkedList.last, isNull);
+    expectFirstAndLastAreNull();
   }
 
   void addFirst_WhenOneEntryIsAdded_ThenSizeShouldBeOne(){
     linkedList.addFirst(DummyEntry());
-    expect(linkedList.size, equals(1));
-    expect(linkedList.isEmpty, isFalse);
+    expectSizeIsOne();
   }
 
   void addFirst_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo(){
     linkedList.addFirst(DummyEntry());
     linkedList.addFirst(DummyEntry());
-    expect(linkedList.size, equals(2));
-    expect(linkedList.isEmpty, isFalse);
+    expectSizeIsTwo();
   }
 
   void addLast_WhenOneEntryIsAdded_ThenSizeShouldBeOne(){
     linkedList.addLast(DummyEntry());
-    expect(linkedList.size, equals(1));
-    expect(linkedList.isEmpty, isFalse);
+    expectSizeIsOne();
   }
 
   void addLast_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo(){
     linkedList.addLast(DummyEntry());
     linkedList.addLast(DummyEntry());
-    expect(linkedList.size, equals(2));
-    expect(linkedList.isEmpty, isFalse);
+    expectSizeIsTwo();
   }
 
   void removeFirst_ShouldThrowIllegalState(){
@@ -71,7 +98,7 @@ class GivenNewlyCreatedList extends BranchTestGroup{
       linkedList.removeFirst();
     }
 
-    expect(act, throwsA(isA<IllegalState>()));
+    expect(act, throwsAIllegalState);
   }
 
   void removeLast_ShouldThrowIllegalState(){
@@ -79,7 +106,7 @@ class GivenNewlyCreatedList extends BranchTestGroup{
       linkedList.removeLast();
     }
 
-    expect(act, throwsA(isA<IllegalState>()));
+    expect(act, throwsAIllegalState);
   }
 
   @override
@@ -107,6 +134,14 @@ class GivenNewlyCreatedList extends BranchTestGroup{
 
     container['removeLast, should throw IllegalState'] = 
         Test(removeLast_ShouldThrowIllegalState);
+  }
+
+  @override
+  T? findVariableByKey<T>(String key) {
+    if(key == 'linked_list')
+      return linkedList as T;
+      
+    return super.findVariableByKey<T>(key);
   }
 }
 
