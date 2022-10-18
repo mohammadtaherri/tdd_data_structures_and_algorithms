@@ -84,48 +84,42 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   }
 
   void whenOneItemIsAdded_ThenSizeShouldBeOne(){
-    linkedList.addFirst(x);
+    _addEntries([x]);
     expect(linkedList.size, equals(1));
     expect(linkedList.isEmpty, isFalse);
   }
 
   void whenTwoItemsAreAdded_ThenSizeShouldBeTwo(){
-    linkedList.addFirst(x);
-    linkedList.addFirst(y);
+    _addEntries([x, y]);
     expect(linkedList.size, equals(2));
     expect(linkedList.isEmpty, isFalse);
   }
 
   void whenXIsAdded_ThenFirstAndLastShouldBeX(){
-    linkedList.addFirst(x);
+    _addEntries([x]);
     expect(linkedList.first, equals(x));
     expect(linkedList.last, equals(x));
   }
 
   void whenXAndYAreAdded_ThenFirstAndLastShouldBeYAndX(){
-    linkedList.addFirst(x);
-    linkedList.addFirst(y);
+    _addEntries([x, y]);
     expect(linkedList.first, equals(y));
     expect(linkedList.last, equals(x));
   }
 
   void whenTwoItemsAreAdded_ThenFirstShouldLinkToLast(){
-    linkedList.addFirst(x);
-    linkedList.addFirst(y);
+    _addEntries([x, y]);
     expect(linkedList.first?.next, isNotNull);
     expect(linkedList.first!.next, equals(linkedList.last));
   }
 
   void whenTwoItemsAreAdded_ThenLastShouldLinkToNull(){
-    linkedList.addFirst(x);
-    linkedList.addFirst(y);
+    _addEntries([x, y]);
     expect(linkedList.last?.next, isNull);
   }
 
   void whenThreeItemsAreAdded_ThenLinksShouldBeCorrect(){
-    linkedList.addFirst(x);
-    linkedList.addFirst(y);
-    linkedList.addFirst(z);
+    _addEntries([x, y, z]);
 
     expect(z.next, isNotNull);
     expect(z.next, equals(y));
@@ -139,6 +133,11 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
     expect(linkedList.first!.next, equals(y));
 
     expect(linkedList.last?.next, isNull);
+  }
+
+   void _addEntries(List<LinkedListEntry> entries){
+    for(var entry in entries)
+      linkedList.addFirst(entry);
   }
 
   @override
