@@ -41,7 +41,7 @@ class SinglyLinkedList<E extends LinkedListEntry>{
 
     _first = _last = null;
 
-    _size = 0;
+    _size--;
   }
 
   void removeLast() {
