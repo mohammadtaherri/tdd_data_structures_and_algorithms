@@ -61,10 +61,15 @@ class SinglyLinkedList<E extends LinkedListEntry>{
       E? current = _first;
       late E newLast;
 
-      if(current != null){
-        if(current.next == _last)
+      while (current != null) {
+        if (current.next == _last) {
           newLast = current;
+          break;
+        }
+          
+        current = current.next;
       }
+      
       newLast.next = null;
       _last = newLast;
     }
