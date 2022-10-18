@@ -15,6 +15,7 @@ class SinglyLinkedListTest extends RootTestGroup {
             GivenNewlyCreatedLinkedList(
               groups: [
                 AddFirstMethodTest(),
+                AddLastMethodTest(),
               ],
             ),
           ],
@@ -26,8 +27,7 @@ mixin LinkedListVariables on TestGroup {
       findVariableByKey('linked_list');
 }
 
-class IntEntry extends LinkedListEntry<IntEntry>{
-}
+class IntEntry extends LinkedListEntry<IntEntry>{}
 
 class GivenNewlyCreatedLinkedList extends BranchTestGroup {
   GivenNewlyCreatedLinkedList({required super.groups})
@@ -165,3 +165,13 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   }
 }
 
+
+class AddLastMethodTest extends LeafTestGroup with LinkedListVariables{
+  AddLastMethodTest()
+      : super(groupDescription: '#addFirst method ');
+
+  @override
+  void registerTests(TestContainer container) {
+    
+  }
+}
