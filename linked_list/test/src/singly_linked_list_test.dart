@@ -148,7 +148,7 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
 
 class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
   GivenAddingX()
-      : super(groupDescription: 'given adding x');
+      : super(groupDescription: '#1given adding x');
 
   late DummyEntry x;
 
@@ -260,7 +260,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
 
 class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
   GivenAddingXAndY()
-      : super(groupDescription: 'given adding x and y');
+      : super(groupDescription: '#2given adding x and y');
 
   late DummyEntry x, y;
 
@@ -291,11 +291,32 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
     expect(linkedList.last?.next, isNull);
   }
 
+  void addLast_WhenZIsAdded_ThenLinksShouldBeCorrect(){
+    final z = DummyEntry();
+    linkedList.addLast(z);
+
+    expect(x.next, isNotNull);
+    expect(x.next, equals(y));
+
+    expect(y.next, isNotNull);
+    expect(y.next, equals(z));
+
+    expect(z.next, isNull);
+
+    expect(linkedList.first?.next, isNotNull);
+    expect(linkedList.first!.next, equals(y));
+
+    expect(linkedList.last?.next, isNull);
+  }
+
   @override
   void registerTests(TestContainer container) {
     container.addAll({
       'addFirst, when z is added, then links should be correct':
           Test(addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect),
+
+      'addLast, when z is added, then links should be correct':
+          Test(addLast_WhenZIsAdded_ThenLinksShouldBeCorrect),
     });
   }
 }
