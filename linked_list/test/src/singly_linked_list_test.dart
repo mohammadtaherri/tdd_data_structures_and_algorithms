@@ -17,6 +17,7 @@ class SinglyLinkedListTest extends RootTestGroup {
                 AddFirstMethodTest(),
                 AddLastMethodTest(),
                 RemoveFirstMethodTest(),
+                RemoveLastMethodTest(),
               ],
             ),
           ],
@@ -334,5 +335,15 @@ class RemoveFirstMethodTest extends LeafTestGroup with LinkedListVariables{
 
     container['given adding x, y, z, after remove, first and last should be y and z'] = 
         Test(givenAddingXYZ_AfterRemove_FirstAndLastShouldBeYAndZ);
+  }
+}
+
+class RemoveLastMethodTest extends LeafTestGroup with LinkedListVariables{
+  RemoveLastMethodTest()
+      : super(groupDescription: '(#removeLast method)');
+
+  @override
+  void registerTests(TestContainer container) {
+    
   }
 }
