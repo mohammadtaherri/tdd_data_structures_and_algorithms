@@ -276,37 +276,13 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
   void addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect(){
     final z = DummyEntry();
     linkedList.addFirst(z);
-
-    expect(z.next, isNotNull);
-    expect(z.next, equals(x));
-
-    expect(x.next, isNotNull);
-    expect(x.next, equals(y));
-
-    expect(y.next, isNull);
-
-    expect(linkedList.first?.next, isNotNull);
-    expect(linkedList.first!.next, equals(x));
-
-    expect(linkedList.last?.next, isNull);
+    expectLinksAreCorrect([z, x, y]);
   }
 
   void addLast_WhenZIsAdded_ThenLinksShouldBeCorrect(){
     final z = DummyEntry();
     linkedList.addLast(z);
-
-    expect(x.next, isNotNull);
-    expect(x.next, equals(y));
-
-    expect(y.next, isNotNull);
-    expect(y.next, equals(z));
-
-    expect(z.next, isNull);
-
-    expect(linkedList.first?.next, isNotNull);
-    expect(linkedList.first!.next, equals(y));
-
-    expect(linkedList.last?.next, isNull);
+    expectLinksAreCorrect([x, y, z]);
   }
 
   @override
@@ -360,6 +336,22 @@ mixin ComposedExpect on TestGroup{
   }
 
   expectLastIsLinkedToNull(){
+    expect(linkedList.last?.next, isNull);
+  }
+
+  expectLinksAreCorrect(List<DummyEntry> entries){
+    for(int i = 0; i < entries.length-1; i++){
+      var current = entries[i];
+      var next = entries[i+1];
+      expect(current.next, isNotNull);
+      expect(current.next, equals(next));
+    }
+
+    expect(entries.last.next, isNull);
+
+    expect(linkedList.first?.next, isNotNull);
+    expect(linkedList.first!.next, equals(entries[1]));
+
     expect(linkedList.last?.next, isNull);
   }
 }
