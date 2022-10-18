@@ -21,10 +21,19 @@ class SinglyLinkedListTest extends RootTestGroup {
     expect(linkedList.size, isZero);
   }
 
+  void givenNewlyCreatedList_FirstAndLastShouldBeNull(){
+    SinglyLinkedList linkedList = SinglyLinkedList();
+    expect(linkedList.first, isNull);
+    expect(linkedList.last, isNull);
+  }
+
   @override
   void registerTests(TestContainer container) {
     container['given newly created list, should be empty'] = 
         Test(givenNewlyCreatedList_ShouldBeEmpty);
+
+    container['given newly created list, first and last should be null'] = 
+        Test(givenNewlyCreatedList_FirstAndLastShouldBeNull);
   }
 }
 
