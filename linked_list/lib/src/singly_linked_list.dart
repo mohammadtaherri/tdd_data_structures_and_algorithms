@@ -1,6 +1,6 @@
 part of linked_list;
 
-class SinglyLinkedList<E extends LinkedListEntry> {
+class SinglyLinkedList<E extends LinkedListEntry<E>> {
 
   get isEmpty => _size == 0;
   get size => _size;
@@ -23,10 +23,8 @@ class SinglyLinkedList<E extends LinkedListEntry> {
   }
 }
 
-class LinkedListEntry{
-  var next;
-  
-  
+class LinkedListEntry<E extends LinkedListEntry<E>>{
+  E? next;
 }
 
 

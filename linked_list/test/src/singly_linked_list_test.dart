@@ -26,7 +26,7 @@ mixin LinkedListVariables on TestGroup {
       findVariableByKey('linked_list');
 }
 
-class IntEntry extends LinkedListEntry{
+class IntEntry extends LinkedListEntry<IntEntry>{
 }
 
 class GivenNewlyCreatedLinkedList extends BranchTestGroup {
