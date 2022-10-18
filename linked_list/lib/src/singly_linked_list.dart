@@ -57,4 +57,3 @@ abstract class LinkedListEntry<E extends LinkedListEntry<E>>{
 }
 
 
-class IllegalState implements Exception{}
