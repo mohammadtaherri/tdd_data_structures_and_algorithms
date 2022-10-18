@@ -12,34 +12,40 @@ class SinglyLinkedListTest extends RootTestGroup {
   SinglyLinkedListTest()
       : super(
           groups: [
+            GivenNewlyCreatedLinkedList(
+              groups: [],
+            ),
           ],
         );
+}
 
-  void givenNewlyCreatedList_ShouldBeEmpty(){
-    SinglyLinkedList linkedList = SinglyLinkedList();
+class GivenNewlyCreatedLinkedList extends BranchTestGroup {
+  GivenNewlyCreatedLinkedList({required super.groups})
+      : super(groupDescription: 'given newly created linked list');
+
+  late SinglyLinkedList linkedList;
+
+  @override
+  void setUp() {
+    linkedList = SinglyLinkedList();
+  }
+
+  void shouldBeEmpty() {
     expect(linkedList.isEmpty, isTrue);
     expect(linkedList.size, isZero);
   }
 
-  void givenNewlyCreatedList_FirstAndLastShouldBeNull(){
-    SinglyLinkedList linkedList = SinglyLinkedList();
+  void firstAndLastShouldBeNull() {
     expect(linkedList.first, isNull);
     expect(linkedList.last, isNull);
   }
 
   @override
   void registerTests(TestContainer container) {
-    container['given newly created list, should be empty'] = 
-        Test(givenNewlyCreatedList_ShouldBeEmpty);
+    container['should be empty'] = 
+        Test(shouldBeEmpty);
 
-    container['given newly created list, first and last should be null'] = 
-        Test(givenNewlyCreatedList_FirstAndLastShouldBeNull);
+    container['first and last should be null'] = 
+        Test(firstAndLastShouldBeNull);
   }
 }
-
-
-
-
-
-
-
