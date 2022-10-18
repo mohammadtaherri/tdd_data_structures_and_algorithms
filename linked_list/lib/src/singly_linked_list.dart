@@ -11,7 +11,7 @@ class SinglyLinkedList<E extends LinkedListEntry>{
   get last => null;
 
   void addFirst(E entry) {
-    _size = 1;
+    _size++;
   }
 }
 
