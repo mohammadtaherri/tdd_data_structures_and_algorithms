@@ -39,7 +39,13 @@ class SinglyLinkedList<E extends LinkedListEntry>{
     if(isEmpty)
       throw IllegalState();
 
-    _first = _last = null;
+    if(_first == _last)
+      _first = _last = null;
+    else{
+      _first!.next = null;
+      _first = _last;
+    }
+      
 
     _size--;
   }
