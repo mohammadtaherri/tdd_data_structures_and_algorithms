@@ -74,6 +74,14 @@ class GivenNewlyCreatedList extends BranchTestGroup{
     expect(act, throwsA(isA<IllegalState>()));
   }
 
+  void removeLast_ShouldThrowIllegalState(){
+    void act(){
+      linkedList.removeLast();
+    }
+
+    expect(act, throwsA(isA<IllegalState>()));
+  }
+
   @override
   void registerTests(TestContainer container) {
     container['should be empty'] = 
@@ -96,6 +104,9 @@ class GivenNewlyCreatedList extends BranchTestGroup{
 
     container['removeFirst, should throw IllegalState'] = 
         Test(removeFirst_ShouldThrowIllegalState);
+
+    container['removeLast, should throw IllegalState'] = 
+        Test(removeLast_ShouldThrowIllegalState);
   }
 }
 
