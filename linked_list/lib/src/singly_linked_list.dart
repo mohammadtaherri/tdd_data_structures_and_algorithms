@@ -23,7 +23,7 @@ class SinglyLinkedList<E extends LinkedListEntry<E>> {
   }
 }
 
-class LinkedListEntry<E extends LinkedListEntry<E>>{
+abstract class LinkedListEntry<E extends LinkedListEntry<E>>{
   E? next;
 }
 
