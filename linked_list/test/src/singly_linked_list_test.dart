@@ -14,3 +14,8 @@ class SinglyLinkedListTest extends RootTestGroup{
         ]
       );
 }
+
+class GivenNewlyCreatedList extends BranchTestGroup{
+  GivenNewlyCreatedList({required super.groups})
+      : super(groupDescription: 'given newly created list');
+}
