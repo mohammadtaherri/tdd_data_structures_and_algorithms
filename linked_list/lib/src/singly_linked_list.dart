@@ -36,7 +36,12 @@ class SinglyLinkedList<E extends LinkedListEntry>{
   }
 
   void removeFirst() {
-    throw IllegalState();
+    if(isEmpty)
+      throw IllegalState();
+
+    _first = _last = null;
+
+    _size = 0;
   }
 
   void removeLast() {
