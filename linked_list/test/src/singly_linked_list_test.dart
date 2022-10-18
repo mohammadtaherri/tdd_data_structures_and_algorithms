@@ -105,6 +105,23 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
     expect(linkedList.last, equals(x));
   }
 
+  void whenTwoItemsAreAdded_ThenFirstShouldLinkToLast(){
+    final x = IntEntry();
+    final y = IntEntry();
+    linkedList.addFirst(x);
+    linkedList.addFirst(y);
+    expect(linkedList.first?.next, isNotNull);
+    expect(linkedList.first!.next, equals(linkedList.last));
+  }
+
+  void whenTwoItemsAreAdded_ThenLastShouldLinkToNull(){
+    final x = IntEntry();
+    final y = IntEntry();
+    linkedList.addFirst(x);
+    linkedList.addFirst(y);
+    expect(linkedList.last?.next, isNull);
+  }
+
   @override
   void registerTests(TestContainer container) {
     container['when one item is added, then size should be one'] = 
@@ -118,6 +135,12 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
 
     container['when x and y are added, the first and last should be y and x'] = 
         Test(whenXAndYAreAdded_ThenFirstAndLastShouldBeYAndX);
+
+    container['when two items are added, then first should link to last'] = 
+        Test(whenTwoItemsAreAdded_ThenFirstShouldLinkToLast);
+
+    container['when two items are added, then last should link to null'] = 
+        Test(whenTwoItemsAreAdded_ThenLastShouldLinkToNull);
   }
 }
 
