@@ -45,7 +45,12 @@ class SinglyLinkedList<E extends LinkedListEntry>{
   }
 
   void removeLast() {
-    throw IllegalState();
+    if(isEmpty)
+      throw IllegalState();
+
+    _first = _last = null;
+
+    _size = 0;
   }
 
   int indexOf(E entry) {
