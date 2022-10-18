@@ -1,12 +1,21 @@
 part of linked_list;
 
-class SinglyLinkedList {
+class SinglyLinkedList<E extends LinkedListEntry> {
 
-  get isEmpty => true;
-  get size => 0;
+  get isEmpty => _size == 0;
+  get size => _size;
+  int _size = 0;
 
   get first => null;
   get last => null;
+
+  void addFirst(entry) {
+    _size++;
+  }
+}
+
+class LinkedListEntry{
+  
 }
 
 
