@@ -14,5 +14,12 @@ class SinglyLinkedListTest extends RootTestGroup {
           groups: [
           ],
         );
+
+  @override
+  void registerTests(TestContainer container) {
+    container['nothing'] = Test((){
+
+    });
+  }
 }
 
