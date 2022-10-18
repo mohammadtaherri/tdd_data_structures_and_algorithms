@@ -22,9 +22,15 @@ class SinglyLinkedListTest extends RootTestGroup {
         );
 }
 
+
+
 mixin LinkedListVariables on TestGroup {
   SinglyLinkedList get linkedList =>
       findVariableByKey('linked_list');
+
+  IntEntry get x => findVariableByKey('x');
+  IntEntry get y => findVariableByKey('y');
+  IntEntry get z => findVariableByKey('z');
 }
 
 class IntEntry extends LinkedListEntry<IntEntry>{}
@@ -34,10 +40,15 @@ class GivenNewlyCreatedLinkedList extends BranchTestGroup {
       : super(groupDescription: 'given newly created linked list');
 
   late SinglyLinkedList<IntEntry> linkedList;
+  late IntEntry x, y, z;
 
   @override
   void setUp() {
     linkedList = SinglyLinkedList<IntEntry>();
+
+    x = IntEntry();
+    y = IntEntry();
+    z = IntEntry();
   }
 
   void shouldBeEmpty() {
@@ -63,6 +74,15 @@ class GivenNewlyCreatedLinkedList extends BranchTestGroup {
   T? findVariableByKey<T>(String key) {
     if(key == 'linked_list')
       return linkedList as T;
+
+    if(key == 'x')
+      return x as T;
+
+    if(key == 'y')
+      return y as T;
+
+    if(key == 'z')
+      return z as T;
       
     return super.findVariableByKey<T>(key);
   }
@@ -73,15 +93,6 @@ class GivenNewlyCreatedLinkedList extends BranchTestGroup {
 class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   AddFirstMethodTest(): 
       super(groupDescription: '#addFirst method ');
-
-  late IntEntry x, y, z;
-
-  @override
-  void setUp() {
-    x = IntEntry();
-    y = IntEntry();
-    z = IntEntry();
-  }
 
   void whenOneItemIsAdded_ThenSizeShouldBeOne(){
     _addEntries([x]);
@@ -169,15 +180,6 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
 class AddLastMethodTest extends LeafTestGroup with LinkedListVariables{
   AddLastMethodTest()
       : super(groupDescription: '#addLast method ');
-
-  late IntEntry x, y, z;
-
-  @override
-  void setUp() {
-    x = IntEntry();
-    y = IntEntry();
-    z = IntEntry();
-  }
 
   void whenOneItemIsAdded_ThenSizeShouldBeOne(){
     _addEntries([x]);
