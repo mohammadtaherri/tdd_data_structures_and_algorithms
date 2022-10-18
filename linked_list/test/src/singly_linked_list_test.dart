@@ -5,7 +5,6 @@ import 'package:clean_test/clean_test.dart';
 import 'package:linked_list/linked_list.dart';
 
 import 'matchers.dart';
-import 'singly_linked_list_old_test.dart';
 
 void main() {
   runTest(SinglyLinkedListTest());
@@ -131,35 +130,37 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
 
   @override
   void registerTests(TestContainer container) {
-    container['should be empty'] = 
-        Test(shouldBeEmpty);
+    container.addAll({
+      'should be empty': 
+          Test(shouldBeEmpty),
 
-    container['first and last should be null'] = 
-        Test(firstAndLastShouldBeNull);
+      'first and last should be null': 
+          Test(firstAndLastShouldBeNull),
 
-    container['addFirst, when one entry is added, then size should be one'] = 
-        Test(addFirst_WhenOneEntryIsAdded_ThenSizeShouldBeOne);
+      'addFirst, when one entry is added, then size should be one':
+          Test(addFirst_WhenOneEntryIsAdded_ThenSizeShouldBeOne),
 
-    container['addFirst, when two entries are added, then size should be two'] = 
-        Test(addFirst_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo);
+      'addFirst, when two entries are added, then size should be two':
+          Test(addFirst_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo),
 
-    container['addFirst, when x is added, then first ans last should equal to x'] = 
-        Test(addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX);
+      'addFirst, when x is added, then first ans last should equal to x':
+          Test(addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
 
-    container['addLast, when one entry is added, then size should be one'] = 
-        Test(addLast_WhenOneEntryIsAdded_ThenSizeShouldBeOne);
+      'addLast, when one entry is added, then size should be one':
+          Test(addLast_WhenOneEntryIsAdded_ThenSizeShouldBeOne),
 
-    container['addLast, when two entries are added, then size should be two'] = 
-        Test(addLast_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo);
+      'addLast, when two entries are added, then size should be two':
+          Test(addLast_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo),
 
-    container['addLast, when x is added, then first ans last should equal to x'] = 
-        Test(addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX);
+      'addLast, when x is added, then first ans last should equal to x':
+          Test(addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
 
-    container['removeFirst, should throw IllegalState'] = 
-        Test(removeFirst_ShouldThrowIllegalState);
-
-    container['removeLast, should throw IllegalState'] = 
-        Test(removeLast_ShouldThrowIllegalState);
+      'removeFirst, should throw IllegalState':
+          Test(removeFirst_ShouldThrowIllegalState),
+          
+      'removeLast, should throw IllegalState':
+          Test(removeLast_ShouldThrowIllegalState),
+    });
   }
 
   @override
