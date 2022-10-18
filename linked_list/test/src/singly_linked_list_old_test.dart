@@ -33,7 +33,7 @@ mixin LinkedListVariables on TestGroup {
   IntEntry get z => findVariableByKey('z');
 }
 
-class IntEntry extends LinkedListEntry<IntEntry>{}
+class IntEntry extends LinkedListEntryOld<IntEntry>{}
 
 class GivenNewlyCreatedLinkedList extends BranchTestGroup {
   GivenNewlyCreatedLinkedList({required super.groups})
@@ -311,7 +311,7 @@ class RemoveFirstMethodTest extends LeafTestGroup with LinkedListVariables{
     expect(linkedList.last, z);
   }
 
-  void _givenAdding(List<LinkedListEntry> entries){
+  void _givenAdding(List<LinkedListEntryOld> entries){
     for(var entry in entries)
       linkedList.addLast(entry);
   }
@@ -386,7 +386,7 @@ class RemoveLastMethodTest extends LeafTestGroup with LinkedListVariables{
     expect(linkedList.last!.next, isNull);
   }
 
-  void _givenAdding(List<LinkedListEntry> entries){
+  void _givenAdding(List<LinkedListEntryOld> entries){
     for(var entry in entries)
       linkedList.addLast(entry);
   }
