@@ -46,6 +46,13 @@ class GivenNewlyCreatedList extends BranchTestGroup{
     expect(linkedList.isEmpty, isFalse);
   }
 
+  void addFirst_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo(){
+    linkedList.addFirst(DummyEntry());
+    linkedList.addFirst(DummyEntry());
+    expect(linkedList.size, equals(2));
+    expect(linkedList.isEmpty, isFalse);
+  }
+
   @override
   void registerTests(TestContainer container) {
     container['should be empty'] = 
@@ -56,6 +63,9 @@ class GivenNewlyCreatedList extends BranchTestGroup{
 
     container['addFirst, when one entry is added, then size should be one'] = 
         Test(addFirst_WhenOneEntryIsAdded_ThenSizeShouldBeOne);
+
+    container['addFirst, when two entries are added, then size should be two'] = 
+        Test(addFirst_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo);
   }
 }
 
