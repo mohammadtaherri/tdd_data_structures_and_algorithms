@@ -89,34 +89,17 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
 
   @override
   void registerTests(TestContainer container) {
-    container.addAll({
-      'shouldBeEmpty': 
-          Test(shouldBeEmpty),
-
-      'firstAndLastShouldBeNull': 
-          Test(firstAndLastShouldBeNull),
-
-      'addFirst_SizeShouldBeOne':
-          Test(addFirst_SizeShouldBeOne),
-
-      'addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX':
-          Test(addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
-
-      'addLast_SizeShouldBeOne':
-          Test(addLast_SizeShouldBeOne),
-
-      'addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX':
-          Test(addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
-
-      'removeFirst_ShouldThrowIllegalState':
-          Test(removeFirst_ShouldThrowIllegalState),
-
-      'removeLast_ShouldThrowIllegalState':
-          Test(removeLast_ShouldThrowIllegalState),
-
-      'indexOf_ShouldReturnNegativeOne':
-          Test(indexOf_ShouldReturnNegativeOne),
-    });
+    container.addAll([
+      Test(shouldBeEmpty),
+      Test(firstAndLastShouldBeNull),
+      Test(addFirst_SizeShouldBeOne),
+      Test(addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
+      Test(addLast_SizeShouldBeOne),
+      Test(addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
+      Test(removeFirst_ShouldThrowIllegalState),
+      Test(removeLast_ShouldThrowIllegalState),
+      Test(indexOf_ShouldReturnNegativeOne),
+    ]);
   }
 
   @override
@@ -213,46 +196,21 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
 
   @override
   void registerTests(TestContainer container) {
-    container.addAll({
-      'addFirst_SizeShouldBeTwo':
-          Test(addFirst_SizeShouldBeTwo),
-
-      'addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX': 
-          Test(addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX),
-      
-      'addFirst_WhenYIsAdded_ThenFirstShouldLinkToLast':
-          Test(addFirst_WhenYIsAdded_ThenFirstShouldLinkToLast),
-
-      'addFirst_WhenYIsAdded_ThenLastShouldLinkToNull':
-          Test(addFirst_WhenYIsAdded_ThenLastShouldLinkToNull),
-
-      'addLast_SizeShouldBeTwo':
-          Test(addLast_SizeShouldBeTwo),
-
-      'addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY': 
-          Test(addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY),
-      
-      'addLast_WhenYIsAdded_ThenFirstShouldLinkToLast':
-          Test(addLast_WhenYIsAdded_ThenFirstShouldLinkToLast),
-
-      'addLast_WhenYIsAdded_ThenLastShouldLinkToNull':
-          Test(addLast_WhenYIsAdded_ThenLastShouldLinkToNull),
-
-      'removeFirst_ShouldBeEmpty':
-          Test(removeFirst_ShouldBeEmpty),
-
-      'removeFirst_ThenFirstAndLastShouldBeNull':
-          Test(removeFirst_ThenFirstAndLastShouldBeNull),
-
-      'removeLast_ShouldBeEmpty':
-          Test(removeLast_ShouldBeEmpty),
-
-      'removeLast_ThenFirstAndLastShouldBeNull':
-          Test(removeLast_ThenFirstAndLastShouldBeNull),
-
-      'indexOf_X_ShouldReturnZero':
-          Test(indexOf_X_ShouldReturnZero),
-    });
+    container.addAll([
+      Test(addFirst_SizeShouldBeTwo),
+      Test(addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX),
+      Test(addFirst_WhenYIsAdded_ThenFirstShouldLinkToLast),
+      Test(addFirst_WhenYIsAdded_ThenLastShouldLinkToNull),
+      Test(addLast_SizeShouldBeTwo),
+      Test(addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY),
+      Test(addLast_WhenYIsAdded_ThenFirstShouldLinkToLast),
+      Test(addLast_WhenYIsAdded_ThenLastShouldLinkToNull),
+      Test(removeFirst_ShouldBeEmpty),
+      Test(removeFirst_ThenFirstAndLastShouldBeNull),
+      Test(removeLast_ShouldBeEmpty),
+      Test(removeLast_ThenFirstAndLastShouldBeNull),
+      Test(indexOf_X_ShouldReturnZero),
+    ]);
   }
 }
 
@@ -316,31 +274,16 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
 
   @override
   void registerTests(TestContainer container) {
-    container.addAll({
-      'addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect':
-          Test(addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect),
-
-      'addLast_WhenZIsAdded_ThenLinksShouldBeCorrect':
-          Test(addLast_WhenZIsAdded_ThenLinksShouldBeCorrect),
-
-      'removeFirst_SizeShouldBeOne': 
-          Test(removeFirst_SizeShouldBeOne),
-
-      'removeFirst_FirstAndLastShouldBeEqual':
-          Test(removeFirst_FirstAndLastShouldBeEqual),
-
-      'removeFirst_XShouldLinkToNull':
-          Test(removeFirst_XShouldLinkToNull),
-
-      'removeLast_SizeShouldBeOne': 
-          Test(removeLast_SizeShouldBeOne),
-
-      'removeLast_FirstAndLastShouldBeEqual':
-          Test(removeLast_FirstAndLastShouldBeEqual),
-
-      'removeLast_XShouldLinkToNull':
-          Test(removeLast_XShouldLinkToNull),
-    });
+    container.addAll([
+      Test(addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect),
+      Test(addLast_WhenZIsAdded_ThenLinksShouldBeCorrect),
+      Test(removeFirst_SizeShouldBeOne),
+      Test(removeFirst_FirstAndLastShouldBeEqual),
+      Test(removeFirst_XShouldLinkToNull),
+      Test(removeLast_SizeShouldBeOne),
+      Test(removeLast_FirstAndLastShouldBeEqual),
+      Test(removeLast_XShouldLinkToNull),
+    ]);
   }
 }
 
@@ -373,13 +316,10 @@ class GivenAddingXAndYAndZ extends LeafTestGroup with Variables, ComposedExpect{
 
   @override
   void registerTests(TestContainer container) {
-    container.addAll({
-      'removeFirst_FirstAndLastShouldBeYAndZ': 
-          Test(removeFirst_FirstAndLastShouldBeYAndZ),
-
-      'removeLast_FirstAndLastShouldBeXAndY': 
-          Test(removeLast_FirstAndLastShouldBeXAndY),
-    });
+    container.addAll([
+      Test(removeFirst_FirstAndLastShouldBeYAndZ),
+      Test(removeLast_FirstAndLastShouldBeXAndY),
+    ]);
   }
 }
 
