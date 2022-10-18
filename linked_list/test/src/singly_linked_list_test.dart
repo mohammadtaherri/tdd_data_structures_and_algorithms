@@ -82,6 +82,13 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
     expectSizeIsTwo();
   }
 
+  void addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX(){
+    final x = DummyEntry();
+    linkedList.addFirst(x);
+    expect(linkedList.first, equals(x));
+    expect(linkedList.last, equals(x));
+  }
+
   void addLast_WhenOneEntryIsAdded_ThenSizeShouldBeOne(){
     linkedList.addLast(DummyEntry());
     expectSizeIsOne();
@@ -91,6 +98,13 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
     linkedList.addLast(DummyEntry());
     linkedList.addLast(DummyEntry());
     expectSizeIsTwo();
+  }
+
+  void addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX(){
+    final x = DummyEntry();
+    linkedList.addLast(x);
+    expect(linkedList.first, equals(x));
+    expect(linkedList.last, equals(x));
   }
 
   void removeFirst_ShouldThrowIllegalState(){
@@ -123,11 +137,17 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
     container['addFirst, when two entries are added, then size should be two'] = 
         Test(addFirst_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo);
 
+    container['addFirst, when x is added, then first ans last should equal to x'] = 
+        Test(addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX);
+
     container['addLast, when one entry is added, then size should be one'] = 
         Test(addLast_WhenOneEntryIsAdded_ThenSizeShouldBeOne);
 
     container['addLast, when two entries are added, then size should be two'] = 
         Test(addLast_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo);
+
+    container['addLast, when x is added, then first ans last should equal to x'] = 
+        Test(addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX);
 
     container['removeFirst, should throw IllegalState'] = 
         Test(removeFirst_ShouldThrowIllegalState);
