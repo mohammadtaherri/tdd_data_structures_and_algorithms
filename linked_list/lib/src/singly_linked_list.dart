@@ -14,13 +14,18 @@ class SinglyLinkedList<E extends LinkedListEntry> {
   void addFirst(E entry) {
     if(isEmpty)
       _first = _last = entry;
-    else
+    else{
+      entry.next = _last;
       _first = entry;
+    }
+      
     _size++;
   }
 }
 
 class LinkedListEntry{
+  var next;
+  
   
 }
 
