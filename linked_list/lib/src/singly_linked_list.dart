@@ -42,8 +42,9 @@ class SinglyLinkedList<E extends LinkedListEntry>{
     if(_first == _last)
       _first = _last = null;
     else{
+      var newFirst = first!.next;
       _first!.next = null;
-      _first = _last;
+      _first = newFirst;
     }
       
 
