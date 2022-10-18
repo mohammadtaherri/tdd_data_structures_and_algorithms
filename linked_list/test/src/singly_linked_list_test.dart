@@ -267,8 +267,72 @@ class RemoveFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   RemoveFirstMethodTest()
       : super(groupDescription: '#removeFirst method');
 
+  void remove_ShouldThrowsIllegalState(){
+    void act(){
+      linkedList.removeFirst();
+    }
+
+    expect(act, throwsA(isA<IllegalState>()));
+  }
+
+  void givenAddingOneEntry_AfterRemove_ShouldBeEmpty(){
+    _givenAdding([x]);
+    linkedList.removeFirst();
+    expect(linkedList.isEmpty, isTrue);
+    expect(linkedList.size, isZero);
+  }
+
+  void givenAddingOneEntry_AfterRemove_FirstAndLastShouldBeNull(){
+    _givenAdding([x]);
+    linkedList.removeFirst();
+    expect(linkedList.first, isNull);
+    expect(linkedList.last, isNull);
+  }
+
+  void givenAddingTwoEntries_AfterRemove_FirstAndLastShouldBeEqual(){
+    _givenAdding([x, y]);
+    linkedList.removeFirst();
+    expect(linkedList.first, equals(linkedList.last));
+    expect(linkedList.first, equals(y));
+    expect(linkedList.last, equals(y));
+  }
+
+  void givenAddingXY_AfterRemove_XShouldLinkToNull(){
+    _givenAdding([x, y]);
+    linkedList.removeFirst();
+    expect(x.next, isNull);
+  }
+
+  void givenAddingXYZ_AfterRemove_FirstAndLastShouldBeYAndZ(){
+    _givenAdding([x, y, z]);
+    linkedList.removeFirst();
+    expect(linkedList.first, y);
+    expect(linkedList.last, z);
+  }
+
+  void _givenAdding(List<LinkedListEntry> entries){
+    for(var entry in entries)
+      linkedList.addLast(entry);
+  }
+
   @override
   void registerTests(TestContainer container) {
-    
+    container['remove, should throws IllegalState'] = 
+        Test(remove_ShouldThrowsIllegalState);
+
+    container['given adding one entry, after remvoe, should be empty'] = 
+        Test(givenAddingOneEntry_AfterRemove_ShouldBeEmpty);
+
+    container['given adding one entry, after remove, first and last should be null'] = 
+        Test(givenAddingOneEntry_AfterRemove_FirstAndLastShouldBeNull);
+
+    container['given adding two entries, after remove, first and last should be equal'] = 
+        Test(givenAddingTwoEntries_AfterRemove_FirstAndLastShouldBeEqual);
+
+    container['given adding x and y, after remove, x should link to null'] = 
+        Test(givenAddingXY_AfterRemove_XShouldLinkToNull);
+
+    container['given adding x, y, z, after remove, first and last should be y and z'] = 
+        Test(givenAddingXYZ_AfterRemove_FirstAndLastShouldBeYAndZ);
   }
 }
