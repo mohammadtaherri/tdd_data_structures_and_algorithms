@@ -25,7 +25,7 @@ class SinglyLinkedListTest extends RootTestGroup {
 }
 
 mixin LinkedListVariables on TestGroup {
-  SinglyLinkedList get linkedList =>
+  SinglyLinkedListOld get linkedList =>
       findVariableByKey('linked_list');
 
   IntEntry get x => findVariableByKey('x');
@@ -39,12 +39,12 @@ class GivenNewlyCreatedLinkedList extends BranchTestGroup {
   GivenNewlyCreatedLinkedList({required super.groups})
       : super(groupDescription: 'given newly created linked list');
 
-  late SinglyLinkedList<IntEntry> linkedList;
+  late SinglyLinkedListOld<IntEntry> linkedList;
   late IntEntry x, y, z;
 
   @override
   void setUp() {
-    linkedList = SinglyLinkedList<IntEntry>();
+    linkedList = SinglyLinkedListOld<IntEntry>();
 
     x = IntEntry();
     y = IntEntry();
@@ -383,6 +383,7 @@ class RemoveLastMethodTest extends LeafTestGroup with LinkedListVariables{
     _givenAdding([x, y, z]);
     linkedList.removeLast();
     expect(y.next, isNull);
+    expect(linkedList.last!.next, isNull);
   }
 
   void _givenAdding(List<LinkedListEntry> entries){
