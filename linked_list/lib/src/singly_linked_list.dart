@@ -21,6 +21,19 @@ class SinglyLinkedList<E extends LinkedListEntry<E>> {
       
     _size++;
   }
+
+  void addLast(E entry) {
+    if(isEmpty)
+      _first = _last = entry;
+    else{
+      _last!.next = entry;
+      _last = entry;
+    }
+
+    _size++;
+  }
+
+  
 }
 
 abstract class LinkedListEntry<E extends LinkedListEntry<E>>{
