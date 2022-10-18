@@ -128,6 +128,10 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
     expect(act, throwsAIllegalState);
   }
 
+  void indexOf_ShouldReturnNegativeOne(){
+    expect(linkedList.indexOf(DummyEntry()), equals(-1));
+  }
+
   @override
   void registerTests(TestContainer container) {
     container.addAll({
@@ -157,9 +161,12 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
 
       'removeFirst, should throw IllegalState':
           Test(removeFirst_ShouldThrowIllegalState),
-          
+
       'removeLast, should throw IllegalState':
           Test(removeLast_ShouldThrowIllegalState),
+
+      'indexOf, should return negative one':
+          Test(indexOf_ShouldReturnNegativeOne),
     });
   }
 
