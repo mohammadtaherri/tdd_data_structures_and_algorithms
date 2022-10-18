@@ -256,6 +256,10 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     expect(linkedList.last, isNull);
   }
 
+  void indexOf_X_ShouldReturnZero(){
+    expect(linkedList.indexOf(x), isZero);
+  }
+
   @override
   void registerTests(TestContainer container) {
     container.addAll({
@@ -288,6 +292,9 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
 
       'removeLast, then first and last should be null':
           Test(removeLast_ThenFirstAndLastShouldBeNull),
+
+      'indexOf x, should return zero':
+          Test(indexOf_X_ShouldReturnZero),
     });
   }
 }
