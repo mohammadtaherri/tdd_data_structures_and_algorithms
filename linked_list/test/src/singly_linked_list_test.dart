@@ -17,7 +17,9 @@ class SinglyLinkedListTest extends RootTestGroup {
   SinglyLinkedListTest()
       : super(groups: [
           GivenNewlyCreatedList(
-            groups: [],
+            groups: [
+              GivenAddingX(),
+            ],
           )
         ]);
 }
@@ -166,6 +168,25 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
       return linkedList as T;
       
     return super.findVariableByKey<T>(key);
+  }
+}
+
+
+class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
+  GivenAddingX()
+      : super(groupDescription: 'given adding x');
+
+  late DummyEntry x;
+
+  @override
+  void setUp() {
+    x = DummyEntry();
+    linkedList.addFirst(x);
+  }
+
+  @override
+  void registerTests(TestContainer container) {
+    
   }
 }
 
