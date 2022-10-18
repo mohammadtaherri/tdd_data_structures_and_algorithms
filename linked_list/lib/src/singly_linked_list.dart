@@ -12,7 +12,10 @@ class SinglyLinkedList<E extends LinkedListEntry> {
   E? _last;
 
   void addFirst(E entry) {
-    _first = _last = entry;
+    if(isEmpty)
+      _first = _last = entry;
+    else
+      _first = entry;
     _size++;
   }
 }
