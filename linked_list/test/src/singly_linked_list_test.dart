@@ -14,5 +14,23 @@ class SinglyLinkedListTest extends RootTestGroup {
           groups: [
           ],
         );
+
+  void givenNewlyCreatedList_ShouldBeEmpty(){
+    SinglyLinkedList linkedList = SinglyLinkedList();
+    expect(linkedList.isEmpty, isTrue);
+    expect(linkedList.size, isZero);
+  }
+
+  @override
+  void registerTests(TestContainer container) {
+    container['given newly created list, should be empty'] = 
+        Test(givenNewlyCreatedList_ShouldBeEmpty);
+  }
 }
+
+
+
+
+
+
 
