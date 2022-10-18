@@ -18,6 +18,7 @@ class SinglyLinkedListTest extends RootTestGroup {
           GivenNewlyCreatedList(
             groups: [
               GivenAddingX(),
+              GivenAddingXAndY(),
             ],
           )
         ]);
@@ -253,6 +254,17 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
       'indexOf x, should return zero':
           Test(indexOf_X_ShouldReturnZero),
     });
+  }
+}
+
+
+class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
+  GivenAddingXAndY()
+      : super(groupDescription: 'given adding x and y');
+
+  @override
+  void registerTests(TestContainer container) {
+
   }
 }
 
