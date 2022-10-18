@@ -19,6 +19,7 @@ class SinglyLinkedListTest extends RootTestGroup {
             groups: [
               GivenAddingX(),
               GivenAddingXAndY(),
+              GivenAddingXAndYAndZ(),
             ],
           )
         ]);
@@ -340,6 +341,29 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
       'removeLast, X should link to null':
           Test(removeLast_XShouldLinkToNull),
     });
+  }
+}
+
+class GivenAddingXAndYAndZ extends LeafTestGroup with Variables, ComposedExpect{
+  GivenAddingXAndYAndZ()
+      : super(groupDescription: '###given adding x, y and z');
+
+  late DummyEntry x, y, z;
+
+  @override
+  void setUp() {
+    x = DummyEntry();
+    y = DummyEntry();
+    z = DummyEntry();
+
+    linkedList.addFirst(x);
+    linkedList.addLast(y);
+    linkedList.addLast(z);
+  }
+
+  @override
+  void registerTests(TestContainer container) {
+    
   }
 }
 
