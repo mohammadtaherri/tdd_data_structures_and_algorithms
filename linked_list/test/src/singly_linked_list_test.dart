@@ -21,6 +21,11 @@ class SinglyLinkedListTest extends RootTestGroup {
         );
 }
 
+mixin LinkedListVariables on TestGroup {
+  SinglyLinkedList get linkedList =>
+      findVariableByKey('linked_list');
+}
+
 class GivenNewlyCreatedLinkedList extends BranchTestGroup {
   GivenNewlyCreatedLinkedList({required super.groups})
       : super(groupDescription: 'given newly created linked list');
@@ -50,10 +55,19 @@ class GivenNewlyCreatedLinkedList extends BranchTestGroup {
     container['first and last should be null'] = 
         Test(firstAndLastShouldBeNull);
   }
+
+    @override
+  T? findVariableByKey<T>(String key) {
+    if(key == 'linked_list')
+      return linkedList as T;
+      
+    return super.findVariableByKey<T>(key);
+  }
+
 }
 
 
-class AddFirstMethodTest extends LeafTestGroup{
+class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   AddFirstMethodTest(): 
       super(groupDescription: '#addFirst method ');
 
