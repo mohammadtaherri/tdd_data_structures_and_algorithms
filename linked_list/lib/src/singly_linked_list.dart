@@ -68,15 +68,9 @@ class SinglyLinkedList<E extends LinkedListEntry>{
   }
 
   E? _nodeBefore(E node) {
-    E? current = _first;
+    for (var current = _first; current != null; current = current.next)
+      if (current.next == node) return current;
 
-    while (current != null) {
-      if (current.next == node) {
-        return current;
-      }
-
-      current = current.next;
-    }
     return null;
   }
 
