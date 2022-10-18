@@ -192,9 +192,39 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     linkedList.addFirst(x);
   }
 
+  void addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX(){
+    final y = DummyEntry();
+    linkedList.addFirst(y);
+    expect(linkedList.first, equals(y));
+    expect(linkedList.last, equals(x));
+  }
+
+  void addFirst_WhenYIsAdded_ThenFirstShouldLinkToLast(){
+    final y = DummyEntry();
+    linkedList.addFirst(y);
+    expect(linkedList.first?.next, isNotNull);
+    expect(linkedList.first!.next, equals(linkedList.last));
+  }
+
+  void addFirst_WhenYIsAdded_ThenLastShouldLinkToNull(){
+    final y = DummyEntry();
+    linkedList.addFirst(y);
+    expect(linkedList.last?.next, isNull);
+  }
+
   @override
   void registerTests(TestContainer container) {
-    
+    container.addAll({
+      'addFirst, when y is added, then first and last should be y and x': 
+          Test(addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX),
+      
+      'addFirst, when y is added, then first should link to last':
+          Test(addFirst_WhenYIsAdded_ThenFirstShouldLinkToLast),
+
+      'addFirst, when y is added, then last should link to null':
+          Test(addFirst_WhenYIsAdded_ThenLastShouldLinkToNull),
+
+    });
   }
 }
 
