@@ -54,6 +54,13 @@ class SinglyLinkedList<E extends LinkedListEntry>{
   }
 
   int indexOf(E entry) {
+    E? current = _first;
+    int index = 0;
+
+    if(current != null)
+      if(current == entry)
+        return index;
+    
     return -1;
   }
 }
