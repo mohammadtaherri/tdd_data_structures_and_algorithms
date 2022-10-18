@@ -74,31 +74,35 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   AddFirstMethodTest(): 
       super(groupDescription: '#addFirst method ');
 
+  late IntEntry x, y, z;
+
+  @override
+  void setUp() {
+    x = IntEntry();
+    y = IntEntry();
+    z = IntEntry();
+  }
+
   void whenOneItemIsAdded_ThenSizeShouldBeOne(){
-    IntEntry entry = IntEntry();
-    linkedList.addFirst(entry);
+    linkedList.addFirst(x);
     expect(linkedList.size, equals(1));
     expect(linkedList.isEmpty, isFalse);
   }
 
   void whenTwoItemsAreAdded_ThenSizeShouldBeTwo(){
-    IntEntry entry = IntEntry();
-    linkedList.addFirst(entry);
-    linkedList.addFirst(entry);
+    linkedList.addFirst(x);
+    linkedList.addFirst(y);
     expect(linkedList.size, equals(2));
     expect(linkedList.isEmpty, isFalse);
   }
 
   void whenXIsAdded_ThenFirstAndLastShouldBeX(){
-    final x = IntEntry();
     linkedList.addFirst(x);
     expect(linkedList.first, equals(x));
     expect(linkedList.last, equals(x));
   }
 
   void whenXAndYAreAdded_ThenFirstAndLastShouldBeYAndX(){
-    final x = IntEntry();
-    final y = IntEntry();
     linkedList.addFirst(x);
     linkedList.addFirst(y);
     expect(linkedList.first, equals(y));
@@ -106,8 +110,6 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   }
 
   void whenTwoItemsAreAdded_ThenFirstShouldLinkToLast(){
-    final x = IntEntry();
-    final y = IntEntry();
     linkedList.addFirst(x);
     linkedList.addFirst(y);
     expect(linkedList.first?.next, isNotNull);
@@ -115,17 +117,12 @@ class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   }
 
   void whenTwoItemsAreAdded_ThenLastShouldLinkToNull(){
-    final x = IntEntry();
-    final y = IntEntry();
     linkedList.addFirst(x);
     linkedList.addFirst(y);
     expect(linkedList.last?.next, isNull);
   }
 
   void whenThreeItemsAreAdded_ThenLinksShouldBeCorrect(){
-    final x = IntEntry();
-    final y = IntEntry();
-    final z = IntEntry();
     linkedList.addFirst(x);
     linkedList.addFirst(y);
     linkedList.addFirst(z);
