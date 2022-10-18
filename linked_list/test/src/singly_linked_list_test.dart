@@ -48,6 +48,12 @@ mixin ComposedExpect on TestGroup{
     expect(linkedList.first, isNull);
     expect(linkedList.last, isNull);
   }
+
+  expectFirstAndLastAreEqualTo(DummyEntry x){
+    expect(linkedList.first, equals(x));
+    expect(linkedList.last, equals(x));
+    expect(linkedList.last, equals(linkedList.first));
+  }
 }
 
 
@@ -85,8 +91,7 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
   void addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX(){
     final x = DummyEntry();
     linkedList.addFirst(x);
-    expect(linkedList.first, equals(x));
-    expect(linkedList.last, equals(x));
+    expectFirstAndLastAreEqualTo(x);
   }
 
   void addLast_WhenOneEntryIsAdded_ThenSizeShouldBeOne(){
@@ -103,8 +108,7 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
   void addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX(){
     final x = DummyEntry();
     linkedList.addLast(x);
-    expect(linkedList.first, equals(x));
-    expect(linkedList.last, equals(x));
+    expectFirstAndLastAreEqualTo(x);
   }
 
   void removeFirst_ShouldThrowIllegalState(){
