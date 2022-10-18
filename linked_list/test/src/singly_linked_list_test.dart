@@ -10,7 +10,7 @@ void main() {
   runTest(SinglyLinkedListTest());
 }
 
-class DummyEntry extends LinkedListEntry{}
+class DummyEntry extends LinkedListEntry<DummyEntry>{}
 
 class SinglyLinkedListTest extends RootTestGroup {
   SinglyLinkedListTest()

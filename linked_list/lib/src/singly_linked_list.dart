@@ -1,6 +1,6 @@
 part of linked_list;
 
-class SinglyLinkedList<E extends LinkedListEntry>{
+class SinglyLinkedList<E extends LinkedListEntry<E>>{
 
   bool get isEmpty => _size == 0;
   int get size => _size;
@@ -18,7 +18,6 @@ class SinglyLinkedList<E extends LinkedListEntry>{
       entry.next = _first;
       _first = entry;
     }
-      
 
     _size++;
   }
@@ -30,8 +29,7 @@ class SinglyLinkedList<E extends LinkedListEntry>{
       _last!.next = entry;
       _last = entry;
     }
-      
-      
+
     _size++;
   }
 
@@ -46,8 +44,7 @@ class SinglyLinkedList<E extends LinkedListEntry>{
       _first!.next = null;
       _first = newFirst;
     }
-      
-
+    
     _size--;
   }
 
@@ -86,6 +83,6 @@ class SinglyLinkedList<E extends LinkedListEntry>{
   }
 }
 
-class LinkedListEntry{
-  var next;
+class LinkedListEntry<E extends LinkedListEntry<E>>{
+  E? next;
 }
