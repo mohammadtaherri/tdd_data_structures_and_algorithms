@@ -27,7 +27,7 @@ class SinglyLinkedListTest extends RootTestGroup {
 
 class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
   GivenNewlyCreatedList({required super.groups})
-      : super(groupDescription: 'given newly created list');
+      : super(groupDescription: 'GivenNewlyCreatedList');
 
   @override
   late SinglyLinkedList<DummyEntry> linkedList;
@@ -90,31 +90,31 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
   @override
   void registerTests(TestContainer container) {
     container.addAll({
-      'should be empty': 
+      'shouldBeEmpty': 
           Test(shouldBeEmpty),
 
-      'first and last should be null': 
+      'firstAndLastShouldBeNull': 
           Test(firstAndLastShouldBeNull),
 
-      'addFirst, size should be one':
+      'addFirst_SizeShouldBeOne':
           Test(addFirst_SizeShouldBeOne),
 
-      'addFirst, when x is added, then first ans last should equal to x':
+      'addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX':
           Test(addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
 
-      'addLast, size should be one':
+      'addLast_SizeShouldBeOne':
           Test(addLast_SizeShouldBeOne),
 
-      'addLast, when x is added, then first ans last should equal to x':
+      'addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX':
           Test(addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
 
-      'removeFirst, should throw IllegalState':
+      'removeFirst_ShouldThrowIllegalState':
           Test(removeFirst_ShouldThrowIllegalState),
 
-      'removeLast, should throw IllegalState':
+      'removeLast_ShouldThrowIllegalState':
           Test(removeLast_ShouldThrowIllegalState),
 
-      'indexOf, should return negative one':
+      'indexOf_ShouldReturnNegativeOne':
           Test(indexOf_ShouldReturnNegativeOne),
     });
   }
@@ -131,7 +131,7 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
 
 class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
   GivenAddingX()
-      : super(groupDescription: '#given adding x');
+      : super(groupDescription: 'GivenAddingX');
 
   late DummyEntry x;
 
@@ -214,43 +214,43 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
   @override
   void registerTests(TestContainer container) {
     container.addAll({
-      'addFirst, size should be two':
+      'addFirst_SizeShouldBeTwo':
           Test(addFirst_SizeShouldBeTwo),
 
-      'addFirst, when y is added, then first and last should be y and x': 
+      'addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX': 
           Test(addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX),
       
-      'addFirst, when y is added, then first should link to last':
+      'addFirst_WhenYIsAdded_ThenFirstShouldLinkToLast':
           Test(addFirst_WhenYIsAdded_ThenFirstShouldLinkToLast),
 
-      'addFirst, when y is added, then last should link to null':
+      'addFirst_WhenYIsAdded_ThenLastShouldLinkToNull':
           Test(addFirst_WhenYIsAdded_ThenLastShouldLinkToNull),
 
-      'addLast, size should be two':
+      'addLast_SizeShouldBeTwo':
           Test(addLast_SizeShouldBeTwo),
 
-      'addLast, when y is added, then first and last should be x and y': 
+      'addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY': 
           Test(addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY),
       
-      'addLast, when y is added, then first should link to last':
+      'addLast_WhenYIsAdded_ThenFirstShouldLinkToLast':
           Test(addLast_WhenYIsAdded_ThenFirstShouldLinkToLast),
 
-      'addLast, when y is added, then last should link to null':
+      'addLast_WhenYIsAdded_ThenLastShouldLinkToNull':
           Test(addLast_WhenYIsAdded_ThenLastShouldLinkToNull),
 
-      'removeFirst, should be empty':
+      'removeFirst_ShouldBeEmpty':
           Test(removeFirst_ShouldBeEmpty),
 
-      'removeFirst, then first and last should be null':
+      'removeFirst_ThenFirstAndLastShouldBeNull':
           Test(removeFirst_ThenFirstAndLastShouldBeNull),
 
-      'removeLast, should be empty':
+      'removeLast_ShouldBeEmpty':
           Test(removeLast_ShouldBeEmpty),
 
-      'removeLast, then first and last should be null':
+      'removeLast_ThenFirstAndLastShouldBeNull':
           Test(removeLast_ThenFirstAndLastShouldBeNull),
 
-      'indexOf x, should return zero':
+      'indexOf_X_ShouldReturnZero':
           Test(indexOf_X_ShouldReturnZero),
     });
   }
@@ -259,7 +259,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
 
 class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
   GivenAddingXAndY()
-      : super(groupDescription: '##given adding x and y');
+      : super(groupDescription: 'GivenAddingXAndY');
 
   late DummyEntry x, y;
 
@@ -317,28 +317,28 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
   @override
   void registerTests(TestContainer container) {
     container.addAll({
-      'addFirst, when z is added, then links should be correct':
+      'addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect':
           Test(addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect),
 
-      'addLast, when z is added, then links should be correct':
+      'addLast_WhenZIsAdded_ThenLinksShouldBeCorrect':
           Test(addLast_WhenZIsAdded_ThenLinksShouldBeCorrect),
 
-      'removeFirst, size should be one': 
+      'removeFirst_SizeShouldBeOne': 
           Test(removeFirst_SizeShouldBeOne),
 
-      'removeFirst, first and last should be equal':
+      'removeFirst_FirstAndLastShouldBeEqual':
           Test(removeFirst_FirstAndLastShouldBeEqual),
 
-      'removeFirst, x should link to null':
+      'removeFirst_XShouldLinkToNull':
           Test(removeFirst_XShouldLinkToNull),
 
-      'removeLast, size should be one': 
+      'removeLast_SizeShouldBeOne': 
           Test(removeLast_SizeShouldBeOne),
 
-      'removeLast, first and last should be equal':
+      'removeLast_FirstAndLastShouldBeEqual':
           Test(removeLast_FirstAndLastShouldBeEqual),
 
-      'removeLast, X should link to null':
+      'removeLast_XShouldLinkToNull':
           Test(removeLast_XShouldLinkToNull),
     });
   }
@@ -346,7 +346,7 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
 
 class GivenAddingXAndYAndZ extends LeafTestGroup with Variables, ComposedExpect{
   GivenAddingXAndYAndZ()
-      : super(groupDescription: '###given adding x, y and z');
+      : super(groupDescription: 'GivenAddingXAndYAndZ');
 
   late DummyEntry x, y, z;
 
@@ -374,10 +374,10 @@ class GivenAddingXAndYAndZ extends LeafTestGroup with Variables, ComposedExpect{
   @override
   void registerTests(TestContainer container) {
     container.addAll({
-      'removeFirst, first and last should be y and z': 
+      'removeFirst_FirstAndLastShouldBeYAndZ': 
           Test(removeFirst_FirstAndLastShouldBeYAndZ),
 
-      'removeLast, first and last should be x and y': 
+      'removeLast_FirstAndLastShouldBeXAndY': 
           Test(removeLast_FirstAndLastShouldBeXAndY),
     });
   }
