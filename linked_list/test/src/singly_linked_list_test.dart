@@ -303,6 +303,16 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
     expectSizeIsOne();
   }
 
+  void removeLast_FirstAndLastShouldBeEqual(){
+    linkedList.removeLast();
+    expectFirstAndLastAreEqualTo(x);
+  }
+
+  void removeLast_XShouldLinkToNull(){
+    linkedList.removeLast();
+    expect(x.next, isNull);
+  }
+
   @override
   void registerTests(TestContainer container) {
     container.addAll({
@@ -323,6 +333,12 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
 
       'removeLast, size should be one': 
           Test(removeLast_SizeShouldBeOne),
+
+      'removeLast, first and last should be equal':
+          Test(removeLast_FirstAndLastShouldBeEqual),
+
+      'removeLast, X should link to null':
+          Test(removeLast_XShouldLinkToNull),
     });
   }
 }
