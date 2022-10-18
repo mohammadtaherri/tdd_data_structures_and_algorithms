@@ -13,6 +13,10 @@ class SinglyLinkedList<E extends LinkedListEntry>{
   void addFirst(E entry) {
     _size++;
   }
+
+  void addLast(E entry) {
+    _size++;
+  }
 }
 
 class LinkedListEntry{}
