@@ -26,7 +26,7 @@ mixin Variables on TestGroup {
   SinglyLinkedList get linkedList => findVariableByKey('linked_list');
 }
 
-mixin UtilityMethods on TestGroup{
+mixin ComposedExpect on TestGroup{
   SinglyLinkedList get linkedList => findVariableByKey('linked_list');
 
   expectListIsEmpty(){
@@ -51,7 +51,7 @@ mixin UtilityMethods on TestGroup{
 }
 
 
-class GivenNewlyCreatedList extends BranchTestGroup with UtilityMethods{
+class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
   GivenNewlyCreatedList({required super.groups})
       : super(groupDescription: 'given newly created list');
 
