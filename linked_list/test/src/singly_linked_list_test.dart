@@ -262,6 +262,17 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
   GivenAddingXAndY()
       : super(groupDescription: 'given adding x and y');
 
+  late DummyEntry x, y;
+
+  @override
+  void setUp() {
+    x = DummyEntry();
+    y = DummyEntry();
+
+    linkedList.addFirst(x);
+    linkedList.addLast(y);
+  }
+
   @override
   void registerTests(TestContainer container) {
 
