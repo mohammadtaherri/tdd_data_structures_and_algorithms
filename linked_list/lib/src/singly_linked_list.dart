@@ -21,6 +21,10 @@ class SinglyLinkedList<E extends LinkedListEntry>{
   void removeFirst() {
     throw IllegalState();
   }
+
+  void removeLast() {
+    throw IllegalState();
+  }
 }
 
 class LinkedListEntry{}
