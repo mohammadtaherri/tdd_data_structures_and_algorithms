@@ -58,23 +58,26 @@ class SinglyLinkedList<E extends LinkedListEntry>{
     if(_first == _last)
       _first = _last = null;
     else{
-      E? current = _first;
-      late E newLast;
-
-      while (current != null) {
-        if (current.next == _last) {
-          newLast = current;
-          break;
-        }
-          
-        current = current.next;
-      }
       
+      E newLast = _nodeBefore(_last!)!;
       newLast.next = null;
       _last = newLast;
     }
 
     _size--;
+  }
+
+  E? _nodeBefore(E node) {
+    E? current = _first;
+
+    while (current != null) {
+      if (current.next == node) {
+        return current;
+      }
+
+      current = current.next;
+    }
+    return null;
   }
 
   int indexOf(E entry) {
