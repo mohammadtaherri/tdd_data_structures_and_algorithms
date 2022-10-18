@@ -15,7 +15,7 @@ class SinglyLinkedList<E extends LinkedListEntry>{
     if(isEmpty)
       _first = _last = entry;
     else{
-      entry.next = _last;
+      entry.next = _first;
       _first = entry;
     }
       
