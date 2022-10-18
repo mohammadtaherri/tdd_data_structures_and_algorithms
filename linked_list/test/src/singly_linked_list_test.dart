@@ -44,15 +44,9 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
     expectFirstAndLastAreNull();
   }
 
-  void addFirst_WhenOneEntryIsAdded_ThenSizeShouldBeOne(){
+  void addFirst_SizeShouldBeOne(){
     linkedList.addFirst(DummyEntry());
     expectSizeIsOne();
-  }
-
-  void addFirst_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo(){
-    linkedList.addFirst(DummyEntry());
-    linkedList.addFirst(DummyEntry());
-    expectSizeIsTwo();
   }
 
   void addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX(){
@@ -61,15 +55,9 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
     expectFirstAndLastAreEqualTo(x);
   }
 
-  void addLast_WhenOneEntryIsAdded_ThenSizeShouldBeOne(){
+  void addLast_SizeShouldBeOne(){
     linkedList.addLast(DummyEntry());
     expectSizeIsOne();
-  }
-
-  void addLast_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo(){
-    linkedList.addLast(DummyEntry());
-    linkedList.addLast(DummyEntry());
-    expectSizeIsTwo();
   }
 
   void addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX(){
@@ -107,20 +95,14 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
       'first and last should be null': 
           Test(firstAndLastShouldBeNull),
 
-      'addFirst, when one entry is added, then size should be one':
-          Test(addFirst_WhenOneEntryIsAdded_ThenSizeShouldBeOne),
-
-      'addFirst, when two entries are added, then size should be two':
-          Test(addFirst_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo),
+      'addFirst, size should be one':
+          Test(addFirst_SizeShouldBeOne),
 
       'addFirst, when x is added, then first ans last should equal to x':
           Test(addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
 
-      'addLast, when one entry is added, then size should be one':
-          Test(addLast_WhenOneEntryIsAdded_ThenSizeShouldBeOne),
-
-      'addLast, when two entries are added, then size should be two':
-          Test(addLast_WhenTwoEntriesAreAdded_ThenSizeShouldBeTwo),
+      'addLast, size should be one':
+          Test(addLast_SizeShouldBeOne),
 
       'addLast, when x is added, then first ans last should equal to x':
           Test(addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
@@ -148,7 +130,7 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
 
 class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
   GivenAddingX()
-      : super(groupDescription: '#1given adding x');
+      : super(groupDescription: '#given adding x');
 
   late DummyEntry x;
 
@@ -156,6 +138,11 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
   void setUp() {
     x = DummyEntry();
     linkedList.addFirst(x);
+  }
+
+  void addFirst_SizeShouldBeTwo(){
+    linkedList.addFirst(DummyEntry());
+    expectSizeIsTwo();
   }
 
   void addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX(){
@@ -174,6 +161,11 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     final y = DummyEntry();
     linkedList.addFirst(y);
     expectLastIsLinkedToNull();
+  }
+
+  void addLast_SizeShouldBeTwo(){
+    linkedList.addLast(DummyEntry());
+    expectSizeIsTwo();
   }
 
   void addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY(){
@@ -221,6 +213,9 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
   @override
   void registerTests(TestContainer container) {
     container.addAll({
+      'addFirst, size should be two':
+          Test(addFirst_SizeShouldBeTwo),
+
       'addFirst, when y is added, then first and last should be y and x': 
           Test(addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX),
       
@@ -229,6 +224,9 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
 
       'addFirst, when y is added, then last should link to null':
           Test(addFirst_WhenYIsAdded_ThenLastShouldLinkToNull),
+
+      'addLast, size should be two':
+          Test(addLast_SizeShouldBeTwo),
 
       'addLast, when y is added, then first and last should be x and y': 
           Test(addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY),
@@ -260,7 +258,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
 
 class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
   GivenAddingXAndY()
-      : super(groupDescription: '#2given adding x and y');
+      : super(groupDescription: '##given adding x and y');
 
   late DummyEntry x, y;
 
