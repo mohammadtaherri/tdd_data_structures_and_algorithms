@@ -204,6 +204,30 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     expectFirstAndLastAreNull();
   }
 
+  void elementAt_WhenIndexIsNegative_ShouldThrowOutOfRange(){
+    void act(){
+      linkedList.elementAt(-1);
+    }
+
+    expect(act, throwsA(isA<OutOFRange>()));
+  }
+
+  void elementAt_WhenIndexIsGreaterThanSize_ShouldThrowOutOfRange(){
+    void act(){
+      linkedList.elementAt(2);
+    }
+
+    expect(act, throwsA(isA<OutOFRange>()));
+  }
+
+  void elementAt_WhenIndexIsEqualToSize_ShouldThrowOutOfRange(){
+    void act(){
+      linkedList.elementAt(1);
+    }
+
+    expect(act, throwsA(isA<OutOFRange>()));
+  }
+
   void indexOf_X_ShouldReturnZero(){
     expect(linkedList.indexOf(x), isZero);
   }
@@ -228,6 +252,9 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
       Test(removeFirst_ThenFirstAndLastShouldBeNull),
       Test(removeLast_ShouldBeEmpty),
       Test(removeLast_ThenFirstAndLastShouldBeNull),
+      Test(elementAt_WhenIndexIsNegative_ShouldThrowOutOfRange),
+      Test(elementAt_WhenIndexIsGreaterThanSize_ShouldThrowOutOfRange),
+      Test(elementAt_WhenIndexIsEqualToSize_ShouldThrowOutOfRange),
       Test(indexOf_X_ShouldReturnZero),
       Test(reverse_ThenFirstAndLastShouldBeX),
     ]);
