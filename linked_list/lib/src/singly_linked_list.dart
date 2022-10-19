@@ -74,6 +74,9 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
   void elementAt(int index) {
     if(isEmpty)
       throw Empty();
+
+    if(index < 0 || index >= size)
+      throw OutOFRange();
   }
 
   int indexOf(E entry) {
