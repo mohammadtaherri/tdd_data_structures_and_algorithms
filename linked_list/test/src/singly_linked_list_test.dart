@@ -88,6 +88,11 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
     expect(linkedList.indexOf(DummyEntry()), equals(-1));
   }
 
+  void reverse_ThenFirstAndLastShouldBeNull(){
+    linkedList.reverse();
+    expectFirstAndLastAreNull();
+  }
+
   @override
   void registerTests(TestContainer container) {
     container.addAll([
@@ -100,6 +105,7 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
       Test(removeFirst_ShouldThrowIllegalState),
       Test(removeLast_ShouldThrowIllegalState),
       Test(indexOf_ShouldReturnNegativeOne),
+      Test(reverse_ThenFirstAndLastShouldBeNull),
     ]);
   }
 
@@ -193,6 +199,11 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     expect(linkedList.indexOf(x), isZero);
   }
 
+  void reverse_ThenFirstAndLastShouldBeX(){
+    linkedList.reverse();
+    expectFirstAndLastAreEqualTo(x);
+  }
+
   @override
   void registerTests(TestContainer container) {
     container.addAll([
@@ -209,6 +220,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
       Test(removeLast_ShouldBeEmpty),
       Test(removeLast_ThenFirstAndLastShouldBeNull),
       Test(indexOf_X_ShouldReturnZero),
+      Test(reverse_ThenFirstAndLastShouldBeX),
     ]);
   }
 }
