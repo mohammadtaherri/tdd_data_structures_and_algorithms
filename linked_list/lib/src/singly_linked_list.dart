@@ -78,7 +78,26 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     if(index < 0 || index >= size)
       throw OutOFRange();
 
-    return _first!;
+    E? current = first;
+    int i = 0;
+
+    if(i <= index){
+      if(i == index)
+        return current!;
+
+      current = current?.next;
+      i++;
+    }
+
+    if(i <= index){
+      if(i == index)
+        return current!;
+
+      current = current?.next;
+      i++;
+    }
+
+    throw OutOFRange();
   }
 
   int indexOf(E entry) {
