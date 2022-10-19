@@ -89,7 +89,7 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
       linkedList.elementAt(0);
     }
 
-    expect(act, throwsA(isA<Empty>()));
+    expect(act, throwsAEmpty);
   }
 
   void indexOf_ShouldReturnNegativeOne(){
