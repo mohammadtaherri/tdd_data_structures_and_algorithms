@@ -71,6 +71,11 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     return null;
   }
 
+  void elementAt(int index) {
+    if(isEmpty)
+      throw Empty();
+  }
+
   int indexOf(E entry) {
     for (var c = _first, i = 0; c != null; c = c.next, i++)
       if (c == entry) 
@@ -99,6 +104,7 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     
     _last?.next = null;
   }
+
 }
 
 abstract class LinkedListEntry<E extends LinkedListEntry<E>>{
