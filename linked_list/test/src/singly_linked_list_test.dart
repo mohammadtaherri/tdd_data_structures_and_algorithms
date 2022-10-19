@@ -330,6 +330,11 @@ class GivenAddingXAndYAndZ extends LeafTestGroup with Variables, ComposedExpect{
     expect(z.next, equals(y));
   }
 
+  void reverse_ThenLastShouldBeLinkedToNull(){
+    linkedList.reverse();
+    expectLastIsLinkedToNull();
+  }
+
   @override
   void registerTests(TestContainer container) {
     container.addAll([
@@ -337,6 +342,7 @@ class GivenAddingXAndYAndZ extends LeafTestGroup with Variables, ComposedExpect{
       Test(removeLast_FirstAndLastShouldBeXAndY),
       Test(reverse_ThenYShouldBeLinkedToX),
       Test(reverse_ThenZShouldBeLinkedToY),
+      Test(reverse_ThenLastShouldBeLinkedToNull),
     ]);
   }
 }
