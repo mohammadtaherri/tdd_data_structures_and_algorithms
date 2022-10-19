@@ -269,6 +269,10 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
     expect(x.next, isNull);
   }
 
+  void indexOf_Y_shouldReturnOne(){
+    expect(linkedList.indexOf(y), equals(1));
+  }
+
   @override
   void registerTests(TestContainer container) {
     container.addAll([
@@ -280,6 +284,7 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
       Test(removeLast_SizeShouldBeOne),
       Test(removeLast_FirstAndLastShouldBeEqual),
       Test(removeLast_XShouldLinkToNull),
+      Test(indexOf_Y_shouldReturnOne),
     ]);
   }
 }
