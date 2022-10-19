@@ -81,7 +81,7 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     E? current = first;
     int i = 0;
 
-    if(i <= index){
+    while(i <= index){
       if(i == index)
         return current!;
 
@@ -89,15 +89,7 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
       i++;
     }
 
-    if(i <= index){
-      if(i == index)
-        return current!;
-
-      current = current?.next;
-      i++;
-    }
-
-    throw OutOFRange();
+    throw Error();
   }
 
   int indexOf(E entry) {
