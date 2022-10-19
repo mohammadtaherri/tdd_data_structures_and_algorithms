@@ -55,7 +55,6 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     if(_first == _last)
       _first = _last = null;
     else{
-      
       E newLast = _nodeBefore(_last!)!;
       newLast.next = null;
       _last = newLast;
@@ -113,7 +112,6 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     
     _last?.next = null;
   }
-
 }
 
 abstract class LinkedListEntry<E extends LinkedListEntry<E>>{
