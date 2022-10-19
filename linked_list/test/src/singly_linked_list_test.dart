@@ -26,8 +26,7 @@ class SinglyLinkedListTest extends RootTestGroup {
 }
 
 class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
-  GivenNewlyCreatedList({required super.groups})
-      : super(groupDescription: 'GivenNewlyCreatedList');
+  GivenNewlyCreatedList({required super.groups});
 
   @override
   late SinglyLinkedList<DummyEntry> linkedList;
@@ -113,8 +112,7 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
 
 
 class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
-  GivenAddingX()
-      : super(groupDescription: 'GivenAddingX');
+  GivenAddingX();
 
   late DummyEntry x;
 
@@ -216,8 +214,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
 
 
 class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
-  GivenAddingXAndY()
-      : super(groupDescription: 'GivenAddingXAndY');
+  GivenAddingXAndY();
 
   late DummyEntry x, y;
 
@@ -288,8 +285,7 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
 }
 
 class GivenAddingXAndYAndZ extends LeafTestGroup with Variables, ComposedExpect{
-  GivenAddingXAndYAndZ()
-      : super(groupDescription: 'GivenAddingXAndYAndZ');
+  GivenAddingXAndYAndZ();
 
   late DummyEntry x, y, z;
 
