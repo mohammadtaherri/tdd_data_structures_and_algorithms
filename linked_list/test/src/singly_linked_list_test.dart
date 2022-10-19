@@ -322,6 +322,10 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
     expect(x.next, isNull);
   }
 
+  void elementAt_One_ShouldReturnY(){
+    expect(linkedList.elementAt(1), equals(y));
+  }
+
   void indexOf_Y_shouldReturnOne(){
     expect(linkedList.indexOf(y), equals(1));
   }
@@ -342,6 +346,7 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
       Test(removeLast_SizeShouldBeOne),
       Test(removeLast_FirstAndLastShouldBeEqual),
       Test(removeLast_XShouldBeLinkedToNull),
+      Test(elementAt_One_ShouldReturnY),
       Test(indexOf_Y_shouldReturnOne),
       Test(reverse_ThenFirstAndLastShouldBeReversed),
     ]);
