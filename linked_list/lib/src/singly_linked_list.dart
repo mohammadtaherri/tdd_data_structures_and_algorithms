@@ -84,14 +84,7 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     var prev = first;
     var current = prev?.next;
 
-    if(current != null){
-      var temp = current.next;
-      current.next = prev;
-      prev = current;
-      current = temp;
-    }
-
-    if(current != null){
+    while(current != null){
       var temp = current.next;
       current.next = prev;
       prev = current;
