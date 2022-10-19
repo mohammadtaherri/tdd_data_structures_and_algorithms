@@ -71,12 +71,14 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     return null;
   }
 
-  void elementAt(int index) {
+  E elementAt(int index) {
     if(isEmpty)
       throw Empty();
 
     if(index < 0 || index >= size)
       throw OutOFRange();
+
+    return _first!;
   }
 
   int indexOf(E entry) {
