@@ -78,16 +78,9 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     if(index < 0 || index >= size)
       throw OutOFRange();
 
-    E? current = first;
-    int i = 0;
-
-    while(i <= index){
+    for(var i = 0, current = first; i <= index; i++, current = current?.next)
       if(i == index)
         return current!;
-
-      current = current?.next;
-      i++;
-    }
 
     throw Error();
   }
