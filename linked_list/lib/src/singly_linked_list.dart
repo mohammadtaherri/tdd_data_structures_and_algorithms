@@ -94,6 +94,8 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     var temp = _first;
     _first = _last;
     _last = temp;
+    
+    _last?.next = null;
   }
 }
 
