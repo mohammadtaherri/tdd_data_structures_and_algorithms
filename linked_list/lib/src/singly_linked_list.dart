@@ -80,6 +80,8 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
   }
 
   void reverse() {
+    if(size <= 1)
+      return;
 
     var prev = first;
     var current = prev?.next;
