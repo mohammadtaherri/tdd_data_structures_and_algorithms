@@ -78,6 +78,12 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
 
     return -1;
   }
+
+  void reverse() {
+    var temp = _first;
+    _first = _last;
+    _last = temp;
+  }
 }
 
 abstract class LinkedListEntry<E extends LinkedListEntry<E>>{
