@@ -14,15 +14,17 @@ class DummyEntry extends LinkedListEntry<DummyEntry>{}
 
 class SinglyLinkedListTest extends RootTestGroup {
   SinglyLinkedListTest()
-      : super(groups: [
-          GivenNewlyCreatedList(
-            groups: [
-              GivenAddingX(),
-              GivenAddingXAndY(),
-              GivenAddingXAndYAndZ(),
-            ],
-          )
-        ]);
+      : super(
+          groups: [
+            GivenNewlyCreatedList(
+              groups: [
+                GivenAddingX(),
+                GivenAddingXAndY(),
+                GivenAddingXAndYAndZ(),
+              ],
+            )
+          ],
+        );
 }
 
 class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
@@ -112,7 +114,6 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
 
 
 class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
-  GivenAddingX();
 
   late DummyEntry x;
 
@@ -214,7 +215,6 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
 
 
 class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
-  GivenAddingXAndY();
 
   late DummyEntry x, y;
 
@@ -285,7 +285,6 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
 }
 
 class GivenAddingXAndYAndZ extends LeafTestGroup with Variables, ComposedExpect{
-  GivenAddingXAndYAndZ();
 
   late DummyEntry x, y, z;
 
@@ -362,13 +361,9 @@ mixin ComposedExpect on TestGroup{
   }
 
   expectLinksAreCorrect(List<DummyEntry> entries){
-    for(int i = 0; i < entries.length-1; i++){
-      var current = entries[i];
-      var next = entries[i+1];
-      expect(current.next, isNotNull);
-      expect(current.next, equals(next));
-    }
-
+    for(int i = 0; i < entries.length-1; i++)
+      _expectCurrentIsLinkedToNext(entries[i], entries[i+1]);
+    
     expect(entries.last.next, isNull);
 
     expect(linkedList.first?.next, isNotNull);
@@ -376,4 +371,10 @@ mixin ComposedExpect on TestGroup{
 
     expect(linkedList.last?.next, isNull);
   }
+
+  void _expectCurrentIsLinkedToNext(DummyEntry current, DummyEntry next) {
+    expect(current.next, isNotNull);
+    expect(current.next, equals(next));
+  }
 }
+
