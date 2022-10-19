@@ -134,13 +134,13 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     expectFirstAndLastAreEqualTo(y, x);
   }
 
-  void addFirst_WhenYIsAdded_ThenFirstShouldLinkToLast(){
+  void addFirst_WhenYIsAdded_ThenFirstShouldBeLinkedToLast(){
     final y = DummyEntry();
     linkedList.addFirst(y);
     expectFirstIsLinkedToLast();
   }
 
-  void addFirst_WhenYIsAdded_ThenLastShouldLinkToNull(){
+  void addFirst_WhenYIsAdded_ThenLastShouldBeLinkedToNull(){
     final y = DummyEntry();
     linkedList.addFirst(y);
     expectLastIsLinkedToNull();
@@ -157,13 +157,13 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     expectFirstAndLastAreEqualTo(x, y);
   }
 
-  void addLast_WhenYIsAdded_ThenFirstShouldLinkToLast(){
+  void addLast_WhenYIsAdded_ThenFirstShouldBeLinkedToLast(){
     final y = DummyEntry();
     linkedList.addLast(y);
     expectFirstIsLinkedToLast();
   }
 
-  void addLast_WhenYIsAdded_ThenLastShouldLinkToNull(){
+  void addLast_WhenYIsAdded_ThenLastShouldBeLinkedToNull(){
     final y = DummyEntry();
     linkedList.addLast(y);
     expectLastIsLinkedToNull();
@@ -198,12 +198,12 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     container.addAll([
       Test(addFirst_SizeShouldBeTwo),
       Test(addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX),
-      Test(addFirst_WhenYIsAdded_ThenFirstShouldLinkToLast),
-      Test(addFirst_WhenYIsAdded_ThenLastShouldLinkToNull),
+      Test(addFirst_WhenYIsAdded_ThenFirstShouldBeLinkedToLast),
+      Test(addFirst_WhenYIsAdded_ThenLastShouldBeLinkedToNull),
       Test(addLast_SizeShouldBeTwo),
       Test(addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY),
-      Test(addLast_WhenYIsAdded_ThenFirstShouldLinkToLast),
-      Test(addLast_WhenYIsAdded_ThenLastShouldLinkToNull),
+      Test(addLast_WhenYIsAdded_ThenFirstShouldBeLinkedToLast),
+      Test(addLast_WhenYIsAdded_ThenLastShouldBeLinkedToNull),
       Test(removeFirst_ShouldBeEmpty),
       Test(removeFirst_ThenFirstAndLastShouldBeNull),
       Test(removeLast_ShouldBeEmpty),
@@ -249,7 +249,7 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
     expectFirstAndLastAreEqualTo(y);
   }
 
-  void removeFirst_XShouldLinkToNull(){
+  void removeFirst_XShouldBeLinkedToNull(){
     linkedList.removeFirst();
     expect(x.next, isNull);
   }
@@ -264,7 +264,7 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
     expectFirstAndLastAreEqualTo(x);
   }
 
-  void removeLast_XShouldLinkToNull(){
+  void removeLast_XShouldBeLinkedToNull(){
     linkedList.removeLast();
     expect(x.next, isNull);
   }
@@ -280,10 +280,10 @@ class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
       Test(addLast_WhenZIsAdded_ThenLinksShouldBeCorrect),
       Test(removeFirst_SizeShouldBeOne),
       Test(removeFirst_FirstAndLastShouldBeEqual),
-      Test(removeFirst_XShouldLinkToNull),
+      Test(removeFirst_XShouldBeLinkedToNull),
       Test(removeLast_SizeShouldBeOne),
       Test(removeLast_FirstAndLastShouldBeEqual),
-      Test(removeLast_XShouldLinkToNull),
+      Test(removeLast_XShouldBeLinkedToNull),
       Test(indexOf_Y_shouldReturnOne),
     ]);
   }
