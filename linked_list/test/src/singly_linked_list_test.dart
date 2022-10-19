@@ -209,7 +209,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
       linkedList.elementAt(-1);
     }
 
-    expect(act, throwsA(isA<OutOFRange>()));
+    expect(act, throwsAOutOfRange);
   }
 
   void elementAt_WhenIndexIsGreaterThanSize_ShouldThrowOutOfRange(){
@@ -217,7 +217,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
       linkedList.elementAt(2);
     }
 
-    expect(act, throwsA(isA<OutOFRange>()));
+    expect(act, throwsAOutOfRange);
   }
 
   void elementAt_WhenIndexIsEqualToSize_ShouldThrowOutOfRange(){
@@ -225,7 +225,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
       linkedList.elementAt(1);
     }
 
-    expect(act, throwsA(isA<OutOFRange>()));
+    expect(act, throwsAOutOfRange);
   }
 
   void indexOf_X_ShouldReturnZero(){
