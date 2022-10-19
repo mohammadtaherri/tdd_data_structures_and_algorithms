@@ -75,10 +75,14 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     E? current = _first;
     int index = 0;
 
-    if(current != null)
+    while(current != null){
       if(current == entry)
         return index;
-    
+
+      current = current.next;
+      index++;
+    }
+
     return -1;
   }
 }
