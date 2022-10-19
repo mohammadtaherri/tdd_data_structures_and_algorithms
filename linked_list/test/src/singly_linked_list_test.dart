@@ -204,7 +204,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     expectFirstAndLastAreNull();
   }
 
-  void elementAt_WhenIndexIsNegative_ShouldThrowOutOfRange(){
+  void elementAt_GivenNegativeIndex_ShouldThrowOutOfRange(){
     void act(){
       linkedList.elementAt(-1);
     }
@@ -212,7 +212,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     expect(act, throwsAOutOfRange);
   }
 
-  void elementAt_WhenIndexIsGreaterThanSize_ShouldThrowOutOfRange(){
+  void elementAt_GivenIndexGreaterThanSize_ShouldThrowOutOfRange(){
     void act(){
       linkedList.elementAt(2);
     }
@@ -220,7 +220,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     expect(act, throwsAOutOfRange);
   }
 
-  void elementAt_WhenIndexIsEqualToSize_ShouldThrowOutOfRange(){
+  void elementAt_GivenIndexEqualToSize_ShouldThrowOutOfRange(){
     void act(){
       linkedList.elementAt(1);
     }
@@ -228,7 +228,7 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
     expect(act, throwsAOutOfRange);
   }
 
-  void elementAt_WhenIndexIsZero_ShouldReturnX(){
+  void elementAt_Zero_ShouldReturnX(){
     expect(linkedList.elementAt(0), equals(x));
   }
 
@@ -256,10 +256,10 @@ class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
       Test(removeFirst_ThenFirstAndLastShouldBeNull),
       Test(removeLast_ShouldBeEmpty),
       Test(removeLast_ThenFirstAndLastShouldBeNull),
-      Test(elementAt_WhenIndexIsNegative_ShouldThrowOutOfRange),
-      Test(elementAt_WhenIndexIsGreaterThanSize_ShouldThrowOutOfRange),
-      Test(elementAt_WhenIndexIsEqualToSize_ShouldThrowOutOfRange),
-      Test(elementAt_WhenIndexIsZero_ShouldReturnX),
+      Test(elementAt_GivenNegativeIndex_ShouldThrowOutOfRange),
+      Test(elementAt_GivenIndexGreaterThanSize_ShouldThrowOutOfRange),
+      Test(elementAt_GivenIndexEqualToSize_ShouldThrowOutOfRange),
+      Test(elementAt_Zero_ShouldReturnX),
       Test(indexOf_X_ShouldReturnZero),
       Test(reverse_ThenFirstAndLastShouldBeX),
     ]);
