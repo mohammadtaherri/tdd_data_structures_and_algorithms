@@ -84,6 +84,14 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
     expect(act, throwsAIllegalState);
   }
 
+  void elementAt_shouldThrowEmpty(){
+    void act(){
+      linkedList.elementAt(0);
+    }
+
+    expect(act, throwsA(isA<Empty>()));
+  }
+
   void indexOf_ShouldReturnNegativeOne(){
     expect(linkedList.indexOf(DummyEntry()), equals(-1));
   }
@@ -104,6 +112,7 @@ class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
       Test(addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
       Test(removeFirst_ShouldThrowIllegalState),
       Test(removeLast_ShouldThrowIllegalState),
+      Test(elementAt_shouldThrowEmpty),
       Test(indexOf_ShouldReturnNegativeOne),
       Test(reverse_ThenFirstAndLastShouldBeNull),
     ]);
