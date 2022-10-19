@@ -72,16 +72,9 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
   }
 
   int indexOf(E entry) {
-    E? current = _first;
-    int index = 0;
-
-    while(current != null){
-      if(current == entry)
-        return index;
-
-      current = current.next;
-      index++;
-    }
+    for (var c = _first, i = 0; c != null; c = c.next, i++)
+      if (c == entry) 
+        return i;
 
     return -1;
   }
