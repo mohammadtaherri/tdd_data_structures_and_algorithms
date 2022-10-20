@@ -19,8 +19,9 @@ class ArrayQueueTest extends RootTestGroup{
       );
 }
 
-class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup{
+class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup with ComposedExpect{
 
+  @override
   late ArrayQueue<int> queue;
 
   @override
@@ -29,22 +30,19 @@ class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup{
   }
 
   void shouldBeEmpty(){
-    expect(queue.isEmpty, isTrue);
-    expect(queue.size, isZero);
+    expectQueueIsEmpty();
   }
 
   void shouldNotBeFull(){
-    expect(queue.isFull, isFalse);
+    expectQueueIsNotFull();
   }
 
   void enqueue_ShouldIncrementSizebyOne(){
     queue.enqueue(10);
-    expect(queue.size, equals(1));
-    expect(queue.isEmpty, isFalse);
+    expectQueueSizeIsOne();
 
     queue.enqueue(10);
-    expect(queue.size, equals(2));
-    expect(queue.isEmpty, isFalse);
+    expectQueueSizeIsTwo();
   }
 
   void dequeue_ShouldDecrementSizeByOne(){
@@ -52,12 +50,10 @@ class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup{
     queue.enqueue(10);
 
     queue.dequeue();
-    expect(queue.size, equals(1));
-    expect(queue.isEmpty, isFalse);
+    expectQueueSizeIsOne();
 
     queue.dequeue();
-    expect(queue.size, isZero);
-    expect(queue.isEmpty, isTrue);
+    expectQueueIsEmpty();
   }
 
   void enqueue_WhenPastCapacity_ShouldThrowFullQueue(){
@@ -192,9 +188,10 @@ class NegativeCapasityArrayQueue extends LeafTestGroup{
   }
 }
 
-class GivenZeroCapacityArrayQueue extends LeafTestGroup{
+class GivenZeroCapacityArrayQueue extends LeafTestGroup with ComposedExpect{
 
-  late ArrayQueue queue;
+  @override
+  late ArrayQueue<int> queue;
 
   @override
   void setUp() {
@@ -202,8 +199,7 @@ class GivenZeroCapacityArrayQueue extends LeafTestGroup{
   }
 
   void shouldBeEmpty(){
-    expect(queue.isEmpty, isTrue);
-    expect(queue.size, isZero);
+    expectQueueIsEmpty();
   }
 
   void shouldBeFull(){
@@ -243,6 +239,30 @@ class GivenZeroCapacityArrayQueue extends LeafTestGroup{
       Test(dequeue_ShouldThrowEmptyQueue),
       Test(peek_ShouldThrowEmptyQueue),
     ]);
+  }
+}
+
+mixin ComposedExpect on TestGroup{
+
+  ArrayQueue<int> get queue;
+
+  void expectQueueIsEmpty(){
+    expect(queue.isEmpty, isTrue);
+    expect(queue.size, isZero);
+  }
+
+  void expectQueueSizeIsOne(){
+    expect(queue.isEmpty, isFalse);
+    expect(queue.size, equals(1));
+  }
+
+  void expectQueueSizeIsTwo(){
+    expect(queue.isEmpty, isFalse);
+    expect(queue.size, equals(2));
+  }
+
+  void expectQueueIsNotFull(){
+    expect(queue.isFull, isFalse);
   }
 }
 
