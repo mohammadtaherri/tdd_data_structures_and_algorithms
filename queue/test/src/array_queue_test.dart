@@ -4,6 +4,8 @@ import 'package:test/test.dart';
 import 'package:clean_test/clean_test.dart';
 import 'package:queue/queue.dart';
 
+import 'matchers.dart';
+
 void main() {
   runTest(ArrayQueueTest());
 }
@@ -64,7 +66,7 @@ class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup with
       queue.enqueue(10);
     }
 
-    expect(act, throwsA(isA<FullQueueException>()));
+    expect(act, throwsAFullQueue);
   }
 
   void dequeue_ShouldThrowEmptyQueue(){
@@ -72,7 +74,7 @@ class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup with
       queue.dequeue();
     }
 
-    expect(act, throwsA(isA<EmptyQueueException>()));
+    expect(act, throwsAEmptyQueue);
   }
 
   void peek_ShouldThrowEmptyQueue(){
@@ -80,7 +82,7 @@ class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup with
       queue.peek();
     }
 
-    expect(act, throwsA(isA<EmptyQueueException>()));
+    expect(act, throwsAEmptyQueue);
   }
 
   void enqueue_dequeue_WhenXIsEnqueued_XShouldBeDequeued(){
@@ -177,7 +179,7 @@ class NegativeCapasityArrayQueue extends LeafTestGroup{
       ArrayQueue(capacity: -1);
     }
 
-    expect(act, throwsA(isA<IllegalCapcityException>()));
+    expect(act, throwsAIllegalCapcity);
   }
 
   @override
@@ -211,7 +213,7 @@ class GivenZeroCapacityArrayQueue extends LeafTestGroup with ComposedExpect{
       queue.enqueue(10);
     }
 
-    expect(act, throwsA(isA<FullQueueException>()));
+    expect(act, throwsAFullQueue);
   }
 
   void dequeue_ShouldThrowEmptyQueue(){
@@ -219,7 +221,7 @@ class GivenZeroCapacityArrayQueue extends LeafTestGroup with ComposedExpect{
       queue.dequeue();
     }
 
-    expect(act, throwsA(isA<EmptyQueueException>()));
+    expect(act, throwsAEmptyQueue);
   }
 
   void peek_ShouldThrowEmptyQueue(){
@@ -227,7 +229,7 @@ class GivenZeroCapacityArrayQueue extends LeafTestGroup with ComposedExpect{
       queue.peek();
     }
 
-    expect(act, throwsA(isA<EmptyQueueException>()));
+    expect(act, throwsAEmptyQueue);
   }
 
   @override
