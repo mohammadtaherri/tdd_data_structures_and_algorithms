@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:collection';
+
 import 'package:test/test.dart';
 import 'package:clean_test/clean_test.dart';
 import 'package:stack/stack.dart';
@@ -19,8 +21,9 @@ class StackTest extends RootTestGroup{
     );
 }
 
-class GivenNwelyCreatedStackWithPositiveCapacity extends LeafTestGroup{
+class GivenNwelyCreatedStackWithPositiveCapacity extends LeafTestGroup with ComposedExpect{
 
+  @override
   late Stack<int> stack;
 
   @override
@@ -29,18 +32,15 @@ class GivenNwelyCreatedStackWithPositiveCapacity extends LeafTestGroup{
   }
 
   void shouldBeEmpty(){
-    expect(stack.isEmpty, isTrue);
-    expect(stack.size, isZero);
+    expectStackIsEmpty();
   }
 
   void push_ShouldIncrementSizeByOne(){
     stack.push(10);
-    expect(stack.size, equals(1));
-    expect(stack.isEmpty, isFalse);
+    expectStackSizeIsOne();
 
     stack.push(10);
-    expect(stack.size, equals(2));
-    expect(stack.isEmpty, isFalse);
+    expectStackSizeIsTwo();
   }
 
   void push_WhenPastCapacity_ShouldThrowStackOverFlow(){
@@ -67,12 +67,10 @@ class GivenNwelyCreatedStackWithPositiveCapacity extends LeafTestGroup{
     stack.push(10);
 
     stack.pop();
-    expect(stack.size, equals(1));
-    expect(stack.isEmpty, isFalse);
+    expectStackSizeIsOne();
 
     stack.pop();
-    expect(stack.isEmpty, isTrue);
-    expect(stack.size, isZero);
+    expectStackIsEmpty();
   }
 
   void peek_ShouldThrowStackEmpty(){
@@ -141,8 +139,9 @@ class NegativeCapacityStack extends LeafTestGroup{
 }
 
 
-class GivenZeroCapacityStack extends LeafTestGroup{
+class GivenZeroCapacityStack extends LeafTestGroup with ComposedExpect{
 
+  @override
   late Stack<int> stack;
 
   @override
@@ -151,8 +150,7 @@ class GivenZeroCapacityStack extends LeafTestGroup{
   }
 
   void shouldBeEmpty(){
-    expect(stack.isEmpty, isTrue);
-    expect(stack.size, isZero);
+    expectStackIsEmpty();
   }
 
   void push_ShouldThrowStackOverFlow(){
@@ -187,5 +185,25 @@ class GivenZeroCapacityStack extends LeafTestGroup{
       Test(pop_ShouldThrowStackUnderFLow),
       Test(peek_ShouldThrowStackEmpty),
     ]);
+  }
+}
+
+mixin ComposedExpect on TestGroup{
+
+  Stack get stack;
+
+  void expectStackIsEmpty(){
+    expect(stack.isEmpty, isTrue);
+    expect(stack.size, isZero);
+  }
+
+  void expectStackSizeIsOne(){
+    expect(stack.size, equals(1));
+    expect(stack.isEmpty, isFalse);
+  }
+
+  void expectStackSizeIsTwo(){
+    expect(stack.size, equals(2));
+    expect(stack.isEmpty, isFalse);
   }
 }
