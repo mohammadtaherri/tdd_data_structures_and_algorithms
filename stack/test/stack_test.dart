@@ -1,7 +1,4 @@
 // ignore_for_file: non_constant_identifier_names
-
-import 'dart:collection';
-
 import 'package:test/test.dart';
 import 'package:clean_test/clean_test.dart';
 import 'package:stack/stack.dart';
