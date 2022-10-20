@@ -56,8 +56,10 @@ class _ZeroCapacityArrayQueue<T> extends ArrayQueue<T>{
 
   @override
   get isEmpty => true;
+
   @override
   get isFull => true;
+  
   @override
   get size => 0;
 
