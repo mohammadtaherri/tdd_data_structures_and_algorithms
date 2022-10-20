@@ -1,9 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
-
 import 'package:test/test.dart';
 import 'package:clean_test/clean_test.dart';
 import 'package:queue/queue.dart';
-
 import 'matchers.dart';
 
 void main() {
@@ -14,21 +12,26 @@ class ArrayQueueTest extends RootTestGroup{
   ArrayQueueTest()
       : super(
         groups: [
-          GivenNewlyCreatedArrayQueueWithPositiveCapacity(),
+          GivenNewlyCreatedArrayQueueWith3Capacity(),
           NegativeCapasityArrayQueue(),
           GivenZeroCapacityArrayQueue(),
         ],
       );
 }
 
-class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup with ComposedExpect{
+class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with ComposedExpect{
 
   @override
   late ArrayQueue<int> queue;
+  late int x, y, z, w;
 
   @override
   void setUp() {
     queue = ArrayQueue<int>(capacity: 3);
+    x = 10;
+    y = 20;
+    z = 30;
+    w = 40;
   }
 
   void shouldBeEmpty(){
@@ -40,16 +43,16 @@ class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup with
   }
 
   void enqueue_ShouldIncrementSizebyOne(){
-    queue.enqueue(10);
+    queue.enqueue(x);
     expectQueueSizeIsOne();
 
-    queue.enqueue(10);
+    queue.enqueue(x);
     expectQueueSizeIsTwo();
   }
 
   void dequeue_ShouldDecrementSizeByOne(){
-    queue.enqueue(10);
-    queue.enqueue(10);
+    queue.enqueue(x);
+    queue.enqueue(x);
 
     queue.dequeue();
     expectQueueSizeIsOne();
@@ -60,10 +63,10 @@ class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup with
 
   void enqueue_WhenPastCapacity_ShouldThrowFullQueue(){
     void act(){
-      queue.enqueue(10);
-      queue.enqueue(10);
-      queue.enqueue(10);
-      queue.enqueue(10);
+      queue.enqueue(x);
+      queue.enqueue(x);
+      queue.enqueue(x);
+      queue.enqueue(x);
     }
 
     expect(act, throwsAFullQueue);
@@ -86,70 +89,49 @@ class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup with
   }
 
   void enqueue_dequeue_WhenXIsEnqueued_XShouldBeDequeued(){
-    final x = 10;
     queue.enqueue(x);
     expect(queue.dequeue(), equals(x));
   }
 
   void enqueue_dequeue_WhenXAndYAreEnqueued_XAndYShouldBeDequeued(){
-    final x = 10;
-    final y = 20;
     queue.enqueue(x);
     queue.enqueue(y);
     expect(queue.dequeue(), equals(x));
     expect(queue.dequeue(), equals(y));
   }
 
-  void enqueue_ShouldBeCircular(){
-    final x = 10;
-    final y = 20;
-    final z = 30;
-    final q = 40;
-
-    queue.enqueue(x);
-    queue.enqueue(y);
-    queue.enqueue(z);
-
-    queue.dequeue();
-
-    queue.enqueue(q);
-
+  void enqueue_ShouldEnqueueItemsInCorrectOrder(){
+    _givenEnqueueXYZFollowdByOneDequeue();
+    queue.enqueue(w);
     expect(queue.dequeue(), equals(y));
     expect(queue.dequeue(), equals(z));
    
   }
 
-  void dequeue_ShouldBeCircular(){
-    final x = 10;
-    final y = 20;
-    final z = 30;
-    final q = 40;
-
-    queue.enqueue(x);
-    queue.enqueue(y);
-    queue.enqueue(z);
-
-    queue.dequeue();
-
-    queue.enqueue(q);
-
+  void dequeue_ShouldDequeueItemsInCorrectOrder(){
+    _givenEnqueueXYZFollowdByOneDequeue();
+    queue.enqueue(w);
     expect(queue.dequeue(), equals(y));
     expect(queue.dequeue(), equals(z));
-    expect(queue.dequeue(), equals(q));
+    expect(queue.dequeue(), equals(w));
   }
 
   void peek_GivenEnqueuingX_ShouldReturnX(){
-    final x = 10;
     queue.enqueue(x);
     expect(queue.peek(), equals(x));
   }
 
   void peek_GivenEnqueuingXAndY_ShouldReturnX(){
-    final x = 10;
-    final y = 20;
     queue.enqueue(x);
     queue.enqueue(y);
     expect(queue.peek(), equals(x));
+  }
+
+  void _givenEnqueueXYZFollowdByOneDequeue() {
+    queue.enqueue(x);
+    queue.enqueue(y);
+    queue.enqueue(z);
+    queue.dequeue();
   }
 
   @override
@@ -164,8 +146,8 @@ class GivenNewlyCreatedArrayQueueWithPositiveCapacity extends LeafTestGroup with
       Test(peek_ShouldThrowEmptyQueue),
       Test(enqueue_dequeue_WhenXIsEnqueued_XShouldBeDequeued),
       Test(enqueue_dequeue_WhenXAndYAreEnqueued_XAndYShouldBeDequeued),
-      Test(enqueue_ShouldBeCircular),
-      Test(dequeue_ShouldBeCircular),
+      Test(enqueue_ShouldEnqueueItemsInCorrectOrder),
+      Test(dequeue_ShouldDequeueItemsInCorrectOrder),
       Test(peek_GivenEnqueuingX_ShouldReturnX),
       Test(peek_GivenEnqueuingXAndY_ShouldReturnX),
     ]);
@@ -243,6 +225,7 @@ class GivenZeroCapacityArrayQueue extends LeafTestGroup with ComposedExpect{
     ]);
   }
 }
+
 
 mixin ComposedExpect on TestGroup{
 
