@@ -5,7 +5,10 @@ class Stack<T>{
     if(capacity < 0)
       throw IllegalCapacityException();
 
-    return Stack._(capacity: capacity);
+    if(capacity == 0)
+      return _ZeroCapacityStack<T>();
+
+    return Stack<T>._(capacity: capacity);
   }
 
   Stack._({int capacity = 5}) : _items = List.filled(capacity, null);
@@ -37,6 +40,31 @@ class Stack<T>{
       throw StackEmptyException();
 
     return _items[size-1]!;
+  }
+}
+
+class _ZeroCapacityStack<T> extends Stack<T>{
+  _ZeroCapacityStack() : super._(capacity: 0);
+
+  @override
+  bool get isEmpty => true;
+
+  @override
+  int get size => 0;
+
+  @override
+  void push(T item) {
+    throw StackOverflowException();
+  }
+
+  @override
+  T pop() {
+    throw StackUnderflowException();
+  }
+
+  @override
+  T peek() {
+    throw StackEmptyException();
   }
 }
 
