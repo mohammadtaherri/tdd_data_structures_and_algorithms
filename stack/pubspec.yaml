@@ -11,8 +11,10 @@ environment:
 
 dev_dependencies:
   lints: ^2.0.0
+  build_runner:
+  build_test:
   test: ^1.16.0
   clean_test:
     git:
       url: git@github.com:mohammadtaherri/clean_test.git
-      ref: de8e56059b18cc109af5db144b828d42480ba1c6
+      ref: db6f6691ac2d7a888ac838279c67fcb101d7f4af
