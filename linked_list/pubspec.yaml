@@ -14,4 +14,4 @@ dev_dependencies:
   clean_test:
     git:
       url: git@github.com:mohammadtaherri/clean_test.git
-      ref: de8e56059b18cc109af5db144b828d42480ba1c6
+      ref: 7ca61f235bb4a9921c58a9011133c62e61f0fc24

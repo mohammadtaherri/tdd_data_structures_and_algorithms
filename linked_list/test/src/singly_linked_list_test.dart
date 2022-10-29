@@ -1,417 +1,20 @@
 // ignore_for_file: non_constant_identifier_names
+library singly_linked_list_test;
 
 import 'package:test/test.dart';
-import 'package:clean_test/clean_test.dart';
+import 'package:clean_test/annotated_test.dart';
 import 'package:linked_list/linked_list.dart';
 
 import 'matchers.dart';
 
 void main() {
-  runTest(SinglyLinkedListTest());
+  runTests(libraryName: 'singly_linked_list_test');
 }
 
 class DummyEntry extends LinkedListEntry<DummyEntry>{}
 
-class SinglyLinkedListTest extends RootTestGroup {
-  SinglyLinkedListTest()
-      : super(
-          groups: [
-            GivenNewlyCreatedList(
-              groups: [
-                GivenAddingX(),
-                GivenAddingXAndY(),
-                GivenAddingXAndYAndZ(),
-              ],
-            )
-          ],
-        );
-}
-
-class GivenNewlyCreatedList extends BranchTestGroup with ComposedExpect{
-  GivenNewlyCreatedList({required super.groups});
-
-  @override
-  late SinglyLinkedList<DummyEntry> linkedList;
-
-  @override
-  void setUp() {
-    linkedList = SinglyLinkedList<DummyEntry>();
-  }
-
-  void shouldBeEmpty(){
-    expectListIsEmpty();
-  }
-
-  void firstAndLastShouldBeNull(){
-    expectFirstAndLastAreNull();
-  }
-
-  void addFirst_SizeShouldBeOne(){
-    linkedList.addFirst(DummyEntry());
-    expectSizeIsOne();
-  }
-
-  void addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX(){
-    final x = DummyEntry();
-    linkedList.addFirst(x);
-    expectFirstAndLastAreEqualTo(x);
-  }
-
-  void addLast_SizeShouldBeOne(){
-    linkedList.addLast(DummyEntry());
-    expectSizeIsOne();
-  }
-
-  void addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX(){
-    final x = DummyEntry();
-    linkedList.addLast(x);
-    expectFirstAndLastAreEqualTo(x);
-  }
-
-  void removeFirst_ShouldThrowIllegalState(){
-    void act(){
-      linkedList.removeFirst();
-    }
-
-    expect(act, throwsAIllegalState);
-  }
-
-  void removeLast_ShouldThrowIllegalState(){
-    void act(){
-      linkedList.removeLast();
-    }
-
-    expect(act, throwsAIllegalState);
-  }
-
-  void elementAt_shouldThrowEmpty(){
-    void act(){
-      linkedList.elementAt(0);
-    }
-
-    expect(act, throwsAEmpty);
-  }
-
-  void indexOf_ShouldReturnNegativeOne(){
-    expect(linkedList.indexOf(DummyEntry()), equals(-1));
-  }
-
-  void reverse_ThenFirstAndLastShouldBeNull(){
-    linkedList.reverse();
-    expectFirstAndLastAreNull();
-  }
-
-  @override
-  void registerTests(TestContainer container) {
-    container.addAll([
-      Test(shouldBeEmpty),
-      Test(firstAndLastShouldBeNull),
-      Test(addFirst_SizeShouldBeOne),
-      Test(addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
-      Test(addLast_SizeShouldBeOne),
-      Test(addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX),
-      Test(removeFirst_ShouldThrowIllegalState),
-      Test(removeLast_ShouldThrowIllegalState),
-      Test(elementAt_shouldThrowEmpty),
-      Test(indexOf_ShouldReturnNegativeOne),
-      Test(reverse_ThenFirstAndLastShouldBeNull),
-    ]);
-  }
-
-  @override
-  T? findVariableByKey<T>(String key) {
-    if(key == 'linked_list')
-      return linkedList as T;
-      
-    return super.findVariableByKey<T>(key);
-  }
-}
-
-
-class GivenAddingX extends LeafTestGroup with Variables, ComposedExpect{
-
-  late DummyEntry x;
-
-  @override
-  void setUp() {
-    x = DummyEntry();
-    linkedList.addFirst(x);
-  }
-
-  void addFirst_SizeShouldBeTwo(){
-    linkedList.addFirst(DummyEntry());
-    expectSizeIsTwo();
-  }
-
-  void addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX(){
-    final y = DummyEntry();
-    linkedList.addFirst(y);
-    expectFirstAndLastAreEqualTo(y, x);
-  }
-
-  void addFirst_WhenYIsAdded_ThenFirstShouldBeLinkedToLast(){
-    final y = DummyEntry();
-    linkedList.addFirst(y);
-    expectFirstIsLinkedToLast();
-  }
-
-  void addFirst_WhenYIsAdded_ThenLastShouldBeLinkedToNull(){
-    final y = DummyEntry();
-    linkedList.addFirst(y);
-    expectLastIsLinkedToNull();
-  }
-
-  void addLast_SizeShouldBeTwo(){
-    linkedList.addLast(DummyEntry());
-    expectSizeIsTwo();
-  }
-
-  void addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY(){
-    final y = DummyEntry();
-    linkedList.addLast(y);
-    expectFirstAndLastAreEqualTo(x, y);
-  }
-
-  void addLast_WhenYIsAdded_ThenFirstShouldBeLinkedToLast(){
-    final y = DummyEntry();
-    linkedList.addLast(y);
-    expectFirstIsLinkedToLast();
-  }
-
-  void addLast_WhenYIsAdded_ThenLastShouldBeLinkedToNull(){
-    final y = DummyEntry();
-    linkedList.addLast(y);
-    expectLastIsLinkedToNull();
-  }
-
-  void removeFirst_ShouldBeEmpty(){
-    linkedList.removeFirst();
-    expectListIsEmpty();
-  }
-
-  void removeFirst_ThenFirstAndLastShouldBeNull(){
-    linkedList.removeFirst();
-    expectFirstAndLastAreNull();
-  }
-
-  void removeLast_ShouldBeEmpty(){
-    linkedList.removeLast();
-    expectListIsEmpty();
-  }
-
-  void removeLast_ThenFirstAndLastShouldBeNull(){
-    linkedList.removeLast();
-    expectFirstAndLastAreNull();
-  }
-
-  void elementAt_GivenNegativeIndex_ShouldThrowOutOfRange(){
-    void act(){
-      linkedList.elementAt(-1);
-    }
-
-    expect(act, throwsAOutOfRange);
-  }
-
-  void elementAt_GivenIndexGreaterThanSize_ShouldThrowOutOfRange(){
-    void act(){
-      linkedList.elementAt(2);
-    }
-
-    expect(act, throwsAOutOfRange);
-  }
-
-  void elementAt_GivenIndexEqualToSize_ShouldThrowOutOfRange(){
-    void act(){
-      linkedList.elementAt(1);
-    }
-
-    expect(act, throwsAOutOfRange);
-  }
-
-  void elementAt_Zero_ShouldReturnX(){
-    expect(linkedList.elementAt(0), equals(x));
-  }
-
-  void indexOf_X_ShouldReturnZero(){
-    expect(linkedList.indexOf(x), isZero);
-  }
-
-  void reverse_ThenFirstAndLastShouldBeX(){
-    linkedList.reverse();
-    expectFirstAndLastAreEqualTo(x);
-  }
-
-  @override
-  void registerTests(TestContainer container) {
-    container.addAll([
-      Test(addFirst_SizeShouldBeTwo),
-      Test(addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX),
-      Test(addFirst_WhenYIsAdded_ThenFirstShouldBeLinkedToLast),
-      Test(addFirst_WhenYIsAdded_ThenLastShouldBeLinkedToNull),
-      Test(addLast_SizeShouldBeTwo),
-      Test(addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY),
-      Test(addLast_WhenYIsAdded_ThenFirstShouldBeLinkedToLast),
-      Test(addLast_WhenYIsAdded_ThenLastShouldBeLinkedToNull),
-      Test(removeFirst_ShouldBeEmpty),
-      Test(removeFirst_ThenFirstAndLastShouldBeNull),
-      Test(removeLast_ShouldBeEmpty),
-      Test(removeLast_ThenFirstAndLastShouldBeNull),
-      Test(elementAt_GivenNegativeIndex_ShouldThrowOutOfRange),
-      Test(elementAt_GivenIndexGreaterThanSize_ShouldThrowOutOfRange),
-      Test(elementAt_GivenIndexEqualToSize_ShouldThrowOutOfRange),
-      Test(elementAt_Zero_ShouldReturnX),
-      Test(indexOf_X_ShouldReturnZero),
-      Test(reverse_ThenFirstAndLastShouldBeX),
-    ]);
-  }
-}
-
-
-class GivenAddingXAndY extends LeafTestGroup with Variables, ComposedExpect{
-
-  late DummyEntry x, y;
-
-  @override
-  void setUp() {
-    x = DummyEntry();
-    y = DummyEntry();
-
-    linkedList.addFirst(x);
-    linkedList.addLast(y);
-  }
-
-  void addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect(){
-    final z = DummyEntry();
-    linkedList.addFirst(z);
-    expectLinksAreCorrect([z, x, y]);
-  }
-
-  void addLast_WhenZIsAdded_ThenLinksShouldBeCorrect(){
-    final z = DummyEntry();
-    linkedList.addLast(z);
-    expectLinksAreCorrect([x, y, z]);
-  }
-
-  void removeFirst_SizeShouldBeOne(){
-    linkedList.removeFirst();
-    expectSizeIsOne();
-  }
-
-  void removeFirst_FirstAndLastShouldBeEqual(){
-    linkedList.removeFirst();
-    expectFirstAndLastAreEqualTo(y);
-  }
-
-  void removeFirst_XShouldBeLinkedToNull(){
-    linkedList.removeFirst();
-    expect(x.next, isNull);
-  }
-
-  void removeLast_SizeShouldBeOne(){
-    linkedList.removeLast();
-    expectSizeIsOne();
-  }
-
-  void removeLast_FirstAndLastShouldBeEqual(){
-    linkedList.removeLast();
-    expectFirstAndLastAreEqualTo(x);
-  }
-
-  void removeLast_XShouldBeLinkedToNull(){
-    linkedList.removeLast();
-    expect(x.next, isNull);
-  }
-
-  void elementAt_One_ShouldReturnY(){
-    expect(linkedList.elementAt(1), equals(y));
-  }
-
-  void indexOf_Y_shouldReturnOne(){
-    expect(linkedList.indexOf(y), equals(1));
-  }
-
-  void reverse_ThenFirstAndLastShouldBeReversed(){
-    linkedList.reverse();
-    expectFirstAndLastAreEqualTo(y, x);
-  }
-
-  @override
-  void registerTests(TestContainer container) {
-    container.addAll([
-      Test(addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect),
-      Test(addLast_WhenZIsAdded_ThenLinksShouldBeCorrect),
-      Test(removeFirst_SizeShouldBeOne),
-      Test(removeFirst_FirstAndLastShouldBeEqual),
-      Test(removeFirst_XShouldBeLinkedToNull),
-      Test(removeLast_SizeShouldBeOne),
-      Test(removeLast_FirstAndLastShouldBeEqual),
-      Test(removeLast_XShouldBeLinkedToNull),
-      Test(elementAt_One_ShouldReturnY),
-      Test(indexOf_Y_shouldReturnOne),
-      Test(reverse_ThenFirstAndLastShouldBeReversed),
-    ]);
-  }
-}
-
-class GivenAddingXAndYAndZ extends LeafTestGroup with Variables, ComposedExpect{
-
-  late DummyEntry x, y, z;
-
-  @override
-  void setUp() {
-    x = DummyEntry();
-    y = DummyEntry();
-    z = DummyEntry();
-
-    linkedList.addFirst(x);
-    linkedList.addLast(y);
-    linkedList.addLast(z);
-  }
-
-  void removeFirst_FirstAndLastShouldBeYAndZ(){
-    linkedList.removeFirst();
-    expectFirstAndLastAreEqualTo(y, z);
-  }
-
-  void removeLast_FirstAndLastShouldBeXAndY(){
-    linkedList.removeLast();
-    expectFirstAndLastAreEqualTo(x, y);
-  }
-
-  void reverse_ThenYShouldBeLinkedToX(){
-    linkedList.reverse();
-    expect(y.next, equals(x));
-  }
-
-  void reverse_ThenZShouldBeLinkedToY(){
-    linkedList.reverse();
-    expect(z.next, equals(y));
-  }
-
-  void reverse_ThenLastShouldBeLinkedToNull(){
-    linkedList.reverse();
-    expectLastIsLinkedToNull();
-  }
-
-  @override
-  void registerTests(TestContainer container) {
-    container.addAll([
-      Test(removeFirst_FirstAndLastShouldBeYAndZ),
-      Test(removeLast_FirstAndLastShouldBeXAndY),
-      Test(reverse_ThenYShouldBeLinkedToX),
-      Test(reverse_ThenZShouldBeLinkedToY),
-      Test(reverse_ThenLastShouldBeLinkedToNull),
-    ]);
-  }
-}
-
-
-mixin Variables on TestGroup {
-  SinglyLinkedList get linkedList => findVariableByKey('linked_list');
-}
-
-mixin ComposedExpect on TestGroup{
-  SinglyLinkedList get linkedList => findVariableByKey('linked_list');
+mixin ComposedExpect{
+  SinglyLinkedList get linkedList;
 
   expectListIsEmpty(){
     expect(linkedList.isEmpty, isTrue);
@@ -464,4 +67,358 @@ mixin ComposedExpect on TestGroup{
     expect(current.next, equals(next));
   }
 }
+
+@TestCase()
+@Root()
+class SinglyLinkedListTest with ComposedExpect{
+  @override
+  late final SinglyLinkedList<LinkedListEntry> linkedList;
+}
+
+@TestCase()
+class GivenNewlyCreatedList extends SinglyLinkedListTest{
+  
+  @SetUp()
+  void CreateNewSinglyLinkedList() {
+    linkedList = SinglyLinkedList<DummyEntry>();
+  }
+
+  @Test()
+  void shouldBeEmpty(){
+    expectListIsEmpty();
+  }
+
+  @Test()
+  void firstAndLastShouldBeNull(){
+    expectFirstAndLastAreNull();
+  }
+
+  @Test()
+  void addFirst_SizeShouldBeOne(){
+    linkedList.addFirst(DummyEntry());
+    expectSizeIsOne();
+  }
+
+  @Test()
+  void addFirst_WhenXIsAdded_ThenFirstAndLastShouldEqualToX(){
+    final x = DummyEntry();
+    linkedList.addFirst(x);
+    expectFirstAndLastAreEqualTo(x);
+  }
+
+  @Test()
+  void addLast_SizeShouldBeOne(){
+    linkedList.addLast(DummyEntry());
+    expectSizeIsOne();
+  }
+
+  @Test()
+  void addLast_WhenXIsAdded_ThenFirstAndLastShouldEqualToX(){
+    final x = DummyEntry();
+    linkedList.addLast(x);
+    expectFirstAndLastAreEqualTo(x);
+  }
+
+  @Test()
+  void removeFirst_ShouldThrowIllegalState(){
+    void act(){
+      linkedList.removeFirst();
+    }
+
+    expect(act, throwsAIllegalState);
+  }
+
+  @Test()
+  void removeLast_ShouldThrowIllegalState(){
+    void act(){
+      linkedList.removeLast();
+    }
+
+    expect(act, throwsAIllegalState);
+  }
+
+  @Test()
+  void elementAt_shouldThrowEmpty(){
+    void act(){
+      linkedList.elementAt(0);
+    }
+
+    expect(act, throwsAEmpty);
+  }
+
+  @Test()
+  void indexOf_ShouldReturnNegativeOne(){
+    expect(linkedList.indexOf(DummyEntry()), equals(-1));
+  }
+
+  @Test()
+  void reverse_ThenFirstAndLastShouldBeNull(){
+    linkedList.reverse();
+    expectFirstAndLastAreNull();
+  }
+}
+
+@TestCase()
+class GivenAddingX extends GivenNewlyCreatedList{
+
+  late final DummyEntry x;
+
+  @SetUp()
+  void addXToLinkedList() {
+    x = DummyEntry();
+    linkedList.addFirst(x);
+  }
+
+  @Test()
+  void addFirst_SizeShouldBeTwo(){
+    linkedList.addFirst(DummyEntry());
+    expectSizeIsTwo();
+  }
+
+  @Test()
+  void addFirst_WhenYIsAdded_ThenFirstAndLastShouldBeYAndX(){
+    final y = DummyEntry();
+    linkedList.addFirst(y);
+    expectFirstAndLastAreEqualTo(y, x);
+  }
+
+  @Test()
+  void addFirst_WhenYIsAdded_ThenFirstShouldBeLinkedToLast(){
+    final y = DummyEntry();
+    linkedList.addFirst(y);
+    expectFirstIsLinkedToLast();
+  }
+
+  @Test()
+  void addFirst_WhenYIsAdded_ThenLastShouldBeLinkedToNull(){
+    final y = DummyEntry();
+    linkedList.addFirst(y);
+    expectLastIsLinkedToNull();
+  }
+
+  @Test()
+  void addLast_SizeShouldBeTwo(){
+    linkedList.addLast(DummyEntry());
+    expectSizeIsTwo();
+  }
+
+  @Test()
+  void addLast_WhenYIsAdded_ThenFirstAndLastShouldBeXAndY(){
+    final y = DummyEntry();
+    linkedList.addLast(y);
+    expectFirstAndLastAreEqualTo(x, y);
+  }
+
+  @Test()
+  void addLast_WhenYIsAdded_ThenFirstShouldBeLinkedToLast(){
+    final y = DummyEntry();
+    linkedList.addLast(y);
+    expectFirstIsLinkedToLast();
+  }
+
+  @Test()
+  void addLast_WhenYIsAdded_ThenLastShouldBeLinkedToNull(){
+    final y = DummyEntry();
+    linkedList.addLast(y);
+    expectLastIsLinkedToNull();
+  }
+
+  @Test()
+  void removeFirst_ShouldBeEmpty(){
+    linkedList.removeFirst();
+    expectListIsEmpty();
+  }
+
+  @Test()
+  void removeFirst_ThenFirstAndLastShouldBeNull(){
+    linkedList.removeFirst();
+    expectFirstAndLastAreNull();
+  }
+
+  @Test()
+  void removeLast_ShouldBeEmpty(){
+    linkedList.removeLast();
+    expectListIsEmpty();
+  }
+
+  @Test()
+  void removeLast_ThenFirstAndLastShouldBeNull(){
+    linkedList.removeLast();
+    expectFirstAndLastAreNull();
+  }
+
+  @Test()
+  void elementAt_GivenNegativeIndex_ShouldThrowOutOfRange(){
+    void act(){
+      linkedList.elementAt(-1);
+    }
+
+    expect(act, throwsAOutOfRange);
+  }
+
+  @Test()
+  void elementAt_GivenIndexGreaterThanSize_ShouldThrowOutOfRange(){
+    void act(){
+      linkedList.elementAt(2);
+    }
+
+    expect(act, throwsAOutOfRange);
+  }
+
+  @Test()
+  void elementAt_GivenIndexEqualToSize_ShouldThrowOutOfRange(){
+    void act(){
+      linkedList.elementAt(1);
+    }
+
+    expect(act, throwsAOutOfRange);
+  }
+
+  @Test()
+  void elementAt_Zero_ShouldReturnX(){
+    expect(linkedList.elementAt(0), equals(x));
+  }
+
+  @Test()
+  void indexOf_X_ShouldReturnZero(){
+    expect(linkedList.indexOf(x), isZero);
+  }
+
+  @Test()
+  void reverse_ThenFirstAndLastShouldBeX(){
+    linkedList.reverse();
+    expectFirstAndLastAreEqualTo(x);
+  }
+}
+
+@TestCase()
+class GivenAddingXAndY extends GivenNewlyCreatedList{
+
+  late final DummyEntry x, y;
+
+  @SetUp()
+  void addXAndYToLinkedList() {
+    x = DummyEntry();
+    y = DummyEntry();
+
+    linkedList.addFirst(x);
+    linkedList.addLast(y);
+  }
+
+  @Test()
+  void addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect(){
+    final z = DummyEntry();
+    linkedList.addFirst(z);
+    expectLinksAreCorrect([z, x, y]);
+  }
+
+  @Test()
+  void addLast_WhenZIsAdded_ThenLinksShouldBeCorrect(){
+    final z = DummyEntry();
+    linkedList.addLast(z);
+    expectLinksAreCorrect([x, y, z]);
+  }
+
+  @Test()
+  void removeFirst_SizeShouldBeOne(){
+    linkedList.removeFirst();
+    expectSizeIsOne();
+  }
+
+  @Test()
+  void removeFirst_FirstAndLastShouldBeEqual(){
+    linkedList.removeFirst();
+    expectFirstAndLastAreEqualTo(y);
+  }
+
+  @Test()
+  void removeFirst_XShouldBeLinkedToNull(){
+    linkedList.removeFirst();
+    expect(x.next, isNull);
+  }
+
+  @Test()
+  void removeLast_SizeShouldBeOne(){
+    linkedList.removeLast();
+    expectSizeIsOne();
+  }
+
+  @Test()
+  void removeLast_FirstAndLastShouldBeEqual(){
+    linkedList.removeLast();
+    expectFirstAndLastAreEqualTo(x);
+  }
+
+  @Test()
+  void removeLast_XShouldBeLinkedToNull(){
+    linkedList.removeLast();
+    expect(x.next, isNull);
+  }
+
+  @Test()
+  void elementAt_One_ShouldReturnY(){
+    expect(linkedList.elementAt(1), equals(y));
+  }
+
+  @Test()
+  void indexOf_Y_shouldReturnOne(){
+    expect(linkedList.indexOf(y), equals(1));
+  }
+
+  @Test()
+  void reverse_ThenFirstAndLastShouldBeReversed(){
+    linkedList.reverse();
+    expectFirstAndLastAreEqualTo(y, x);
+  }
+}
+
+@TestCase()
+class GivenAddingXAndYAndZ extends GivenNewlyCreatedList{
+
+  late final DummyEntry x, y, z;
+
+  @SetUp()
+  void addXAndYAndZToLinkedList() {
+    x = DummyEntry();
+    y = DummyEntry();
+    z = DummyEntry();
+
+    linkedList.addFirst(x);
+    linkedList.addLast(y);
+    linkedList.addLast(z);
+  }
+
+  @Test()
+  void removeFirst_FirstAndLastShouldBeYAndZ(){
+    linkedList.removeFirst();
+    expectFirstAndLastAreEqualTo(y, z);
+  }
+
+  @Test()
+  void removeLast_FirstAndLastShouldBeXAndY(){
+    linkedList.removeLast();
+    expectFirstAndLastAreEqualTo(x, y);
+  }
+
+  @Test()
+  void reverse_ThenYShouldBeLinkedToX(){
+    linkedList.reverse();
+    expect(y.next, equals(x));
+  }
+
+  @Test()
+  void reverse_ThenZShouldBeLinkedToY(){
+    linkedList.reverse();
+    expect(z.next, equals(y));
+  }
+
+  @Test()
+  void reverse_ThenLastShouldBeLinkedToNull(){
+    linkedList.reverse();
+    expectLastIsLinkedToNull();
+  }
+}
+
+
+
 

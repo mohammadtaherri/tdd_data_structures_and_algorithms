@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:test/test.dart';
-import 'package:clean_test/clean_test.dart';
+import 'package:clean_test/test_group.dart';
 import 'package:linked_list/linked_list.dart';
 
 void main() {
@@ -92,7 +92,7 @@ class GivenNewlyCreatedLinkedList extends BranchTestGroup {
 
 class AddFirstMethodTest extends LeafTestGroup with LinkedListVariables{
   AddFirstMethodTest(): 
-      super(groupDescription: '(#addFirst method)');
+      super(groupDescription: '(#addFirst method)' , groupConfig: TestConfig(skip: true));
 
   void whenOneItemIsAdded_ThenSizeShouldBeOne(){
     _addEntries([x]);
