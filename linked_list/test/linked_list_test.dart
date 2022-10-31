@@ -7,6 +7,7 @@ import 'package:linked_list/linked_list.dart';
 void main() {
   runTestsByLibraryPath('src/singly_linked_list_test.dart');
   runTestsByLibraryPath('src/circular_linked_list_test.dart');
+  runTestsByLibraryPath('src/doubly_linked_list_test.dart');
 }
 
 
