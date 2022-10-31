@@ -1,7 +1,7 @@
 part of linked_list;
 
 
-class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends LinkedList<E>{
+class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
   bool get isEmpty => _size == 0;
