@@ -42,25 +42,17 @@ mixin ComposedExpect{
     expect(linkedList.last, equals(y??x));
   }
 
-  expectFirstIsLinkedToLast(){
-    expect(linkedList.first?.next, isNotNull);
-    expect(linkedList.first!.next, equals(linkedList.last));
+  expectFirstIsLinkedTo(DummyEntry? x){
+    expect(linkedList.first!.next, equals(x));
   }
 
-  expectLastIsLinkedToNull(){
-    expect(linkedList.last?.next, isNull);
+  expectLastIsLinkedTo(DummyEntry? x){
+    expect(linkedList.last!.next, equals(x));
   }
 
   expectLinksAreCorrect(List<DummyEntry> entries){
     for(int i = 0; i < entries.length-1; i++)
       _expectCurrentIsLinkedToNext(entries[i], entries[i+1]);
-    
-    expect(entries.last.next, isNull);
-
-    expect(linkedList.first?.next, isNotNull);
-    expect(linkedList.first!.next, equals(entries[1]));
-
-    expect(linkedList.last?.next, isNull);
   }
 
   void _expectCurrentIsLinkedToNext(DummyEntry current, DummyEntry next) {

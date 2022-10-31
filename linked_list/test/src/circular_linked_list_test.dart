@@ -18,6 +18,14 @@ void main() {
 class CircularLinkedListTest extends LinkedListTest{
   @override
   late final LinkedList<DummyEntry> linkedList;
+
+  @override
+  void expectLinksAreCorrect(List<DummyEntry> entries) {
+    super.expectLinksAreCorrect(entries);
+
+    expectLastIsLinkedTo(linkedList.first);
+    expectFirstIsLinkedTo(entries[1]);
+  }
 }
 
 @TestCase()
@@ -147,14 +155,14 @@ class GivenAddingX extends GivenNewlyCreatedCircularLinkedList{
   void addFirst_WhenYIsAdded_ThenFirstShouldBeLinkedToLast(){
     final y = DummyEntry();
     linkedList.addFirst(y);
-    expectFirstIsLinkedToLast();
+    expectFirstIsLinkedTo(linkedList.last);
   }
 
   @Test()
   void addFirst_WhenYIsAdded_ThenLastShouldBeLinkedToFirst(){
     final y = DummyEntry();
     linkedList.addFirst(y);
-    expect(linkedList.last!.next, equals(linkedList.first));
+    expectLastIsLinkedTo(linkedList.first);
   }
 
   @Test()
@@ -174,14 +182,14 @@ class GivenAddingX extends GivenNewlyCreatedCircularLinkedList{
   void addLast_WhenYIsAdded_ThenFirstShouldBeLinkedToLast(){
     final y = DummyEntry();
     linkedList.addLast(y);
-    expectFirstIsLinkedToLast();
+    expectFirstIsLinkedTo(linkedList.last);
   }
 
   @Test()
   void addLast_WhenYIsAdded_ThenLastShouldBeLinkedToFirst(){
     final y = DummyEntry();
     linkedList.addLast(y);
-    expect(linkedList.last!.next, equals(linkedList.first));
+    expectLastIsLinkedTo(linkedList.first);
   }
 
   @Test()
@@ -270,30 +278,14 @@ class GivenAddingXAndY extends GivenNewlyCreatedCircularLinkedList{
   void addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect(){
     final z = DummyEntry();
     linkedList.addFirst(z);
-    for(int i = 0; i < [z, x, y].length-1; i++){
-      expect([z, x, y][i].next, isNotNull);
-      expect([z, x, y][i].next, equals([z, x, y][i+1]));
-    }
-    
-    expect(linkedList.first?.next, isNotNull);
-    expect(linkedList.first!.next, equals([z, x, y][1]));
-    
-    expect(linkedList.last?.next, equals(linkedList.first));
+    expectLinksAreCorrect([z, x, y]);
   }
 
   @Test()
   void addLast_WhenZIsAdded_ThenLinksShouldBeCorrect(){
     final z = DummyEntry();
     linkedList.addLast(z);
-    for(int i = 0; i < [z, x, y].length-1; i++){
-      expect([z, x, y][i].next, isNotNull);
-      expect([z, x, y][i].next, equals([z, x, y][i+1]));
-    }
-    
-    expect(linkedList.first?.next, isNotNull);
-    expect(linkedList.first!.next, equals([x, y, z][1]));
-    
-    expect(linkedList.last?.next, equals(linkedList.first));
+    expectLinksAreCorrect([x, y, z]);
   }
 
   @Test()
@@ -317,7 +309,7 @@ class GivenAddingXAndY extends GivenNewlyCreatedCircularLinkedList{
   @Test()
   void removeFirst_ThenLastShouldBeLinkedToFirst(){
     linkedList.removeFirst();
-    expect(linkedList.last!.next, equals(linkedList.first));
+    expectLastIsLinkedTo(linkedList.first);
   }
 
   @Test()
@@ -335,7 +327,7 @@ class GivenAddingXAndY extends GivenNewlyCreatedCircularLinkedList{
   @Test()
   void removeLast_ThenLastShouldBeLinkedToFirst(){
     linkedList.removeLast();
-    expect(linkedList.last!.next, equals(linkedList.first));
+    expectLastIsLinkedTo(linkedList.first);
   }
 
 
@@ -399,7 +391,7 @@ class GivenAddingXAndYAndZ extends GivenNewlyCreatedCircularLinkedList{
   @Test(skip: 'reverse')
   void reverse_ThenLastShouldBeLinkedToNull(){
     linkedList.reverse();
-    expectLastIsLinkedToNull();
+    expectLastIsLinkedTo(null);
   }
 }
 

@@ -18,6 +18,14 @@ void main() {
 class SinglyLinkedListTest extends LinkedListTest{
   @override
   late final LinkedList<DummyEntry> linkedList;
+
+  @override
+  void expectLinksAreCorrect(List<DummyEntry> entries) {
+    super.expectLinksAreCorrect(entries);
+
+    expectLastIsLinkedTo(null);
+    expectFirstIsLinkedTo(entries[1]);
+  }
 }
 
 @TestCase()
@@ -131,14 +139,14 @@ class GivenAddingX extends GivenNewlyCreatedSinglyLinkedList{
   void addFirst_WhenYIsAdded_ThenFirstShouldBeLinkedToLast(){
     final y = DummyEntry();
     linkedList.addFirst(y);
-    expectFirstIsLinkedToLast();
+    expectFirstIsLinkedTo(linkedList.last);
   }
 
   @Test()
   void addFirst_WhenYIsAdded_ThenLastShouldBeLinkedToNull(){
     final y = DummyEntry();
     linkedList.addFirst(y);
-    expectLastIsLinkedToNull();
+    expectLastIsLinkedTo(null);
   }
 
   @Test()
@@ -158,14 +166,14 @@ class GivenAddingX extends GivenNewlyCreatedSinglyLinkedList{
   void addLast_WhenYIsAdded_ThenFirstShouldBeLinkedToLast(){
     final y = DummyEntry();
     linkedList.addLast(y);
-    expectFirstIsLinkedToLast();
+    expectFirstIsLinkedTo(linkedList.last);
   }
 
   @Test()
   void addLast_WhenYIsAdded_ThenLastShouldBeLinkedToNull(){
     final y = DummyEntry();
     linkedList.addLast(y);
-    expectLastIsLinkedToNull();
+    expectLastIsLinkedTo(null);
   }
 
   @Test()
@@ -360,7 +368,7 @@ class GivenAddingXAndYAndZ extends GivenNewlyCreatedSinglyLinkedList{
   @Test()
   void reverse_ThenLastShouldBeLinkedToNull(){
     linkedList.reverse();
-    expectLastIsLinkedToNull();
+    expectLastIsLinkedTo(null);
   }
 }
 
