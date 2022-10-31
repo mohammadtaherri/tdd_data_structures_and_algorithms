@@ -33,7 +33,7 @@ class CircularLinkedListTest extends LinkedListTest{
 class GivenNewlyCreatedCircularLinkedList extends CircularLinkedListTest{
   
   @SetUp()
-  void CreateNewCircularLinkedList() {
+  void createNewCircularLinkedList() {
     linkedList = CircularLinkedList<DummyEntry>();
   }
 
