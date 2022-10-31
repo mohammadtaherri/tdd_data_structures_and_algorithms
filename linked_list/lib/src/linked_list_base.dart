@@ -47,11 +47,11 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
       _last = entry;
     }
 
-    afterAddlast(oldLast);
+    doAfterAddlast(oldLast);
 
     _size++;
   }
 
-  void afterAddlast(E? oldLast){}
+  void doAfterAddlast(E? oldLast){}
 
 }

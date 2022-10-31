@@ -12,7 +12,7 @@ class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBa
   }
 
   @override
-  void afterAddlast(E? oldLast){
+  void doAfterAddlast(E? oldLast){
     if(oldLast == null)
       return;
 
