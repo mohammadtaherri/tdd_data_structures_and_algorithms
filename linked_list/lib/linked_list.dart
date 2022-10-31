@@ -1,5 +1,6 @@
 library linked_list;
 
+part './src/linked_list_base.dart';
 part './src/singly_linked_list.dart';
 part './src/circular_linked_list.dart';
 part './src/doubly_linked_list.dart';
@@ -7,6 +8,8 @@ part './src/errors.dart';
 
 
 abstract class LinkedList<E extends LinkedListEntry<E>>{
+
+  const LinkedList._();
 
   bool get isEmpty;
   int get size;
