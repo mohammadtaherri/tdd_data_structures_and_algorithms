@@ -5,26 +5,17 @@ class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBa
 
   @override
   void doAfterAddFirst(E? oldFirst){
-    if(oldFirst == null)
-      return;
-
-    oldFirst.previous = _first;
+    oldFirst?.previous = _first;
   }
 
   @override
   void doAfterAddlast(E? oldLast){
-    if(oldLast == null)
-      return;
-
     _last!.previous = oldLast;
   }
 
   @override
   void doAfterRemoveFirst(){
-    if(_first == null)
-      return;
-
-    _first!.previous = null;
+    _first?.previous = null;
   }
 
   @override
