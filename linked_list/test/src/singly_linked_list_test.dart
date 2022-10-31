@@ -61,6 +61,21 @@ class GivenNewlyCreatedSinglyLinkedList extends SinglyLinkedListTest{
   }
 
   @Test()
+  void addFirst_WhenXIsAdded_ThenFirstShouldBeLinkedToNull(){
+    final x = DummyEntry();
+    linkedList.addFirst(x);
+    expectFirstIsLinkedTo(null);
+  }
+
+  @Test()
+  void addFirst_WhenXIsAdded_ThenLastShouldBeLinkedToNull(){
+    final x = DummyEntry();
+    linkedList.addFirst(x);
+    expectLastIsLinkedTo(null);
+  }
+
+
+  @Test()
   void addLast_SizeShouldBeOne(){
     linkedList.addLast(DummyEntry());
     expectSizeIsOne();
@@ -71,6 +86,20 @@ class GivenNewlyCreatedSinglyLinkedList extends SinglyLinkedListTest{
     final x = DummyEntry();
     linkedList.addLast(x);
     expectFirstAndLastAreEqualTo(x);
+  }
+
+  @Test()
+  void addLast_WhenXIsAdded_ThenFirstShouldBeLinkedToNull(){
+    final x = DummyEntry();
+    linkedList.addLast(x);
+    expectFirstIsLinkedTo(null);
+  }
+
+  @Test()
+  void addLast_WhenXIsAdded_ThenLastShouldBeLinkedToNull(){
+    final x = DummyEntry();
+    linkedList.addLast(x);
+    expectLastIsLinkedTo(null);
   }
 
   @Test()
@@ -280,7 +309,7 @@ class GivenAddingXAndY extends GivenNewlyCreatedSinglyLinkedList{
   }
 
   @Test()
-  void removeFirst_FirstAndLastShouldBeEqual(){
+  void removeFirst_FirstAndLastShouldBeEqualToY(){
     linkedList.removeFirst();
     expectFirstAndLastAreEqualTo(y);
   }
@@ -292,21 +321,45 @@ class GivenAddingXAndY extends GivenNewlyCreatedSinglyLinkedList{
   }
 
   @Test()
+  void removeFirst_ThenFirstShouldBeLinkedTonull(){
+    linkedList.removeFirst();
+    expectFirstIsLinkedTo(null);
+  }
+
+  @Test()
+  void removeFirst_ThenLastShouldBeLinkedTonull(){
+    linkedList.removeFirst();
+    expectLastIsLinkedTo(null);
+  }
+
+  @Test()
   void removeLast_SizeShouldBeOne(){
     linkedList.removeLast();
     expectSizeIsOne();
   }
 
   @Test()
-  void removeLast_FirstAndLastShouldBeEqual(){
+  void removeLast_FirstAndLastShouldBeEqualToX(){
     linkedList.removeLast();
     expectFirstAndLastAreEqualTo(x);
   }
 
   @Test()
-  void removeLast_XShouldBeLinkedToNull(){
+  void removeLast_YShouldBeLinkedToNull(){
     linkedList.removeLast();
-    expect(x.next, isNull);
+    expect(y.next, isNull);
+  }
+
+  @Test()
+  void removeLast_ThenFirstShouldBeLinkedTonull(){
+    linkedList.removeLast();
+    expectFirstIsLinkedTo(null);
+  }
+
+  @Test()
+  void removeLast_ThenLastShouldBeLinkedTonull(){
+    linkedList.removeLast();
+    expectLastIsLinkedTo(null);
   }
 
   @Test()
