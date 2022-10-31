@@ -33,7 +33,7 @@ class SinglyLinkedListTest extends LinkedListTest{
 class GivenNewlyCreatedSinglyLinkedList extends SinglyLinkedListTest{
   
   @SetUp()
-  void CreateNewSinglyLinkedList() {
+  void createNewSinglyLinkedList() {
     linkedList = SinglyLinkedList<DummyEntry>();
   }
 
