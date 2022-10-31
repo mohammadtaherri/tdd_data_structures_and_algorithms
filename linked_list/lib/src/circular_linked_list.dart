@@ -1,17 +1,23 @@
 part of linked_list;
 
-class CircularLinkedList<E extends LinkedListEntry<E>>{
+class CircularLinkedList<E extends LinkedListEntry<E>> extends LinkedList<E>{
+
+  @override
   get isEmpty => _size == 0;
 
+  @override
   get size => _size;
   int _size = 0;
 
+  @override
   get first => _first;
   E? _first;
 
+  @override
   get last => _last;
   E? _last;
 
+  @override
   void addFirst(E entry) {
     if(isEmpty){
       _first = _last = entry;
@@ -25,6 +31,7 @@ class CircularLinkedList<E extends LinkedListEntry<E>>{
     _size++;
   }
 
+  @override
   void addLast(E entry) {
     if(isEmpty){
       _first = _last = entry;
@@ -38,6 +45,7 @@ class CircularLinkedList<E extends LinkedListEntry<E>>{
     _size++;
   }
 
+  @override
   void removeFirst() {
     if(isEmpty)
       throw IllegalState();
@@ -54,6 +62,7 @@ class CircularLinkedList<E extends LinkedListEntry<E>>{
     _size--;
   }
 
+  @override
   void removeLast() {
     if(isEmpty)
       throw IllegalState();
@@ -75,7 +84,8 @@ class CircularLinkedList<E extends LinkedListEntry<E>>{
     return null;
   }
 
-   E elementAt(int index) {
+  @override
+  E elementAt(int index) {
     if(isEmpty)
       throw Empty();
 
@@ -89,6 +99,7 @@ class CircularLinkedList<E extends LinkedListEntry<E>>{
     throw Error();
   }
 
+  @override
   indexOf(E entry) {
     for (var c = _first, i = 0; c != null; c = c.next, i++)
       if (c == entry) 
@@ -97,11 +108,9 @@ class CircularLinkedList<E extends LinkedListEntry<E>>{
     return -1;
   }
 
+  @override
   void reverse() {
     if(size <= 1)
       return;
-
-    
   }
-
 }
