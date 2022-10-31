@@ -22,21 +22,12 @@ class CircularLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E
   }
 
   @override
-  void removeLast() {
-    if(isEmpty)
-      throw IllegalState();
-
-    if(_first == _last)
-      _first = _last = null;
-    else{
-      _last =_nodeBefore(_last!);
-      _last!.next = _first;
-    }
-
-    _size--;
+  void doAfterRemoveLast(E? oldLast){
+    _last?.next = _first;
   }
 
-  E? _nodeBefore(E node) {
+  @override
+  E? nodeBefore(E node) {
     for (var current = _first; current != null; current = current.next)
       if (current.next == node) return current;
 

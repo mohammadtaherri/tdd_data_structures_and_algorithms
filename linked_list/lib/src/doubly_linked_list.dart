@@ -28,20 +28,13 @@ class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBa
   }
 
   @override
-  void removeLast() {
-    if(isEmpty)
-      throw IllegalState();
+  E? nodeBefore(E node) {
+    return node.previous;
+  }
 
-    if(_first == _last)
-      _first = _last = null;
-    else{
-      var newlast = _last!.previous;
-      _last!.previous = null;
-      newlast!.next = null;
-      _last = newlast;
-    }
-    
-    _size--;
+  @override
+  void doAfterRemoveLast(E? oldLast){
+    oldLast?.previous = null;
   }
 
   @override

@@ -3,22 +3,7 @@ part of linked_list;
 class SinglyLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
-  void removeLast() {
-    if(isEmpty)
-      throw IllegalState();
-
-    if(_first == _last)
-      _first = _last = null;
-    else{
-      E newLast = _nodeBefore(_last!)!;
-      newLast.next = null;
-      _last = newLast;
-    }
-
-    _size--;
-  }
-
-  E? _nodeBefore(E node) {
+  E? nodeBefore(E node) {
     for (var current = _first; current != null; current = current.next)
       if (current.next == node) return current;
 

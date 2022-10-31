@@ -74,4 +74,28 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
 
   void doAfterRemoveFirst(){}
 
+  @override
+  void removeLast() {
+    if(isEmpty)
+      throw IllegalState();
+
+    var oldLast = _last;
+
+    if(_first == _last)
+      _first = _last = null;
+    else{
+      E newLast = nodeBefore(_last!)!;
+      newLast.next = null;
+      _last = newLast;
+    }
+
+    doAfterRemoveLast(oldLast);
+
+    _size--;
+  }
+
+  E? nodeBefore(E node);
+
+  void doAfterRemoveLast(E? oldLast){}
+
 }
