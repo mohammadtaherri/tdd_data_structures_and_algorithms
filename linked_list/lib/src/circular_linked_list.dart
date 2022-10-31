@@ -4,7 +4,7 @@ class CircularLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E
 
 
   @override
-  void afterAddFirst(E? oldFirst){
+  void doAfterAddFirst(E? oldFirst){
     _last!.next = _first;
   }
 

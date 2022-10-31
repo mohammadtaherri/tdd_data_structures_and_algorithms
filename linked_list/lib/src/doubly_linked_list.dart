@@ -4,7 +4,7 @@ part of linked_list;
 class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
-  void afterAddFirst(E? oldFirst){
+  void doAfterAddFirst(E? oldFirst){
     if(oldFirst == null)
       return;
 
