@@ -9,17 +9,8 @@ class CircularLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E
   }
 
   @override
-  void addLast(E entry) {
-    if(isEmpty){
-      _first = _last = entry;
-      _last!.next = _first;
-    }else{
-      _last!.next = entry;
-      _last = entry;
-      _last!.next = _first;
-    }
-      
-    _size++;
+  void afterAddlast(E? oldLast){
+    _last!.next = _first;
   }
 
   @override

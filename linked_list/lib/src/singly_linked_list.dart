@@ -3,18 +3,6 @@ part of linked_list;
 class SinglyLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
-  void addLast(E entry) {
-    if(isEmpty)
-      _first = _last = entry;
-    else{
-      _last!.next = entry;
-      _last = entry;
-    }
-
-    _size++;
-  }
-
-  @override
   void removeFirst() {
     if(isEmpty)
       throw IllegalState();

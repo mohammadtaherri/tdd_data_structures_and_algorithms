@@ -12,16 +12,11 @@ class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBa
   }
 
   @override
-  void addLast(E entry) {
-    if(isEmpty)
-      _first = _last = entry;
-    else{
-      _last!.next = entry;
-      entry.previous = _last;
-      _last = entry;
-    }
+  void afterAddlast(E? oldLast){
+    if(oldLast == null)
+      return;
 
-    _size++;
+    _last!.previous = oldLast;
   }
 
   @override
