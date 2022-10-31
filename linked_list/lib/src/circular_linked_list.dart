@@ -1,6 +1,6 @@
 part of linked_list;
 
-class CircularLinkedList<E extends LinkedListEntry<E>> extends LinkedList<E>{
+class CircularLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
   get isEmpty => _size == 0;
