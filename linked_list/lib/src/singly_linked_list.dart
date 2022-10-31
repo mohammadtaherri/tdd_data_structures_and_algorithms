@@ -1,16 +1,23 @@
 part of linked_list;
 
-class SinglyLinkedList<E extends LinkedListEntry<E>>{
+class SinglyLinkedList<E extends LinkedListEntry<E>> extends LinkedList<E>{
 
+  @override
   bool get isEmpty => _size == 0;
+
+  @override
   int get size => _size;
   int _size = 0;
 
+  @override
   E? get first => _first;
   E? _first;
+
+  @override
   E? get last => _last;
   E? _last;
 
+  @override
   void addFirst(E entry) {
     if(isEmpty)
       _first = _last = entry;
@@ -22,6 +29,7 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     _size++;
   }
 
+  @override
   void addLast(E entry) {
     if(isEmpty)
       _first = _last = entry;
@@ -33,6 +41,7 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     _size++;
   }
 
+  @override
   void removeFirst() {
     if(isEmpty)
       throw IllegalState();
@@ -48,6 +57,7 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     _size--;
   }
 
+  @override
   void removeLast() {
     if(isEmpty)
       throw IllegalState();
@@ -70,6 +80,7 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     return null;
   }
 
+  @override
   E elementAt(int index) {
     if(isEmpty)
       throw Empty();
@@ -84,6 +95,7 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     throw Error();
   }
 
+  @override
   int indexOf(E entry) {
     for (var c = _first, i = 0; c != null; c = c.next, i++)
       if (c == entry) 
@@ -92,6 +104,7 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
     return -1;
   }
 
+  @override
   void reverse() {
     if(size <= 1)
       return;
@@ -114,6 +127,3 @@ class SinglyLinkedList<E extends LinkedListEntry<E>>{
   }
 }
 
-abstract class LinkedListEntry<E extends LinkedListEntry<E>>{
-  E? next;
-}
