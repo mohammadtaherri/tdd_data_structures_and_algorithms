@@ -14,20 +14,11 @@ class CircularLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E
   }
 
   @override
-  void removeFirst() {
-    if(isEmpty)
-      throw IllegalState();
+  void doAfterRemoveFirst(){
+    if(_first == null)
+      return;
 
-    if(_first == _last)
-      _first = _last = null;
-    else{
-      var newFirst = _first!.next;
-      _first!.next = null;
-      _first = newFirst;
-      _last!.next = _first;
-    }
-
-    _size--;
+    _last!.next = _first;
   }
 
   @override

@@ -20,20 +20,11 @@ class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBa
   }
 
   @override
-  void removeFirst() {
-    if(isEmpty)
-      throw IllegalState();
+  void doAfterRemoveFirst(){
+    if(_first == null)
+      return;
 
-    if(_first == _last)
-      _first = _last = null;
-    else{
-      var newFirst = _first!.next;
-      _first!.next = null;
-      newFirst!.previous = null;
-      _first = newFirst;
-    }
-  
-    _size--;
+    _first!.previous = null;
   }
 
   @override
