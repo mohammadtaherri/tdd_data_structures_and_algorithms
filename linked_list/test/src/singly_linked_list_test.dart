@@ -12,6 +12,7 @@ void main() {
   runTestsByLibraryName('singly_linked_list_test');
 }
 
+class DummyEntry extends LinkedListEntry<DummyEntry>{}
 
 @TestCase()
 @Root()
@@ -20,7 +21,7 @@ class SinglyLinkedListTest extends LinkedListTest{
   late final LinkedList<DummyEntry> linkedList;
 
   @override
-  void expectLinksAreCorrect(List<DummyEntry> entries) {
+  void expectLinksAreCorrect(covariant List<DummyEntry> entries) {
     super.expectLinksAreCorrect(entries);
 
     expectLastIsLinkedTo(null);

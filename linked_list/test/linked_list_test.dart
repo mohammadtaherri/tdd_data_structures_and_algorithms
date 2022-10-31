@@ -12,10 +12,8 @@ void main() {
 
 abstract class LinkedListTest with ComposedExpect{}
 
-class DummyEntry extends LinkedListEntry<DummyEntry>{}
-
 mixin ComposedExpect{
-  LinkedList<DummyEntry> get linkedList;
+  LinkedList<LinkedListEntry> get linkedList;
 
   expectListIsEmpty(){
     expect(linkedList.isEmpty, isTrue);
@@ -37,25 +35,25 @@ mixin ComposedExpect{
     expect(linkedList.last, isNull);
   }
 
-  expectFirstAndLastAreEqualTo(DummyEntry x, [DummyEntry? y]){
+  expectFirstAndLastAreEqualTo(LinkedListEntry x, [LinkedListEntry? y]){
     expect(linkedList.first, equals(x));
     expect(linkedList.last, equals(y??x));
   }
 
-  expectFirstIsLinkedTo(DummyEntry? x){
+  expectFirstIsLinkedTo(LinkedListEntry? x){
     expect(linkedList.first!.next, equals(x));
   }
 
-  expectLastIsLinkedTo(DummyEntry? x){
+  expectLastIsLinkedTo(LinkedListEntry? x){
     expect(linkedList.last!.next, equals(x));
   }
 
-  expectLinksAreCorrect(List<DummyEntry> entries){
+  expectLinksAreCorrect(List<LinkedListEntry> entries){
     for(int i = 0; i < entries.length-1; i++)
       _expectCurrentIsLinkedToNext(entries[i], entries[i+1]);
   }
 
-  void _expectCurrentIsLinkedToNext(DummyEntry current, DummyEntry next) {
+  void _expectCurrentIsLinkedToNext(LinkedListEntry current, LinkedListEntry next) {
     expect(current.next, isNotNull);
     expect(current.next, equals(next));
   }
