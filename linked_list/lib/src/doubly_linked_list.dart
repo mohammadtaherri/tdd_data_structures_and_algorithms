@@ -4,21 +4,6 @@ part of linked_list;
 class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
-  bool get isEmpty => _size == 0;
-
-  @override
-  int get size => _size;
-  int _size = 0;
-
-  @override
-  E? get first => _first;
-  E? _first;
-
-  @override
-  E? get last => _last;
-  E? _last;
-
-  @override
   void addFirst(E entry) {
     if(isEmpty)
       _first = _last = entry;

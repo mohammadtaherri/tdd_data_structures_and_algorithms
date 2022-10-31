@@ -3,21 +3,6 @@ part of linked_list;
 class CircularLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
-  get isEmpty => _size == 0;
-
-  @override
-  get size => _size;
-  int _size = 0;
-
-  @override
-  get first => _first;
-  E? _first;
-
-  @override
-  get last => _last;
-  E? _last;
-
-  @override
   void addFirst(E entry) {
     if(isEmpty){
       _first = _last = entry;
