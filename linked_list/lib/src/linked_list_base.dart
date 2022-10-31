@@ -19,7 +19,6 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
 
   @override
   void addFirst(E entry) {
-
     var oldFirst = _first;
 
     if(isEmpty)
@@ -97,5 +96,4 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
   E? nodeBefore(E node);
 
   void doAfterRemoveLast(E? oldLast){}
-
 }
