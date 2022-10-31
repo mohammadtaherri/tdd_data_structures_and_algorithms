@@ -5,74 +5,19 @@ import 'package:test/test.dart';
 import 'package:clean_test/annotated_test.dart';
 import 'package:linked_list/linked_list.dart';
 
+import '../linked_list_test.dart';
 import 'matchers.dart';
 
 void main() {
   runTestsByLibraryName('singly_linked_list_test');
 }
 
-class DummyEntry extends LinkedListEntry<DummyEntry>{}
-
-mixin ComposedExpect{
-  CircularLinkedList<DummyEntry> get linkedList;
-
-  expectListIsEmpty(){
-    expect(linkedList.isEmpty, isTrue);
-    expect(linkedList.size, isZero);
-  }
-
-  expectSizeIsOne(){
-    expect(linkedList.size, equals(1));
-    expect(linkedList.isEmpty, isFalse);
-  }
-
-  expectSizeIsTwo(){
-    expect(linkedList.size, equals(2));
-    expect(linkedList.isEmpty, isFalse);
-  }
-
-  expectFirstAndLastAreNull(){
-    expect(linkedList.first, isNull);
-    expect(linkedList.last, isNull);
-  }
-
-  expectFirstAndLastAreEqualTo(DummyEntry x, [DummyEntry? y]){
-    expect(linkedList.first, equals(x));
-    expect(linkedList.last, equals(y??x));
-  }
-
-  expectFirstIsLinkedToLast(){
-    expect(linkedList.first?.next, isNotNull);
-    expect(linkedList.first!.next, equals(linkedList.last));
-  }
-
-  expectLastIsLinkedToNull(){
-    expect(linkedList.last?.next, isNull);
-  }
-
-  expectLinksAreCorrect(List<DummyEntry> entries){
-    for(int i = 0; i < entries.length-1; i++)
-      _expectCurrentIsLinkedToNext(entries[i], entries[i+1]);
-    
-    expect(entries.last.next, isNull);
-
-    expect(linkedList.first?.next, isNotNull);
-    expect(linkedList.first!.next, equals(entries[1]));
-
-    expect(linkedList.last?.next, isNull);
-  }
-
-  void _expectCurrentIsLinkedToNext(DummyEntry current, DummyEntry next) {
-    expect(current.next, isNotNull);
-    expect(current.next, equals(next));
-  }
-}
 
 @TestCase()
 @Root()
-class CircularLinkedListTest with ComposedExpect{
+class CircularLinkedListTest extends LinkedListTest{
   @override
-  late final CircularLinkedList<DummyEntry> linkedList;
+  late final LinkedList<DummyEntry> linkedList;
 }
 
 @TestCase()
@@ -325,8 +270,10 @@ class GivenAddingXAndY extends GivenNewlyCreatedCircularLinkedList{
   void addFirst_WhenZIsAdded_ThenLinksShouldBeCorrect(){
     final z = DummyEntry();
     linkedList.addFirst(z);
-    for(int i = 0; i < [z, x, y].length-1; i++)
-      _expectCurrentIsLinkedToNext([z, x, y][i], [z, x, y][i+1]);
+    for(int i = 0; i < [z, x, y].length-1; i++){
+      expect([z, x, y][i].next, isNotNull);
+      expect([z, x, y][i].next, equals([z, x, y][i+1]));
+    }
     
     expect(linkedList.first?.next, isNotNull);
     expect(linkedList.first!.next, equals([z, x, y][1]));
@@ -338,8 +285,10 @@ class GivenAddingXAndY extends GivenNewlyCreatedCircularLinkedList{
   void addLast_WhenZIsAdded_ThenLinksShouldBeCorrect(){
     final z = DummyEntry();
     linkedList.addLast(z);
-    for(int i = 0; i < [x, y, z].length-1; i++)
-      _expectCurrentIsLinkedToNext([x, y, z][i], [x, y, z][i+1]);
+    for(int i = 0; i < [z, x, y].length-1; i++){
+      expect([z, x, y][i].next, isNotNull);
+      expect([z, x, y][i].next, equals([z, x, y][i+1]));
+    }
     
     expect(linkedList.first?.next, isNotNull);
     expect(linkedList.first!.next, equals([x, y, z][1]));
