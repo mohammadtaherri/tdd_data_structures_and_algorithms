@@ -3,14 +3,6 @@ part of linked_list;
 class SinglyLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
-  E? nodeBefore(E node) {
-    for (var current = _first; current != null; current = current.next)
-      if (current.next == node) return current;
-
-    return null;
-  }
-
-  @override
   E elementAt(int index) {
     if(isEmpty)
       throw Empty();

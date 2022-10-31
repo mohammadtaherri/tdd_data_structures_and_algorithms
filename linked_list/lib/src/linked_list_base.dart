@@ -93,7 +93,12 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
     _size--;
   }
 
-  E? nodeBefore(E node);
+  E? nodeBefore(E node) {
+    for (var current = _first; current != null; current = current.next)
+      if (current.next == node) return current;
+
+    return null;
+  }
 
   void doAfterRemoveLast(E? oldLast){}
 }
