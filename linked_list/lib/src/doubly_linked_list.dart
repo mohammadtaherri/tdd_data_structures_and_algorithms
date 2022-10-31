@@ -4,16 +4,11 @@ part of linked_list;
 class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
-  void addFirst(E entry) {
-    if(isEmpty)
-      _first = _last = entry;
-    else{
-      _first!.previous = entry;
-      entry.next = _first;
-      _first = entry; 
-    }
+  void afterAddFirst(E? oldFirst){
+    if(oldFirst == null)
+      return;
 
-    _size++;
+    oldFirst.previous = _first;
   }
 
   @override

@@ -3,18 +3,6 @@ part of linked_list;
 class SinglyLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
-  void addFirst(E entry) {
-    if(isEmpty)
-      _first = _last = entry;
-    else{
-      entry.next = _first;
-      _first = entry;
-    }
-
-    _size++;
-  }
-
-  @override
   void addLast(E entry) {
     if(isEmpty)
       _first = _last = entry;
