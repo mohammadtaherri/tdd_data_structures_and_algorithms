@@ -4,28 +4,20 @@ part of linked_list;
 class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
-  void doAfterAddFirst(E? oldFirst){
-    oldFirst?.previous = _first;
-  }
-
-  @override
-  void doAfterAddlast(E? oldLast){
-    _last!.previous = oldLast;
-  }
-
-  @override
-  void doAfterRemoveFirst(){
-    _first?.previous = null;
-  }
-
-  @override
   E? nodeBefore(E node) {
     return node.previous;
   }
 
   @override
-  void doAfterRemoveLast(E? oldLast){
-    oldLast?.previous = null;
+  void updateLinks({E? previousEntry, E? nextEntry}){
+    super.updateLinks(previousEntry: previousEntry, nextEntry: nextEntry);
+    nextEntry?.previous = previousEntry;
+  }
+
+  @override
+  void unlinke(E? entry){
+    super.unlinke(entry);
+    entry?.previous = null;
   }
 
   @override

@@ -23,17 +23,13 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
 
     if(isEmpty)
       _first = _last = entry;
-    else{
-      entry.next = _first;
+    else
       _first = entry;
-    }
-
-    doAfterAddFirst(oldFirst);
+    
+    updateLinks(previousEntry: _first, nextEntry: oldFirst);
 
     _size++;
   }
-
-  void doAfterAddFirst(E? oldFirst){}
 
   @override
   void addLast(E entry) {
@@ -41,37 +37,31 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
 
     if(isEmpty)
       _first = _last = entry;
-    else{
-      _last!.next = entry;
+    else
       _last = entry;
-    }
 
-    doAfterAddlast(oldLast);
+    updateLinks(previousEntry: oldLast, nextEntry: _last);
 
     _size++;
   }
-
-  void doAfterAddlast(E? oldLast){}
 
   @override
   void removeFirst() {
     if(isEmpty)
       throw IllegalState();
 
+    var oldFirst = _first;
+
     if(_first == _last)
       _first = _last = null;
-    else{
-      var newFirst = first!.next;
-      _first!.next = null;
-      _first = newFirst;
-    }
-
-    doAfterRemoveFirst();
+    else
+      _first = first!.next;
+    
+    updateLinks(previousEntry: null, nextEntry: _first);
+    unlinke(oldFirst);
     
     _size--;
   }
-
-  void doAfterRemoveFirst(){}
 
   @override
   void removeLast() {
@@ -82,13 +72,11 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
 
     if(_first == _last)
       _first = _last = null;
-    else{
-      E newLast = nodeBefore(_last!)!;
-      newLast.next = null;
-      _last = newLast;
-    }
-
-    doAfterRemoveLast(oldLast);
+    else
+      _last = nodeBefore(_last!);
+    
+    updateLinks(previousEntry: _last, nextEntry: null);
+    unlinke(oldLast);
 
     _size--;
   }
@@ -100,5 +88,11 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
     return null;
   }
 
-  void doAfterRemoveLast(E? oldLast){}
+  void updateLinks({E? previousEntry, E? nextEntry}){
+    previousEntry?.next = nextEntry;
+  }
+
+  void unlinke(E? entry){
+    entry?.next = null;
+  }
 }

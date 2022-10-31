@@ -2,24 +2,9 @@ part of linked_list;
 
 class CircularLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E>{
 
-
   @override
-  void doAfterAddFirst(E? oldFirst){
-    _last!.next = _first;
-  }
-
-  @override
-  void doAfterAddlast(E? oldLast){
-    _last!.next = _first;
-  }
-
-  @override
-  void doAfterRemoveFirst(){
-    _last?.next = _first;
-  }
-
-  @override
-  void doAfterRemoveLast(E? oldLast){
+  void updateLinks({E? previousEntry, E? nextEntry}){
+    super.updateLinks(previousEntry: previousEntry, nextEntry: nextEntry);
     _last?.next = _first;
   }
 
