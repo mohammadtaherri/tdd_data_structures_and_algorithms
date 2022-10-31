@@ -2,6 +2,7 @@ library linked_list;
 
 part './src/singly_linked_list.dart';
 part './src/circular_linked_list.dart';
+part './src/doubly_linked_list.dart';
 part './src/errors.dart';
 
 
