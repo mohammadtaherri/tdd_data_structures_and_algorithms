@@ -15,10 +15,7 @@ class CircularLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E
 
   @override
   void doAfterRemoveFirst(){
-    if(_first == null)
-      return;
-
-    _last!.next = _first;
+    _last?.next = _first;
   }
 
   @override
