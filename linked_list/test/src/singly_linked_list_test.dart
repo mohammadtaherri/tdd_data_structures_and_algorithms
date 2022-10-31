@@ -8,13 +8,13 @@ import 'package:linked_list/linked_list.dart';
 import 'matchers.dart';
 
 void main() {
-  runTests(libraryName: 'singly_linked_list_test');
+  runTestsByLibraryName('singly_linked_list_test');
 }
 
 class DummyEntry extends LinkedListEntry<DummyEntry>{}
 
 mixin ComposedExpect{
-  SinglyLinkedList get linkedList;
+  SinglyLinkedList<DummyEntry> get linkedList;
 
   expectListIsEmpty(){
     expect(linkedList.isEmpty, isTrue);
@@ -72,11 +72,11 @@ mixin ComposedExpect{
 @Root()
 class SinglyLinkedListTest with ComposedExpect{
   @override
-  late final SinglyLinkedList<LinkedListEntry> linkedList;
+  late final SinglyLinkedList<DummyEntry> linkedList;
 }
 
 @TestCase()
-class GivenNewlyCreatedList extends SinglyLinkedListTest{
+class GivenNewlyCreatedSinglyLinkedList extends SinglyLinkedListTest{
   
   @SetUp()
   void CreateNewSinglyLinkedList() {
@@ -159,7 +159,7 @@ class GivenNewlyCreatedList extends SinglyLinkedListTest{
 }
 
 @TestCase()
-class GivenAddingX extends GivenNewlyCreatedList{
+class GivenAddingX extends GivenNewlyCreatedSinglyLinkedList{
 
   late final DummyEntry x;
 
@@ -292,7 +292,7 @@ class GivenAddingX extends GivenNewlyCreatedList{
 }
 
 @TestCase()
-class GivenAddingXAndY extends GivenNewlyCreatedList{
+class GivenAddingXAndY extends GivenNewlyCreatedSinglyLinkedList{
 
   late final DummyEntry x, y;
 
@@ -373,7 +373,7 @@ class GivenAddingXAndY extends GivenNewlyCreatedList{
 }
 
 @TestCase()
-class GivenAddingXAndYAndZ extends GivenNewlyCreatedList{
+class GivenAddingXAndYAndZ extends GivenNewlyCreatedSinglyLinkedList{
 
   late final DummyEntry x, y, z;
 
