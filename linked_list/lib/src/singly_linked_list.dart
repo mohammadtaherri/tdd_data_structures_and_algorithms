@@ -1,6 +1,6 @@
 part of linked_list;
 
-class SinglyLinkedList<E extends LinkedListEntry<E>> extends LinkedList<E>{
+class SinglyLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E>{
 
   @override
   bool get isEmpty => _size == 0;
