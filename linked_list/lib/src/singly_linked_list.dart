@@ -7,21 +7,21 @@ class SinglyLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E>{
     if(size <= 1)
       return;
 
-    var prev = first;
-    var current = prev?.next;
+    var previous = first;
+    var current = first!.next;
 
     while(current != null){
       var temp = current.next;
-      current.next = prev;
-      prev = current;
+      current.next = previous;
+      previous = current;
       current = temp;
     }
 
-    var temp = _first;
+    var temp = first;
     _first = _last;
     _last = temp;
-    
-    _last?.next = null;
+
+    last!.next = null;
   }
 }
 
