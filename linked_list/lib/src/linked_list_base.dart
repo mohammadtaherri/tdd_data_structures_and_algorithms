@@ -20,29 +20,21 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
   @override
   void addFirst(E entry) {
     var oldFirst = _first;
-
-    if(isEmpty)
-      _first = _last = entry;
-    else
-      _first = entry;
-    
+    isEmpty 
+      ? _initFirstAndLastTo(entry) 
+      : _changeFirstTo(entry);
     updateLinks(previousEntry: _first, nextEntry: oldFirst);
-
-    _size++;
+    _incrementSizeByOne();
   }
 
   @override
   void addLast(E entry) {
     var oldLast = _last;
-
-    if(isEmpty)
-      _first = _last = entry;
-    else
-      _last = entry;
-
+    isEmpty 
+      ? _initFirstAndLastTo(entry) 
+      : _changeLastTo(entry);
     updateLinks(previousEntry: oldLast, nextEntry: _last);
-
-    _size++;
+    _incrementSizeByOne();
   }
 
   @override
@@ -51,16 +43,12 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
       throw IllegalState();
 
     var oldFirst = _first;
-
-    if(_first == _last)
-      _first = _last = null;
-    else
-      _first = first!.next;
-    
+    _sizeIsOne
+      ? _clearFirstAndLast()
+      : _changeFirstTo(first!.next);
     updateLinks(previousEntry: null, nextEntry: _first);
     unlinke(oldFirst);
-    
-    _size--;
+    _decrementSizeByOne();
   }
 
   @override
@@ -69,16 +57,28 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
       throw IllegalState();
 
     var oldLast = _last;
-
-    if(_first == _last)
-      _first = _last = null;
-    else
-      _last = nodeBefore(_last!);
-    
+    _sizeIsOne
+      ? _clearFirstAndLast()
+      : _changeLastTo(nodeBefore(last!)!);
     updateLinks(previousEntry: _last, nextEntry: null);
     unlinke(oldLast);
+    _decrementSizeByOne();
+  }
 
-    _size--;
+  void _initFirstAndLastTo(E entry) {
+    _first = _last = entry;
+  }
+
+  void _changeFirstTo(entry) {
+    _first = entry;
+  }
+
+  void _changeLastTo(E entry) {
+    _last = entry;
+  }
+
+  void _clearFirstAndLast() {
+    _first = _last = null;
   }
 
   E? nodeBefore(E node) {
@@ -95,4 +95,9 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
   void unlinke(E? entry){
     entry?.next = null;
   }
+
+  bool get _sizeIsOne => _first == _last;
+
+  void _incrementSizeByOne() => _size++;
+  void _decrementSizeByOne() => _size--;
 }
