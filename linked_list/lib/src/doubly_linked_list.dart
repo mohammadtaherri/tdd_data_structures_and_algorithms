@@ -25,6 +25,27 @@ class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBa
 
   @override
   void reverse() {
+    if(size <= 1)
+      return;
+
+    var previous = first;
+    var current = first!.next;
+
+    while(current != null){
+      var currentTemp = current.next;
+      var previousTemp = previous!.next;
+      current.next = previous;
+      previous.previous = current;
+      current = currentTemp;
+      previous = previousTemp;
+    }
+
+    var temp = first;
+    _first = _last;
+    _last = temp;
+
+    first!.previous = null;
+    last!.next = null;
   }
 }
 
