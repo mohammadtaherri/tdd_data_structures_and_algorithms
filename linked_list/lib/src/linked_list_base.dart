@@ -105,4 +105,19 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
 
   void _incrementSizeByOne() => _size++;
   void _decrementSizeByOne() => _size--;
+
+  @override
+  E elementAt(int index) {
+    if(isEmpty)
+      throw Empty();
+
+    if(index < 0 || index >= size)
+      throw OutOFRange();
+
+    for(var i = 0, current = first; i <= index; i++, current = current?.next)
+      if(i == index)
+        return current!;
+
+    throw Error();
+  }
 }

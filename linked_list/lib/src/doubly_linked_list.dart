@@ -24,21 +24,6 @@ class DoublyLinkedList<E extends DoublyLinkedListEntry<E>> extends _LinkedListBa
   }
 
   @override
-  E elementAt(int index) {
-    if(isEmpty)
-      throw Empty();
-
-    if(index < 0 || index >= _size)
-      throw OutOFRange();
-
-    for (var i = 0, current = _first; current != null; i++, current = current.next) 
-      if (i == index) 
-        return current;
-  
-    throw Error();
-  }
-
-  @override
   int indexOf(E entry) {
     for(var i = 0, current = _first; current != null; i++, current = current.next)
       if(current == entry)
