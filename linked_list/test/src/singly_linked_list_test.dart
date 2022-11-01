@@ -340,9 +340,21 @@ class GivenAddingXAndY extends GivenNewlyCreatedSinglyLinkedList{
   }
 
   @Test()
+  void reverse_ThenYShouldBeLinkedToX(){
+    linkedList.reverse();
+    expect(y.next, equals(x));
+  }
+
+  @Test()
   void reverse_ThenFirstAndLastShouldBeReversed(){
     linkedList.reverse();
     expectFirstAndLastAreEqualTo(y, x);
+  }
+
+  @Test()
+  void reverse_ThenLastShouldBeLinkedToNull(){
+    linkedList.reverse();
+    expectLastIsLinkedTo(null);
   }
 }
 
@@ -375,21 +387,9 @@ class GivenAddingXAndYAndZ extends GivenNewlyCreatedSinglyLinkedList{
   }
 
   @Test()
-  void reverse_ThenYShouldBeLinkedToX(){
-    linkedList.reverse();
-    expect(y.next, equals(x));
-  }
-
-  @Test()
   void reverse_ThenZShouldBeLinkedToY(){
     linkedList.reverse();
     expect(z.next, equals(y));
-  }
-
-  @Test()
-  void reverse_ThenLastShouldBeLinkedToNull(){
-    linkedList.reverse();
-    expectLastIsLinkedTo(null);
   }
 }
 
