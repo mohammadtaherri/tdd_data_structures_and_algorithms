@@ -306,15 +306,9 @@ class GivenAddingXAndY extends GivenNewlyCreatedSinglyLinkedList{
   }
 
   @Test()
-  void removeFirst_ThenFirstShouldBeLinkedToNull(){
+  void removeFirst_ThenFirstAndLastShouldBeLinkedToNull(){
     linkedList.removeFirst();
     expectFirstIsLinkedTo(null);
-  }
-
-  @Test()
-  void removeFirst_ThenLastShouldBeLinkedToNull(){
-    linkedList.removeFirst();
-    expectLastIsLinkedTo(null);
   }
 
   @Test()
@@ -330,21 +324,9 @@ class GivenAddingXAndY extends GivenNewlyCreatedSinglyLinkedList{
   }
 
   @Test()
-  void removeLast_YShouldBeLinkedToNull(){
-    linkedList.removeLast();
-    expect(y.next, isNull);
-  }
-
-  @Test()
-  void removeLast_ThenFirstShouldBeLinkedTonull(){
+  void removeLast_ThenFirstAndLastShouldBeLinkedToNull(){
     linkedList.removeLast();
     expectFirstIsLinkedTo(null);
-  }
-
-  @Test()
-  void removeLast_ThenLastShouldBeLinkedTonull(){
-    linkedList.removeLast();
-    expectLastIsLinkedTo(null);
   }
 
   @Test()
