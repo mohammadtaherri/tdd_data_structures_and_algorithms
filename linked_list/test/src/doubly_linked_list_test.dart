@@ -1,8 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 library doubly_linked_list_test;
 
-import 'dart:ffi';
-
 import 'package:test/test.dart';
 import 'package:clean_test/annotated_test.dart';
 
@@ -72,6 +70,14 @@ class GivenNewlyCreatedDoublyLinkedList extends DoublyLinkedListTest{
   }
 
   @Test()
+  void addFirst_WhenXIsAdded_ThenFirstAndLastShouldBeLinkedToNull(){
+    final x = DummyEntry();
+    linkedList.addFirst(x);
+    expect(linkedList.first!.next, isNull);
+    expect(linkedList.first!.previous, isNull);
+  }
+
+  @Test()
   void addLast_SizeShouldBeOne(){
     linkedList.addLast(DummyEntry());
     expectSizeIsOne();
@@ -82,6 +88,14 @@ class GivenNewlyCreatedDoublyLinkedList extends DoublyLinkedListTest{
     final x = DummyEntry();
     linkedList.addLast(x);
     expectFirstAndLastAreEqualTo(x);
+  }
+
+  @Test()
+  void addLast_WhenXIsAdded_ThenFirstAndLastShouldBeLinkedToNull(){
+    final x = DummyEntry();
+    linkedList.addLast(x);
+    expect(linkedList.first!.next, isNull);
+    expect(linkedList.first!.previous, isNull);
   }
 
   @Test()
@@ -295,7 +309,7 @@ class GivenAddingXAndY extends GivenNewlyCreatedDoublyLinkedList{
   }
 
   @Test()
-  void removeFirst_FirstAndLastShouldBeEqual(){
+  void removeFirst_FirstAndLastShouldBeEqualToY(){
     linkedList.removeFirst();
     expectFirstAndLastAreEqualTo(y);
   }
@@ -308,17 +322,10 @@ class GivenAddingXAndY extends GivenNewlyCreatedDoublyLinkedList{
   }
 
   @Test()
-  void removeFirst_ThenLastShouldBeLinkedToNull(){
+  void removeFirst_ThenFirstAndLastShouldBeLinkedToNull(){
     linkedList.removeFirst();
     expect(linkedList.last!.next, isNull);
     expect(linkedList.last!.previous, isNull);
-  }
-
-  @Test()
-  void removeFirst_ThenFirstShouldBeLinkedToNull(){
-    linkedList.removeFirst();
-    expect(linkedList.first!.next, isNull);
-    expect(linkedList.first!.previous, isNull);
   }
 
   @Test()
@@ -328,7 +335,7 @@ class GivenAddingXAndY extends GivenNewlyCreatedDoublyLinkedList{
   }
 
   @Test()
-  void removeLast_FirstAndLastShouldBeEqual(){
+  void removeLast_FirstAndLastShouldBeEqualToX(){
     linkedList.removeLast();
     expectFirstAndLastAreEqualTo(x);
   }
@@ -341,17 +348,10 @@ class GivenAddingXAndY extends GivenNewlyCreatedDoublyLinkedList{
   }
 
   @Test()
-  void removeLast_ThenLastShouldBeLinkedToNull(){
+  void removeLast_ThenFirstAndLastShouldBeLinkedToNull(){
     linkedList.removeLast();
     expect(linkedList.last!.next, isNull);
     expect(linkedList.last!.previous, isNull);
-  }
-
-  @Test()
-  void removeLast_ThenFirstShouldBeLinkedToNull(){
-    linkedList.removeLast();
-    expect(linkedList.first!.next, isNull);
-    expect(linkedList.first!.previous, isNull);
   }
 
   @Test()
@@ -388,29 +388,15 @@ class GivenAddingXAndYAndZ extends GivenNewlyCreatedDoublyLinkedList{
   }
 
   @Test()
-  void removeFirst_FirstAndLastShouldBeYAndZ(){
+  void removeFirst_ThenLinksShouldBeCorrect(){
     linkedList.removeFirst();
-    expectFirstAndLastAreEqualTo(y, z);
+    expectLinksAreCorrect([y, z]);
   }
 
   @Test()
-  void removeFirst_ThenFirstShouldBeLinkedToLastAndNull(){
-    linkedList.removeFirst();
-    expect(linkedList.first!.next, equals(linkedList.last));
-    expect(linkedList.first!.previous, isNull);
-  }
-
-  @Test()
-  void removeLast_FirstAndLastShouldBeXAndY(){
+  void removeLast_ThenLinksShouldBeCorrect(){
     linkedList.removeLast();
-    expectFirstAndLastAreEqualTo(x, y);
-  }
-
-  @Test()
-  void removeLast_ThenLastShouldBeLinkedToNullAndFirst(){
-    linkedList.removeLast();
-    expect(linkedList.last!.next, isNull);
-    expect(linkedList.last!.previous, equals(linkedList.first));
+    expectLinksAreCorrect([x, y]);
   }
 
   @Test(skip: 'reverse')
