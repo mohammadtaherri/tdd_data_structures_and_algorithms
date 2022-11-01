@@ -1,6 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 library circular_linked_list_test;
 
+import 'dart:ffi';
+
 import 'package:test/test.dart';
 import 'package:clean_test/annotated_test.dart';
 import 'package:linked_list/linked_list.dart';
@@ -257,6 +259,12 @@ class GivenAddingX extends GivenNewlyCreatedCircularLinkedList{
     linkedList.reverse();
     expectFirstAndLastAreEqualTo(x);
   }
+
+  @Test()
+  void reverse_ThenLastShouldBeLinkedToFirst(){
+    linkedList.reverse();
+    expectLastIsLinkedTo(linkedList.first);
+  }
 }
 
 @TestCase()
@@ -340,7 +348,7 @@ class GivenAddingXAndY extends GivenNewlyCreatedCircularLinkedList{
     expect(linkedList.indexOf(y), equals(1));
   }
 
-  @Test(skip: 'reverse')
+  @Test()
   void reverse_ThenFirstAndLastShouldBeReversed(){
     linkedList.reverse();
     expectFirstAndLastAreEqualTo(y, x);
@@ -375,22 +383,22 @@ class GivenAddingXAndYAndZ extends GivenNewlyCreatedCircularLinkedList{
     expectLinksAreCorrect([x, y]);
   }
 
-  @Test(skip: 'reverse')
+  @Test()
   void reverse_ThenYShouldBeLinkedToX(){
     linkedList.reverse();
     expect(y.next, equals(x));
   }
 
-  @Test(skip: 'reverse')
+  @Test()
   void reverse_ThenZShouldBeLinkedToY(){
     linkedList.reverse();
     expect(z.next, equals(y));
   }
 
-  @Test(skip: 'reverse')
-  void reverse_ThenLastShouldBeLinkedToNull(){
+  @Test()
+  void reverse_ThenLastShouldBeLinkedToFirst(){
     linkedList.reverse();
-    expectLastIsLinkedTo(null);
+    expectLastIsLinkedTo(linkedList.first);
   }
 }
 
