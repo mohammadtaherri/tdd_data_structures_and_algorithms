@@ -130,7 +130,7 @@ class GivenNewlyCreatedDoublyLinkedList extends DoublyLinkedListTest{
     expect(linkedList.indexOf(DummyEntry()), equals(-1));
   }
 
-  @Test(skip: 'reverse')
+  @Test()
   void reverse_ThenFirstAndLastShouldBeNull(){
     linkedList.reverse();
     expectFirstAndLastAreNull();
@@ -267,7 +267,7 @@ class GivenAddingX extends GivenNewlyCreatedDoublyLinkedList{
     expect(linkedList.indexOf(x), isZero);
   }
 
-  @Test(skip: 'reverse')
+  @Test()
   void reverse_ThenFirstAndLastShouldBeX(){
     linkedList.reverse();
     expectFirstAndLastAreEqualTo(x);
@@ -364,10 +364,34 @@ class GivenAddingXAndY extends GivenNewlyCreatedDoublyLinkedList{
     expect(linkedList.indexOf(y), equals(1));
   }
 
-  @Test(skip: 'reverse')
+  @Test()
+  void reverse_ThenYNextShouldBeX(){
+    linkedList.reverse();
+    expect(y.next, equals(x));
+  }
+
+  @Test()
+  void reverse_ThenXPreviousShouldBeY(){
+    linkedList.reverse();
+    expect(x.previous, equals(y));
+  }
+
+  @Test()
   void reverse_ThenFirstAndLastShouldBeReversed(){
     linkedList.reverse();
     expectFirstAndLastAreEqualTo(y, x);
+  }
+
+  @Test()
+  void reverse_ThenFirstPreviousShouldBeNull(){
+    linkedList.reverse();
+    expect(linkedList.first!.previous, isNull);
+  }
+
+  @Test()
+  void reverse_ThenLastNextShouldBeNull(){
+    linkedList.reverse();
+    expect(linkedList.last!.next, isNull);
   }
 }
 
@@ -399,10 +423,16 @@ class GivenAddingXAndYAndZ extends GivenNewlyCreatedDoublyLinkedList{
     expectLinksAreCorrect([x, y]);
   }
 
-  @Test(skip: 'reverse')
-  void reverse_ThenYShouldBeLinkedToX(){
+  @Test()
+  void reverse_ThenZNextShouldBeY(){
     linkedList.reverse();
-    expect(y.next, equals(x));
+    expect(z.next, equals(y));
+  }
+
+  @Test()
+  void reverse_ThenYPreviousShouldBeZ(){
+    linkedList.reverse();
+    expect(y.previous, equals(z));
   }
 
   @Test(skip: 'reverse')
