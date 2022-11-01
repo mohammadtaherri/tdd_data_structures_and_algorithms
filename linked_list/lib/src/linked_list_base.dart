@@ -120,4 +120,13 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
 
     throw Error();
   }
+
+  @override
+  int indexOf(E entry) {
+    for (var c = _first, i = 0; c != null; c = c.next, i++)
+      if (c == entry) 
+        return i;
+
+    return -1;
+  }
 }
