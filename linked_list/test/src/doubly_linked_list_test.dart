@@ -434,18 +434,6 @@ class GivenAddingXAndYAndZ extends GivenNewlyCreatedDoublyLinkedList{
     linkedList.reverse();
     expect(y.previous, equals(z));
   }
-
-  @Test(skip: 'reverse')
-  void reverse_ThenZShouldBeLinkedToY(){
-    linkedList.reverse();
-    expect(z.next, equals(y));
-  }
-
-  @Test(skip: 'reverse')
-  void reverse_ThenLastShouldBeLinkedToNull(){
-    linkedList.reverse();
-    expectLastIsLinkedTo(null);
-  }
 }
 
 
