@@ -6,7 +6,8 @@ version: 1.0.0
 environment:
   sdk: '>=2.17.1 <3.0.0'
 
-# dependencies:
+dependencies:
+  meta: ^1.8.0
 
 dev_dependencies:
   lints: ^2.0.0
@@ -15,3 +16,4 @@ dev_dependencies:
     git:
       url: git@github.com:mohammadtaherri/clean_test.git
       ref: f65bca0f2905709a9efb90fed7452e76f6ad53a1
+
