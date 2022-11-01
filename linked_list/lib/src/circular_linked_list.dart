@@ -5,7 +5,7 @@ class CircularLinkedList<E extends LinkedListEntry<E>> extends _LinkedListBase<E
   @override
   void updateLinks({E? previousEntry, E? nextEntry}){
     super.updateLinks(previousEntry: previousEntry, nextEntry: nextEntry);
-    _last?.next = _first;
+    last?.next = first;
   }
 
   @override
