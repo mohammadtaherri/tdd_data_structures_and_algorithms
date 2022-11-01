@@ -111,7 +111,7 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
     if(isEmpty)
       throw Empty();
 
-    if(index < 0 || index >= size)
+    if(_indexIsOutOfRange(index))
       throw OutOFRange();
 
     for(var i = 0, current = first; i <= index; i++, current = current?.next)
@@ -120,6 +120,8 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
 
     throw Error();
   }
+
+  bool _indexIsOutOfRange(int index) => index < 0 || index >= size;
 
   @override
   int indexOf(E entry) {
