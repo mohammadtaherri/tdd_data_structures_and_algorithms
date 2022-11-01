@@ -61,19 +61,11 @@ class GivenNewlyCreatedSinglyLinkedList extends SinglyLinkedListTest{
   }
 
   @Test()
-  void addFirst_WhenXIsAdded_ThenFirstShouldBeLinkedToNull(){
+  void addFirst_WhenXIsAdded_ThenFirstAndLastShouldBeLinkedToNull(){
     final x = DummyEntry();
     linkedList.addFirst(x);
     expectFirstIsLinkedTo(null);
   }
-
-  @Test()
-  void addFirst_WhenXIsAdded_ThenLastShouldBeLinkedToNull(){
-    final x = DummyEntry();
-    linkedList.addFirst(x);
-    expectLastIsLinkedTo(null);
-  }
-
 
   @Test()
   void addLast_SizeShouldBeOne(){
@@ -89,17 +81,10 @@ class GivenNewlyCreatedSinglyLinkedList extends SinglyLinkedListTest{
   }
 
   @Test()
-  void addLast_WhenXIsAdded_ThenFirstShouldBeLinkedToNull(){
+  void addLast_WhenXIsAdded_ThenFirstAndLastShouldBeLinkedToNull(){
     final x = DummyEntry();
     linkedList.addLast(x);
     expectFirstIsLinkedTo(null);
-  }
-
-  @Test()
-  void addLast_WhenXIsAdded_ThenLastShouldBeLinkedToNull(){
-    final x = DummyEntry();
-    linkedList.addLast(x);
-    expectLastIsLinkedTo(null);
   }
 
   @Test()
