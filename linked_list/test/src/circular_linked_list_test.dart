@@ -61,11 +61,10 @@ class GivenNewlyCreatedCircularLinkedList extends CircularLinkedListTest{
   }
 
   @Test()
-  void addFirst_WhenXIsAdded_ThenFirstAndLastShouldBeLinkedToEachOther(){
+  void addFirst_WhenXIsAdded_ThenLastShouldBeLinkedToFirst(){
     final x = DummyEntry();
     linkedList.addFirst(x);
-    expect(linkedList.first!.next, equals(linkedList.last));
-    expect(linkedList.last!.next, equals(linkedList.first));
+    expectLastIsLinkedTo(linkedList.first);
   }
 
   @Test()
@@ -82,11 +81,10 @@ class GivenNewlyCreatedCircularLinkedList extends CircularLinkedListTest{
   }
 
   @Test()
-  void addLast_WhenXIsAdded_ThenFirstAndLastShouldBeLinkedToEachOther(){
+  void addLast_WhenXIsAdded_ThenLastShouldBeLinkedToFirst(){
     final x = DummyEntry();
     linkedList.addLast(x);
-    expect(linkedList.first!.next, equals(linkedList.last));
-    expect(linkedList.last!.next, equals(linkedList.first));
+    expectLastIsLinkedTo(linkedList.first);
   }
 
   @Test()
@@ -296,7 +294,7 @@ class GivenAddingXAndY extends GivenNewlyCreatedCircularLinkedList{
   }
 
   @Test()
-  void removeFirst_FirstAndLastShouldBeEqual(){
+  void removeFirst_FirstAndLastShouldBeEqualToY(){
     linkedList.removeFirst();
     expectFirstAndLastAreEqualTo(y);
   }
@@ -320,7 +318,7 @@ class GivenAddingXAndY extends GivenNewlyCreatedCircularLinkedList{
   }
 
   @Test()
-  void removeLast_FirstAndLastShouldBeEqual(){
+  void removeLast_FirstAndLastShouldBeEqualToX(){
     linkedList.removeLast();
     expectFirstAndLastAreEqualTo(x);
   }
@@ -366,15 +364,15 @@ class GivenAddingXAndYAndZ extends GivenNewlyCreatedCircularLinkedList{
   }
 
   @Test()
-  void removeFirst_FirstAndLastShouldBeYAndZ(){
+  void removeFirst_ThenLinksShouldBeCorrect(){
     linkedList.removeFirst();
-    expectFirstAndLastAreEqualTo(y, z);
+    expectLinksAreCorrect([y, z]);
   }
 
   @Test()
-  void removeLast_FirstAndLastShouldBeXAndY(){
+  void removeLast_ThenLinksShouldBeCorrect(){
     linkedList.removeLast();
-    expectFirstAndLastAreEqualTo(x, y);
+    expectLinksAreCorrect([x, y]);
   }
 
   @Test(skip: 'reverse')
