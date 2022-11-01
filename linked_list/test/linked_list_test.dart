@@ -16,40 +16,40 @@ abstract class LinkedListTest with ComposedExpect{}
 mixin ComposedExpect{
   LinkedList<LinkedListEntry> get linkedList;
 
-  expectListIsEmpty(){
+  void expectListIsEmpty(){
     expect(linkedList.isEmpty, isTrue);
     expect(linkedList.size, isZero);
   }
 
-  expectSizeIsOne(){
+  void expectSizeIsOne(){
     expect(linkedList.size, equals(1));
     expect(linkedList.isEmpty, isFalse);
   }
 
-  expectSizeIsTwo(){
+  void expectSizeIsTwo(){
     expect(linkedList.size, equals(2));
     expect(linkedList.isEmpty, isFalse);
   }
 
-  expectFirstAndLastAreNull(){
+  void expectFirstAndLastAreNull(){
     expect(linkedList.first, isNull);
     expect(linkedList.last, isNull);
   }
 
-  expectFirstAndLastAreEqualTo(LinkedListEntry x, [LinkedListEntry? y]){
+  void expectFirstAndLastAreEqualTo(LinkedListEntry x, [LinkedListEntry? y]){
     expect(linkedList.first, equals(x));
     expect(linkedList.last, equals(y??x));
   }
 
-  expectFirstIsLinkedTo(LinkedListEntry? x){
-    expect(linkedList.first!.next, equals(x));
+  void expectFirstIsLinkedTo(LinkedListEntry? next, [LinkedListEntry? previous]){
+    expect(linkedList.first!.next, equals(next));
   }
 
-  expectLastIsLinkedTo(LinkedListEntry? x){
-    expect(linkedList.last!.next, equals(x));
+  void expectLastIsLinkedTo(LinkedListEntry? next, [LinkedListEntry? previous]){
+    expect(linkedList.last!.next, equals(next));
   }
 
-  expectLinksAreCorrect(List<LinkedListEntry> entries){
+  void expectLinksAreCorrect(List<LinkedListEntry> entries){
     for(int i = 0; i < entries.length-1; i++)
       _expectCurrentIsLinkedToNext(entries[i], entries[i+1]);
   }

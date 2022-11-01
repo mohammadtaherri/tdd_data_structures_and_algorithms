@@ -32,9 +32,21 @@ class DoublyLinkedListTest extends LinkedListTest{
     expect(linkedList.first!.previous, isNull);
   }
 
-   void _expectCurrentIsLinkedToPrevious(DoublyLinkedListEntry current, DoublyLinkedListEntry prev) {
+  void _expectCurrentIsLinkedToPrevious(DoublyLinkedListEntry current, DoublyLinkedListEntry prev) {
     expect(current.previous, isNotNull);
     expect(current.previous, equals(prev));
+  }
+
+  @override
+  void expectFirstIsLinkedTo(covariant DummyEntry? next, [covariant DummyEntry? previous]){
+    super.expectFirstIsLinkedTo(next);
+    expect(linkedList.first!.previous, equals(previous));
+  }
+
+  @override
+  void expectLastIsLinkedTo(covariant DummyEntry? next, [covariant DummyEntry? previous]){
+    super.expectLastIsLinkedTo(next);
+    expect(linkedList.last!.previous, equals(previous));
   }
 }
 
@@ -73,8 +85,7 @@ class GivenNewlyCreatedDoublyLinkedList extends DoublyLinkedListTest{
   void addFirst_WhenXIsAdded_ThenFirstAndLastShouldBeLinkedToNull(){
     final x = DummyEntry();
     linkedList.addFirst(x);
-    expect(linkedList.first!.next, isNull);
-    expect(linkedList.first!.previous, isNull);
+    expectFirstIsLinkedTo(null, null);
   }
 
   @Test()
@@ -94,8 +105,7 @@ class GivenNewlyCreatedDoublyLinkedList extends DoublyLinkedListTest{
   void addLast_WhenXIsAdded_ThenFirstAndLastShouldBeLinkedToNull(){
     final x = DummyEntry();
     linkedList.addLast(x);
-    expect(linkedList.first!.next, isNull);
-    expect(linkedList.first!.previous, isNull);
+    expectFirstIsLinkedTo(null, null);
   }
 
   @Test()
@@ -165,16 +175,14 @@ class GivenAddingX extends GivenNewlyCreatedDoublyLinkedList{
   void addFirst_WhenYIsAdded_ThenFirstShouldBeLinkedToLastAndNull(){
     final y = DummyEntry();
     linkedList.addFirst(y);
-    expect(linkedList.first!.next, equals(linkedList.last));
-    expect(linkedList.first!.previous, isNull);
+    expectFirstIsLinkedTo(linkedList.last, null);
   }
 
   @Test()
   void addFirst_WhenYIsAdded_ThenLastShouldBeLinkedToNullAndFirst(){
     final y = DummyEntry();
     linkedList.addFirst(y);
-    expect(linkedList.last!.next, isNull);
-    expect(linkedList.last!.previous, equals(linkedList.first));
+    expectLastIsLinkedTo(null, linkedList.first);
   }
 
   @Test()
@@ -194,16 +202,14 @@ class GivenAddingX extends GivenNewlyCreatedDoublyLinkedList{
   void addLast_WhenYIsAdded_ThenFirstShouldBeLinkedToLastAndNull(){
     final y = DummyEntry();
     linkedList.addLast(y);
-    expect(linkedList.first!.next, equals(linkedList.last));
-    expect(linkedList.first!.previous, isNull);
+    expectFirstIsLinkedTo(linkedList.last, null);
   }
 
   @Test()
   void addLast_WhenYIsAdded_ThenLastShouldBeLinkedToNullAndFirst(){
     final y = DummyEntry();
     linkedList.addLast(y);
-    expect(linkedList.last!.next, isNull);
-    expect(linkedList.last!.previous, equals(linkedList.first));
+    expectLastIsLinkedTo(null, linkedList.first);
   }
 
   @Test()
@@ -324,8 +330,7 @@ class GivenAddingXAndY extends GivenNewlyCreatedDoublyLinkedList{
   @Test()
   void removeFirst_ThenFirstAndLastShouldBeLinkedToNull(){
     linkedList.removeFirst();
-    expect(linkedList.last!.next, isNull);
-    expect(linkedList.last!.previous, isNull);
+    expectLastIsLinkedTo(null, null);
   }
 
   @Test()
@@ -350,8 +355,7 @@ class GivenAddingXAndY extends GivenNewlyCreatedDoublyLinkedList{
   @Test()
   void removeLast_ThenFirstAndLastShouldBeLinkedToNull(){
     linkedList.removeLast();
-    expect(linkedList.last!.next, isNull);
-    expect(linkedList.last!.previous, isNull);
+    expectLastIsLinkedTo(null, null);
   }
 
   @Test()
