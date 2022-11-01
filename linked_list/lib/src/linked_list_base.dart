@@ -81,6 +81,7 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
     _first = _last = null;
   }
 
+  @protected
   E? nodeBefore(E node) {
     for (var current = _first; current != null; current = current.next)
       if (current.next == node) return current;
@@ -88,10 +89,14 @@ abstract class _LinkedListBase<E extends LinkedListEntry<E>> implements LinkedLi
     return null;
   }
 
+  @protected
+  @mustCallSuper
   void updateLinks({E? previousEntry, E? nextEntry}){
     previousEntry?.next = nextEntry;
   }
 
+  @protected
+  @mustCallSuper
   void unlinke(E? entry){
     entry?.next = null;
   }

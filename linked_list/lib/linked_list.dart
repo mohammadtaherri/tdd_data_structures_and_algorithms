@@ -1,5 +1,7 @@
 library linked_list;
 
+import 'package:meta/meta.dart';
+
 part './src/linked_list_base.dart';
 part './src/singly_linked_list.dart';
 part './src/circular_linked_list.dart';
