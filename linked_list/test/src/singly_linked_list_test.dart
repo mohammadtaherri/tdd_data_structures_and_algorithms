@@ -363,15 +363,15 @@ class GivenAddingXAndYAndZ extends GivenNewlyCreatedSinglyLinkedList{
   }
 
   @Test()
-  void removeFirst_FirstAndLastShouldBeYAndZ(){
+  void removeFirst_ThenLinksShouldBeCorrect(){
     linkedList.removeFirst();
-    expectFirstAndLastAreEqualTo(y, z);
+    expectLinksAreCorrect([y, z]);
   }
 
   @Test()
-  void removeLast_FirstAndLastShouldBeXAndY(){
+  void removeLast_ThenLinksShouldBeCorrect(){
     linkedList.removeLast();
-    expectFirstAndLastAreEqualTo(x, y);
+    expectLinksAreCorrect([x, y]);
   }
 
   @Test()
