@@ -21,26 +21,29 @@ class SinglyLinkedList<E extends LinkedListEntry<E>> implements LinkedList<E>{
 
   @override
   void addFirst(E entry) {
+    var oldFirst = _first;
+
     if(isEmpty)
-      _first = _last = entry;
-    else{
-      entry.next = _first;
-      _first = entry;
-    }
-    
-    _size++;
+      _initFirstAndLastTo(entry);
+    else
+      _changeFirstTo(entry);
+
+    _updateLinks(previous: _first, next: oldFirst);
+    _incrementSizebyOne();
   }
 
   @override
   void addLast(E entry) {
+    var oldLast = _last;
+
     if(isEmpty)
-      _first = _last = entry;
+      _initFirstAndLastTo(entry);
     else{
-      _last!.next = entry;
-      _last = entry;
+      _changeLastTo(entry);
     }
-    
-    _size++;
+
+    _updateLinks(previous: oldLast, next: _last);
+    _incrementSizebyOne();
   }
 
   @override
@@ -48,15 +51,15 @@ class SinglyLinkedList<E extends LinkedListEntry<E>> implements LinkedList<E>{
     if(isEmpty)
       throw IllegalState();
 
-    if(_first == _last)
-      _first = _last = null;
-    else{
-      var newFirst = _first!.next;
-      _first!.next = null;
-      _first = newFirst;
-    }
+    var oldFirst = _first;
 
-    _size--;
+    if(_sizeIsOne)
+      _clearFirstAndLast();
+    else
+      _changeFirstTo(_first!.next);
+    
+    _unlink(oldFirst);
+    _decrementSizeByOne();
   }
 
   @override
@@ -64,15 +67,31 @@ class SinglyLinkedList<E extends LinkedListEntry<E>> implements LinkedList<E>{
     if(isEmpty)
       throw IllegalState();
 
-    if(_first == _last)
-      _first = _last = null;
-    else{
-      var newLast = _nodeBefor(_last!)!;
-      newLast.next = null;
-      _last = newLast;
-    }
+    if(_sizeIsOne)
+      _clearFirstAndLast();
+    else
+      _changeLastTo(_nodeBefor(_last!));
+    
+    _unlink(_last);
+    _decrementSizeByOne();
+  }
 
-    _size--;
+  bool get _sizeIsOne => _first == _last;
+
+  void _initFirstAndLastTo(entry) {
+    _first = _last = entry;
+  }
+
+  void _clearFirstAndLast() {
+    _first = _last = null;
+  }
+
+  void _changeFirstTo(entry) {
+    _first = entry;
+  }
+
+  void _changeLastTo(entry) {
+    _last = entry;
   }
 
   E? _nodeBefor(E node) {
@@ -82,6 +101,22 @@ class SinglyLinkedList<E extends LinkedListEntry<E>> implements LinkedList<E>{
         return current;
 
     return null;
+  }
+
+  void _updateLinks({E? previous, E? next}){
+    previous?.next = next;
+  }
+
+  void _unlink(E? node){
+    node?.next = null;
+  }
+
+  void _incrementSizebyOne() {
+    _size++;
+  }
+
+  void _decrementSizeByOne() {
+    _size--;
   }
 
   @override
@@ -113,21 +148,27 @@ class SinglyLinkedList<E extends LinkedListEntry<E>> implements LinkedList<E>{
     if(size <= 1)
       return;
 
+    _reverseLinks();
+    _reverseFirstAndLast();
+    _unlink(last);
+  }
+
+  void _reverseLinks() {
     var previous = first;
     var current = first!.next;
-
+    
     while(current != null){
       var temp = current.next;
       current.next = previous;
       previous = current;
       current = temp;
     }
+  }
 
+  void _reverseFirstAndLast() {
     var temp = first;
     _first = _last;
     _last = temp;
-
-    last!.next = null;
   }
 
   
