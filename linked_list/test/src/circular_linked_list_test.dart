@@ -1,8 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 library circular_linked_list_test;
 
-import 'dart:ffi';
-
 import 'package:test/test.dart';
 import 'package:clean_test/annotated_test.dart';
 import 'package:linked_list/linked_list.dart';
@@ -11,7 +9,7 @@ import '../linked_list_test.dart';
 import 'matchers.dart';
 
 void main() {
-  runTestsByLibraryName('singly_linked_list_test');
+  runTestsByLibraryName('circular_linked_list_test');
 }
 
 class DummyEntry extends LinkedListEntry<DummyEntry>{}

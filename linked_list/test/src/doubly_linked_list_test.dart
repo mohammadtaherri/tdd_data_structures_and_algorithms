@@ -8,9 +8,12 @@ import '../linked_list_test.dart';
 import 'package:linked_list/linked_list.dart';
 import 'matchers.dart';
 
-
-class DummyEntry extends DoublyLinkedListEntry<DummyEntry>{
+void main() {
+  runTestsByLibraryName('doubly_linked_list_test');
 }
+
+
+class DummyEntry extends DoublyLinkedListEntry<DummyEntry>{}
 
 @TestCase()
 @Root()
