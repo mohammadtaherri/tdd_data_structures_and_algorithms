@@ -1,4 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
+library array_queue_test;
+
 import 'package:dartunit/dartunit.dart';
 import 'package:queue/queue.dart';
 import 'matchers.dart';
