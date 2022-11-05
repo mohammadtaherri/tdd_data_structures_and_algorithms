@@ -1,52 +1,29 @@
-
-
-import 'package:queue/queue.dart';
 import 'package:stack/stack.dart';
+import './queue_base.dart';
 
-class StackQueue<T> implements Queue<T>{
+class StackQueue<T> extends QueueBase<T>{
 
-  factory StackQueue({int capacity = 5}){
-    if(capacity < 0)
-      throw IllegalCapcityException();
+  factory StackQueue({int capacity = 5}) => QueueBase<T>.make(
+        capacity: capacity,
+        maker: () => capacity == 0
+            ? _ZeroCapacityStackQueue()
+            : StackQueue._(capacity: capacity),
+      ) as StackQueue<T>;
 
-    if(capacity == 0)
-      return _ZeroCapacityStackQueue<T>();
+  StackQueue._({super.capacity})
+      : _enqueuingStack = Stack(capacity: capacity),
+        _dequeuingStack = Stack(capacity: capacity);
 
-    return StackQueue._(capacity: capacity);
-  }
-
-  StackQueue._({int capacity = 5}) : _capacity = capacity, _enqueuingStack = Stack(capacity: capacity), _dequeuingStack = Stack(capacity: capacity);
-
-  final int _capacity;
   final Stack<T> _enqueuingStack;
   final Stack<T> _dequeuingStack;
 
   @override
-  bool get isEmpty => _size == 0;
-
-  @override
-  bool get isFull => _size == _capacity;
-
-  @override
-  int get size => _size;
-  int _size = 0;
-
-  @override
-  void enqueue(T item) {
-    if(isFull)
-      throw FullQueueException();
-
-    _size++;
+  void internalEnqueue(T item) {
     _enqueuingStack.push(item);
   }
 
   @override
-  dequeue() {
-    if(isEmpty)
-      throw EmptyQueueException();
-
-    _size--;
-
+  T internalDequeue() {
     if(_dequeuingStack.isEmpty)
       while(!_enqueuingStack.isEmpty)
         _dequeuingStack.push(_enqueuingStack.pop());
@@ -55,10 +32,7 @@ class StackQueue<T> implements Queue<T>{
   }
 
   @override
-  peek() {
-    if(isEmpty)
-      throw EmptyQueueException();
-
+  T internalPeek() {
     if(_dequeuingStack.isEmpty)
       while(!_enqueuingStack.isEmpty)
           _dequeuingStack.push(_enqueuingStack.pop());
@@ -67,31 +41,6 @@ class StackQueue<T> implements Queue<T>{
   }
 }
 
-class _ZeroCapacityStackQueue<T> extends StackQueue<T>{
-
+class _ZeroCapacityStackQueue<T> extends StackQueue<T> with ZeroCapacityQueue<T>{
   _ZeroCapacityStackQueue() : super._(capacity: 0);
-
-  @override
-  bool get isEmpty => true;
-
-  @override
-  bool get isFull => true;
-
-  @override
-  int get size => 0;
-
-  @override
-  void enqueue(T item) {
-    throw FullQueueException();
-  }
-
-  @override
-  T dequeue() {
-    throw EmptyQueueException();
-  }
-
-  @override
-  T peek() {
-    throw EmptyQueueException();
-  }
 }

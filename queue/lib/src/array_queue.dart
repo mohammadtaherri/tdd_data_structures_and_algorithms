@@ -1,20 +1,17 @@
-import 'package:queue/queue.dart';
+import 'dart:isolate';
 
-import './errors.dart';
+import './queue_base.dart';
 
-class ArrayQueue<T> implements Queue<T>{
+class ArrayQueue<T> extends QueueBase<T>{
 
-  factory ArrayQueue({int capacity = 5}){
-    if(capacity < 0)
-      throw IllegalCapcityException();
+  factory ArrayQueue({int capacity = 5}) => QueueBase<T>.make(
+        capacity: capacity,
+        maker: () => capacity == 0
+            ? _ZeroCapacityArrayQueue()
+            : ArrayQueue<T>._(capacity: capacity),
+      ) as ArrayQueue<T>;
 
-    if(capacity == 0)
-      return _ZeroCapacityArrayQueue<T>();
-
-    return ArrayQueue._(capacity: capacity);
-  }
-
-  ArrayQueue._({required int capacity}) 
+  ArrayQueue._({super.capacity}) 
       : _items = List.filled(capacity, null);
   
   final List<T?> _items;
@@ -22,69 +19,23 @@ class ArrayQueue<T> implements Queue<T>{
   int _front = 0;
 
   @override
-  bool get isEmpty => _size == 0;
-
-  @override
-  bool get isFull => _size == _items.length;
-
-  @override
-  int get size => _size;
-  int _size = 0;
-
-  @override
-  void enqueue(T item) {
-    if(isFull)
-      throw FullQueueException();
-    
+  void internalEnqueue(T item) {
     _front %= _items.length;
     _items[_front++] = item;
-    _size++;
   }
 
   @override
-  T dequeue() {
-    if(isEmpty)
-      throw EmptyQueueException();
-
-    _size--;
+  T internalDequeue() {
     _back %= _items.length;
     return _items[_back++]!;
   }
 
   @override
-  T peek() {
-    if(isEmpty)
-      throw EmptyQueueException();
-
+  T internalPeek() {
     return _items[_back]!;
   }
 }
 
-class _ZeroCapacityArrayQueue<T> extends ArrayQueue<T>{
-
+class _ZeroCapacityArrayQueue<T> extends ArrayQueue<T> with ZeroCapacityQueue<T>{
   _ZeroCapacityArrayQueue() : super._(capacity: 0);
-
-  @override
-  get isEmpty => true;
-
-  @override
-  get isFull => true;
-  
-  @override
-  get size => 0;
-
-  @override
-  void enqueue(T item) {
-    throw FullQueueException();
-  }
-
-  @override
-  dequeue() {
-    throw EmptyQueueException();
-  }
-
-  @override
-  peek() {
-    throw EmptyQueueException();
-  }
 }
