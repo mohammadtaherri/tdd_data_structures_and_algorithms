@@ -1,5 +1,3 @@
-import 'dart:isolate';
-
 import './queue_base.dart';
 
 class ArrayQueue<T> extends QueueBase<T>{
