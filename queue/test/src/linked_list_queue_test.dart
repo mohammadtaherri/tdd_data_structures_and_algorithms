@@ -5,11 +5,12 @@ library linked_list_queue_test;
 import 'package:dartunit/dartunit.dart';
 
 import 'package:queue/queue.dart';
+import '../queue_test.dart';
 import './matchers.dart';
 
 @TestCase()
 @Root()
-class LinkedListQueueTest with ComposedExpect{  
+class LinkedListQueueTest extends QueueTest{  
   @override
   late final LinkedListQueue<int> queue;   
 }
@@ -177,28 +178,4 @@ class GivenZeroCapacityLinkedListQueue extends LinkedListQueueTest{
   }
 }
 
-
-mixin ComposedExpect{
-
-  LinkedListQueue<int> get queue;
-
-  void expectQueueIsEmpty(){
-    expect(queue.isEmpty, isTrue);
-    expect(queue.size, isZero);
-  }
-
-  void expectQueueSizeIsOne(){
-    expect(queue.isEmpty, isFalse);
-    expect(queue.size, equals(1));
-  }
-
-  void expectQueueSizeIsTwo(){
-    expect(queue.isEmpty, isFalse);
-    expect(queue.size, equals(2));
-  }
-
-  void expectQueueIsNotFull(){
-    expect(queue.isFull, isFalse);
-  }
-}
 

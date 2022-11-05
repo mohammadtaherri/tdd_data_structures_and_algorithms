@@ -3,11 +3,12 @@ library array_queue_test;
 
 import 'package:dartunit/dartunit.dart';
 import 'package:queue/queue.dart';
+import '../queue_test.dart';
 import 'matchers.dart';
 
 @TestCase()
 @Root()
-class ArrayQueueTest with ComposedExpect{  
+class ArrayQueueTest extends QueueTest{  
   @override
   late final ArrayQueue<int> queue;   
 }
@@ -200,28 +201,4 @@ class GivenZeroCapacityArrayQueue extends ArrayQueueTest{
   }
 }
 
-
-mixin ComposedExpect{
-
-  ArrayQueue<int> get queue;
-
-  void expectQueueIsEmpty(){
-    expect(queue.isEmpty, isTrue);
-    expect(queue.size, isZero);
-  }
-
-  void expectQueueSizeIsOne(){
-    expect(queue.isEmpty, isFalse);
-    expect(queue.size, equals(1));
-  }
-
-  void expectQueueSizeIsTwo(){
-    expect(queue.isEmpty, isFalse);
-    expect(queue.size, equals(2));
-  }
-
-  void expectQueueIsNotFull(){
-    expect(queue.isFull, isFalse);
-  }
-}
 

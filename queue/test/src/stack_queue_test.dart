@@ -5,11 +5,12 @@ library stack_queue_test;
 import 'package:dartunit/dartunit.dart';
 
 import 'package:queue/queue.dart';
+import '../queue_test.dart';
 import './matchers.dart';
 
 @TestCase()
 @Root()
-class StackQueueTest with ComposedExpect{  
+class StackQueueTest extends QueueTest{  
   @override
   late final StackQueue<int> queue;   
 }
@@ -192,31 +193,6 @@ class GivenZeroCapacityStackQueue extends StackQueueTest{
     }
 
     expect(act, throwsAEmptyQueue);
-  }
-}
-
-
-mixin ComposedExpect{
-
-  StackQueue<int> get queue;
-
-  void expectQueueIsEmpty(){
-    expect(queue.isEmpty, isTrue);
-    expect(queue.size, isZero);
-  }
-
-  void expectQueueSizeIsOne(){
-    expect(queue.isEmpty, isFalse);
-    expect(queue.size, equals(1));
-  }
-
-  void expectQueueSizeIsTwo(){
-    expect(queue.isEmpty, isFalse);
-    expect(queue.size, equals(2));
-  }
-
-  void expectQueueIsNotFull(){
-    expect(queue.isFull, isFalse);
   }
 }
 
