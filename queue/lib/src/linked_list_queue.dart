@@ -34,21 +34,21 @@ class LinkedListQueue<T>{
     _size++;
   }
 
-  dequeue() {
+  T dequeue() {
     if(isEmpty)
       throw EmptyQueueException();
     
     _size--;
-    T item = _items.elementAt(0).value;
+    T item = _items.first!.value;
     _items.removeFirst();
     return item;
   }
 
-  peek() {
+  T peek() {
     if(isEmpty)
       throw EmptyQueueException();
 
-    return _items.elementAt(0).value;
+    return _items.first!.value;
   }
 }
 
