@@ -1,32 +1,22 @@
 // ignore_for_file: non_constant_identifier_names
-import 'package:test/test.dart';
-import 'package:clean_test/clean_test.dart';
+import 'package:dartunit/dartunit.dart';
 import 'package:queue/queue.dart';
 import 'matchers.dart';
 
-void main() {
-  runTest(ArrayQueueTest());
-}
-
-class ArrayQueueTest extends RootTestGroup{
-  ArrayQueueTest()
-      : super(
-        groups: [
-          GivenNewlyCreatedArrayQueueWith3Capacity(),
-          NegativeCapasityArrayQueue(),
-          GivenZeroCapacityArrayQueue(),
-        ],
-      );
-}
-
-class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with ComposedExpect{
-
+@TestCase()
+@Root()
+class ArrayQueueTest with ComposedExpect{  
   @override
-  late ArrayQueue<int> queue;
+  late final ArrayQueue<int> queue;   
+}
+
+@TestCase()
+class GivenNewlyCreatedArrayQueueWith3Capacity extends ArrayQueueTest{
+  
   late int x, y, z, w;
 
-  @override
-  void setUp() {
+  @SetUp()
+  void createNewArrauQueueWith3Capacity() {
     queue = ArrayQueue<int>(capacity: 3);
     x = 10;
     y = 20;
@@ -34,14 +24,17 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with Compos
     w = 40;
   }
 
+  @Test()
   void shouldBeEmpty(){
     expectQueueIsEmpty();
   }
 
+  @Test()
   void shouldNotBeFull(){
     expectQueueIsNotFull();
   }
 
+  @Test()
   void enqueue_ShouldIncrementSizebyOne(){
     queue.enqueue(x);
     expectQueueSizeIsOne();
@@ -50,6 +43,7 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with Compos
     expectQueueSizeIsTwo();
   }
 
+  @Test()
   void dequeue_ShouldDecrementSizeByOne(){
     queue.enqueue(x);
     queue.enqueue(x);
@@ -61,6 +55,7 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with Compos
     expectQueueIsEmpty();
   }
 
+  @Test()
   void enqueue_WhenPastCapacity_ShouldThrowFullQueue(){
     void act(){
       queue.enqueue(x);
@@ -72,6 +67,7 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with Compos
     expect(act, throwsAFullQueue);
   }
 
+  @Test()
   void dequeue_ShouldThrowEmptyQueue(){
     void act(){
       queue.dequeue();
@@ -80,6 +76,7 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with Compos
     expect(act, throwsAEmptyQueue);
   }
 
+  @Test()
   void peek_ShouldThrowEmptyQueue(){
     void act(){
       queue.peek();
@@ -88,11 +85,13 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with Compos
     expect(act, throwsAEmptyQueue);
   }
 
+  @Test()
   void enqueue_dequeue_WhenXIsEnqueued_XShouldBeDequeued(){
     queue.enqueue(x);
     expect(queue.dequeue(), equals(x));
   }
 
+  @Test()
   void enqueue_dequeue_WhenXAndYAreEnqueued_XAndYShouldBeDequeued(){
     queue.enqueue(x);
     queue.enqueue(y);
@@ -100,6 +99,7 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with Compos
     expect(queue.dequeue(), equals(y));
   }
 
+  @Test()
   void enqueue_ShouldEnqueueItemsInCorrectOrder(){
     _givenEnqueueXYZFollowdByOneDequeue();
     queue.enqueue(w);
@@ -108,6 +108,7 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with Compos
    
   }
 
+  @Test()
   void dequeue_ShouldDequeueItemsInCorrectOrder(){
     _givenEnqueueXYZFollowdByOneDequeue();
     queue.enqueue(w);
@@ -116,11 +117,13 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with Compos
     expect(queue.dequeue(), equals(w));
   }
 
+  @Test()
   void peek_GivenEnqueuingX_ShouldReturnX(){
     queue.enqueue(x);
     expect(queue.peek(), equals(x));
   }
 
+  @Test()
   void peek_GivenEnqueuingXAndY_ShouldReturnX(){
     queue.enqueue(x);
     queue.enqueue(y);
@@ -133,29 +136,12 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends LeafTestGroup with Compos
     queue.enqueue(z);
     queue.dequeue();
   }
-
-  @override
-  void registerTests(TestContainer container) {
-    container.addAll([
-      Test(shouldBeEmpty),
-      Test(shouldNotBeFull),
-      Test(enqueue_ShouldIncrementSizebyOne),
-      Test(dequeue_ShouldDecrementSizeByOne),
-      Test(enqueue_WhenPastCapacity_ShouldThrowFullQueue),
-      Test(dequeue_ShouldThrowEmptyQueue),
-      Test(peek_ShouldThrowEmptyQueue),
-      Test(enqueue_dequeue_WhenXIsEnqueued_XShouldBeDequeued),
-      Test(enqueue_dequeue_WhenXAndYAreEnqueued_XAndYShouldBeDequeued),
-      Test(enqueue_ShouldEnqueueItemsInCorrectOrder),
-      Test(dequeue_ShouldDequeueItemsInCorrectOrder),
-      Test(peek_GivenEnqueuingX_ShouldReturnX),
-      Test(peek_GivenEnqueuingXAndY_ShouldReturnX),
-    ]);
-  }
 }
 
-class NegativeCapasityArrayQueue extends LeafTestGroup{
+@TestCase()
+class NegativeCapasityArrayQueue extends ArrayQueueTest{
 
+  @Test()
   void whenQueueWithNegativeCapacityIsCreated_ThenIllegalCapcityShouldBeThrown(){
     void act(){
       ArrayQueue(capacity: -1);
@@ -163,33 +149,28 @@ class NegativeCapasityArrayQueue extends LeafTestGroup{
 
     expect(act, throwsAIllegalCapcity);
   }
-
-  @override
-  void registerTests(TestContainer container) {
-    container.addAll([
-      Test(whenQueueWithNegativeCapacityIsCreated_ThenIllegalCapcityShouldBeThrown),
-    ]);
-  }
 }
 
-class GivenZeroCapacityArrayQueue extends LeafTestGroup with ComposedExpect{
+@TestCase()
+class GivenZeroCapacityArrayQueue extends ArrayQueueTest{
 
-  @override
-  late ArrayQueue<int> queue;
-
-  @override
-  void setUp() {
+  
+  @SetUp()
+  void createNewArrayQueueWithZeroCapacity() {
     queue = ArrayQueue<int>(capacity: 0);
   }
 
+  @Test()
   void shouldBeEmpty(){
     expectQueueIsEmpty();
   }
 
+  @Test()
   void shouldBeFull(){
     expect(queue.isFull, isTrue);
   }
 
+  @Test()
   void enqueue_ShouldThrowFullQueue(){
     void act(){
       queue.enqueue(10);
@@ -198,6 +179,7 @@ class GivenZeroCapacityArrayQueue extends LeafTestGroup with ComposedExpect{
     expect(act, throwsAFullQueue);
   }
 
+  @Test()
   void dequeue_ShouldThrowEmptyQueue(){
     void act(){
       queue.dequeue();
@@ -206,6 +188,7 @@ class GivenZeroCapacityArrayQueue extends LeafTestGroup with ComposedExpect{
     expect(act, throwsAEmptyQueue);
   }
 
+  @Test()
   void peek_ShouldThrowEmptyQueue(){
     void act(){
       queue.peek();
@@ -213,21 +196,10 @@ class GivenZeroCapacityArrayQueue extends LeafTestGroup with ComposedExpect{
 
     expect(act, throwsAEmptyQueue);
   }
-
-  @override
-  void registerTests(TestContainer container) {
-    container.addAll([
-      Test(shouldBeEmpty),
-      Test(shouldBeFull),
-      Test(enqueue_ShouldThrowFullQueue),
-      Test(dequeue_ShouldThrowEmptyQueue),
-      Test(peek_ShouldThrowEmptyQueue),
-    ]);
-  }
 }
 
 
-mixin ComposedExpect on TestGroup{
+mixin ComposedExpect{
 
   ArrayQueue<int> get queue;
 
