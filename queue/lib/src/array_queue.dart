@@ -1,4 +1,4 @@
-
+import './errors.dart';
 
 class ArrayQueue<T>{
 
@@ -78,7 +78,3 @@ class _ZeroCapacityArrayQueue<T> extends ArrayQueue<T>{
     throw EmptyQueueException();
   }
 }
-
-class FullQueueException implements Exception{}
-class EmptyQueueException implements Exception{}
-class IllegalCapcityException implements Exception{}
