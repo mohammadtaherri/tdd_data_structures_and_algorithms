@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-library linked_list_queue;
+library linked_list_queue_test;
 
 import 'package:dartunit/dartunit.dart';
 
