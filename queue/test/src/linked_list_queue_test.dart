@@ -118,7 +118,7 @@ class GivenNewlyCreatedLinkedListQueueWith3Capacity extends LinkedListQueueTest{
 }
 
 @TestCase()
-class NegativeCapasityArrayQueue extends LinkedListQueueTest{
+class NegativeCapasityLinkedListQueue extends LinkedListQueueTest{
 
   @Test()
   void whenQueueWithNegativeCapacityIsCreated_ThenIllegalCapcityShouldBeThrown(){
@@ -131,11 +131,11 @@ class NegativeCapasityArrayQueue extends LinkedListQueueTest{
 }
 
 @TestCase()
-class GivenZeroCapacityArrayQueue extends LinkedListQueueTest{
+class GivenZeroCapacityLinkedListQueue extends LinkedListQueueTest{
 
   
   @SetUp()
-  void createNeLinkedListQueueWithZeroCapacity() {
+  void createNeWLinkedListQueueWithZeroCapacity() {
     queue = LinkedListQueue<int>(capacity: 0);
   }
 
