@@ -2,7 +2,7 @@
 import 'package:queue/queue.dart';
 import 'package:linked_list/linked_list.dart';
 
-class LinkedListQueue<T>{
+class LinkedListQueue<T> implements Queue<T>{
 
   factory LinkedListQueue({int capacity = 5}){
     if(capacity < 0)
@@ -21,11 +21,17 @@ class LinkedListQueue<T>{
   final int _capacity;
   final LinkedList<_QueueEntry<T>> _items;
 
+  @override
   bool get isEmpty => _size == 0;
+
+  @override
   bool get isFull => _size == _capacity;
+
+  @override
   int get size => _size;
   int _size = 0;
 
+  @override
   void enqueue(T item) {
     if(isFull)
       throw FullQueueException();
@@ -34,6 +40,7 @@ class LinkedListQueue<T>{
     _size++;
   }
 
+  @override
   T dequeue() {
     if(isEmpty)
       throw EmptyQueueException();
@@ -44,6 +51,7 @@ class LinkedListQueue<T>{
     return item;
   }
 
+  @override
   T peek() {
     if(isEmpty)
       throw EmptyQueueException();

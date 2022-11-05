@@ -1,6 +1,8 @@
+import 'package:queue/queue.dart';
+
 import './errors.dart';
 
-class ArrayQueue<T>{
+class ArrayQueue<T> implements Queue<T>{
 
   factory ArrayQueue({int capacity = 5}){
     if(capacity < 0)
@@ -19,11 +21,17 @@ class ArrayQueue<T>{
   int _back = 0;
   int _front = 0;
 
+  @override
   bool get isEmpty => _size == 0;
+
+  @override
   bool get isFull => _size == _items.length;
+
+  @override
   int get size => _size;
   int _size = 0;
 
+  @override
   void enqueue(T item) {
     if(isFull)
       throw FullQueueException();
@@ -33,6 +41,7 @@ class ArrayQueue<T>{
     _size++;
   }
 
+  @override
   T dequeue() {
     if(isEmpty)
       throw EmptyQueueException();
@@ -42,6 +51,7 @@ class ArrayQueue<T>{
     return _items[_back++]!;
   }
 
+  @override
   T peek() {
     if(isEmpty)
       throw EmptyQueueException();

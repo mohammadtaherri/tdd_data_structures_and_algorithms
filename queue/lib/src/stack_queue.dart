@@ -3,7 +3,7 @@
 import 'package:queue/queue.dart';
 import 'package:stack/stack.dart';
 
-class StackQueue<T>{
+class StackQueue<T> implements Queue<T>{
 
   factory StackQueue({int capacity = 5}){
     if(capacity < 0)
@@ -21,11 +21,17 @@ class StackQueue<T>{
   final Stack<T> _enqueuingStack;
   final Stack<T> _dequeuingStack;
 
+  @override
   bool get isEmpty => _size == 0;
+
+  @override
   bool get isFull => _size == _capacity;
+
+  @override
   int get size => _size;
   int _size = 0;
 
+  @override
   void enqueue(T item) {
     if(isFull)
       throw FullQueueException();
@@ -34,6 +40,7 @@ class StackQueue<T>{
     _enqueuingStack.push(item);
   }
 
+  @override
   dequeue() {
     if(isEmpty)
       throw EmptyQueueException();
@@ -47,6 +54,7 @@ class StackQueue<T>{
     return _dequeuingStack.pop();
   }
 
+  @override
   peek() {
     if(isEmpty)
       throw EmptyQueueException();
