@@ -8,6 +8,7 @@ environment:
   sdk: '>=2.17.1 <3.0.0'
 
 dependencies:
+  meta: ^1.8.0
   linked_list:
     path: ../linked_list
   stack:
