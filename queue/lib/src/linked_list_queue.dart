@@ -19,13 +19,12 @@ class LinkedListQueue<T>{
         _items = SinglyLinkedList();
 
   final int _capacity;
+  final LinkedList<_QueueEntry<T>> _items;
 
   bool get isEmpty => _size == 0;
   bool get isFull => _size == _capacity;
   int get size => _size;
   int _size = 0;
-
-  final LinkedList<_QueueEntry<T>> _items;
 
   void enqueue(T item) {
     if(isFull)
