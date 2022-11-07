@@ -16,19 +16,23 @@ class PriorityQueue<T extends PriorityQueueItem<T>> extends QueueBase<T>{
 
   @override
   void internalEnqueue(T item) {
+    final index = _shiftItemsToInsert(item);
+    _items[index] = item;
+  }
+
+  int _shiftItemsToInsert(item) {
     int lastIndex = size - 1;
 
-    while(lastIndex > -1){
+    for(;lastIndex > -1; lastIndex--){
       T current = _items[lastIndex]!;
-
+    
       if(current.comparePriorityWith(item) != 1)
         break;
-
+    
       _items[lastIndex + 1] = current;
-      lastIndex--;
     }
 
-    _items[lastIndex + 1] = item;
+    return lastIndex + 1;
   }
 
   @override
