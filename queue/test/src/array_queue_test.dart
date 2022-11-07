@@ -103,7 +103,7 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends ArrayQueueTest{
   }
 
   @Test()
-  void enqueue_ShouldEnqueueItemsInCorrectOrder(){
+  void enqueue_ShouldBeCircular(){
     _givenEnqueueXYZFollowdByOneDequeue();
     queue.enqueue(w);
     expect(queue.dequeue(), equals(y));
@@ -112,7 +112,7 @@ class GivenNewlyCreatedArrayQueueWith3Capacity extends ArrayQueueTest{
   }
 
   @Test()
-  void dequeue_ShouldDequeueItemsInCorrectOrder(){
+  void dequeue_ShouldBeCircular(){
     _givenEnqueueXYZFollowdByOneDequeue();
     queue.enqueue(w);
     expect(queue.dequeue(), equals(y));
