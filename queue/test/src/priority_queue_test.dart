@@ -138,7 +138,7 @@ class  GivenNewlyCreatedPriorityQueueWith3Capacity extends PriorityQueueTest {
   }
 
   @Test()
-  void peek_WhenXIsEnqueued_XShouldBePeeked(){
+  void peek_GivenEnqueuingX_ShouldReturnX(){
     queue.enqueue(x);
     expect(queue.peek(), equals(x));
   }
