@@ -1,7 +1,7 @@
 import './queue_base.dart';
 
 class ArrayQueue<T> extends QueueBase<T>{
-
+  
   factory ArrayQueue({int capacity = 5}) => QueueBase<T>.make(
         capacity: capacity,
         maker: () => capacity == 0

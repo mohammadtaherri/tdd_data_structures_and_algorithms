@@ -47,7 +47,6 @@ class PriorityQueue<T extends PriorityQueueItem<T>> extends QueueBase<T>{
 }
 
 abstract class PriorityQueueItem<T extends PriorityQueueItem<T>>{
-
   int comparePriorityWith(T other);
 }
 

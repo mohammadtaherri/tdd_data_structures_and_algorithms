@@ -34,7 +34,6 @@ class LinkedListQueue<T> extends QueueBase<T>{
 }
 
 class _QueueEntry<T> extends LinkedListEntry<_QueueEntry<T>>{
-
   _QueueEntry(this.value);
   final T value;
 }
