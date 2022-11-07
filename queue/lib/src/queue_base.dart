@@ -31,8 +31,8 @@ abstract class QueueBase<T> implements Queue<T>{
   @override
   void enqueue(T item) {
     _validateForEnqueuing();
-    _incrementSizeByOne();
     internalEnqueue(item);
+    _incrementSizeByOne();
   }
 
   bool _validateForEnqueuing(){
