@@ -6,13 +6,14 @@ void main() {
   runTestsByLibraryPath('src/array_queue_test.dart');
   runTestsByLibraryPath('src/linked_list_queue_test.dart');
   runTestsByLibraryPath('src/stack_queue_test.dart');
+  runTestsByLibraryPath('src/priority_queue_test.dart');
 }
 
 abstract class QueueTest with ComposedExpect{}
 
 mixin ComposedExpect{
 
-  Queue<int> get queue;
+  Queue get queue;
 
   void expectQueueIsEmpty(){
     expect(queue.isEmpty, isTrue);
